@@ -5,6 +5,7 @@ import {
   HREFLANG, OG_LOCALE, LOCALES, DEFAULT_LOCALE,
   routePath, useCasePath, type Locale, type Alternates,
 } from '../data/i18n';
+import Analytics from '../components/Analytics.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -129,6 +130,7 @@ const year = new Date().getFullYear();
       rel="stylesheet"
     />
     <script type="application/ld+json" is:inline set:html={JSON.stringify(ld)} />
+    <Analytics path={path} locale={locale} />
   </head>
   <body>
     <a class="skip" href="#main">{fr ? 'Aller au contenu' : 'Skip to content'}</a>

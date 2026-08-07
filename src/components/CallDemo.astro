@@ -186,6 +186,12 @@ const T =
       let timer = null;
       let secs = 0;
 
+      /* Analytics is optional by design: if Analytics.astro is absent or the
+         host is not production, hdTrack is undefined and this is a no-op. */
+      const demoId = root.id || 'demo';
+      const hd = (name, params) =>
+        window.hdTrack && window.hdTrack(name, Object.assign({ demo_id: demoId }, params));
+
       const el = (tag, cls, html) => {
         const n = document.createElement(tag);
         if (cls) n.className = cls;
@@ -221,8 +227,10 @@ const T =
         target.innerHTML = esc(text) + '<span class="caret"></span>';
       }
 
-      async function play() {
+      async function play(via) {
         const token = ++run;
+        const began = Date.now();
+        hd('demo_start', { trigger: via || 'auto' });
         clearInterval(timer);
         thread.innerHTML = '';
         bar.hidden = true;
@@ -311,9 +319,17 @@ const T =
             await wait(200);
           }
         }
+
+        /* Only counts as complete if this run was never superseded by a replay. */
+        if (token === run) {
+          hd('demo_complete', { seconds: Math.round((Date.now() - began) / 1000) });
+        }
       }
 
-      root.querySelector('[data-replay]').addEventListener('click', play);
+      root.querySelector('[data-replay]').addEventListener('click', () => {
+        hd('demo_replay');
+        play('replay');
+      });
 
       if ('IntersectionObserver' in window) {
         let started = false;
@@ -326,7 +342,7 @@ const T =
                   e.intersectionRect.height > window.innerHeight * 0.45);
               if (enough && !started) {
                 started = true;
-                play();
+                play('autoplay');
               }
             });
           },
@@ -334,7 +350,7 @@ const T =
         );
         io.observe(root);
       } else {
-        play();
+        play('fallback');
       }
     });
   });

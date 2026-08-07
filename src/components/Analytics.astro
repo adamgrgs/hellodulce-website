@@ -1,0 +1,293 @@
+---
+/**
+ * GA4 + behaviour tracking for hellodulce.com.
+ *
+ * Design decisions worth knowing before you edit this:
+ *
+ * 1. Event listeners are *delegated* from document, not attached to each CTA.
+ *    There are ~40 app links across 30 pages; hand-tagging every one guarantees
+ *    the 41st ships untracked. Instead we recognise links by destination and
+ *    infer their location from the surrounding DOM.
+ *
+ * 2. Hits only fire on the real domain (see SEND_ON_HOSTS). Preview deploys and
+ *    automated screenshot runs would otherwise show up as engaged users.
+ *
+ * 3. Consent Mode v2 defaults are set BEFORE config, with advertising storage
+ *    denied. Quebec's Law 25 and the GDPR both bite here, and the audience for
+ *    this site is exactly the population least able to afford a privacy
+ *    mistake. Analytics storage defaults to granted; flip DEFAULT_ANALYTICS to
+ *    'denied' and call gtag('consent','update',...) from a banner to go stricter.
+ *
+ * 4. No message content, phone numbers, or identities are ever sent. See
+ *    NEVER_SEND in src/data/analytics.ts.
+ */
+import { GA_ID, SEND_ON_HOSTS, EVENTS, pageType } from '../data/analytics';
+import { HREFLANG, type Locale } from '../data/i18n';
+import { APP_URL } from '../data/site';
+
+interface Props {
+  path: string;
+  locale: Locale;
+}
+const { path, locale } = Astro.props as Props;
+
+const appHost = new URL(APP_URL).host;
+const config = {
+  gaId: GA_ID,
+  hosts: SEND_ON_HOSTS,
+  appHost,
+  events: EVENTS,
+  locale: HREFLANG[locale],
+  pageType: pageType(path),
+};
+---
+
+{/* Consent defaults + gtag. Loaded on every page from Base.astro. */}
+<script is:inline define:vars={{ gaId: GA_ID, hosts: SEND_ON_HOSTS }}>
+  (function () {
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    window.gtag = gtag;
+
+    // Consent Mode v2 — must be queued before config for GA to honour it.
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'granted',
+      functionality_storage: 'granted',
+      security_storage: 'granted',
+      wait_for_update: 500,
+    });
+    gtag('js', new Date());
+
+    var live = hosts.indexOf(location.hostname) !== -1;
+    if (!live) {
+      // Off the production domain we still exercise the whole pipeline, but
+      // nothing leaves the browser. Makes local QA of events possible.
+      window.__hdAnalyticsDryRun = true;
+      gtag('config', gaId, { send_page_view: false });
+      return;
+    }
+
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+    document.head.appendChild(s);
+
+    gtag('config', gaId, {
+      anonymize_ip: true,
+      // Google Signals/ads features are off: no advertising consent collected.
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false,
+    });
+  })();
+</script>
+
+{/* Behaviour tracking. */}
+<script is:inline define:vars={{ cfg: config }}>
+  (function () {
+    var E = cfg.events;
+    var dry = !!window.__hdAnalyticsDryRun;
+
+    /** Single funnel for every event: stamps locale + page type, drops empties. */
+    function track(name, params) {
+      /* page_domain splits marketing-site traffic from app traffic in reports;
+         the app sends the same key with 'app'. */
+      var payload = Object.assign(
+        { page_domain: 'site', content_locale: cfg.locale, page_type: cfg.pageType },
+        params || {}
+      );
+      Object.keys(payload).forEach(function (k) {
+        if (payload[k] === undefined || payload[k] === null || payload[k] === '') {
+          delete payload[k];
+        }
+      });
+      if (dry) {
+        // Off production: keep a readable buffer so events can be asserted in a
+        // browser test without sending anything. See temp QA script / skill.
+        (window.__hdEvents = window.__hdEvents || []).push([name, payload]);
+        console.debug('[analytics dry-run]', name, JSON.stringify(payload));
+        return;
+      }
+      window.gtag('event', name, payload);
+    }
+    // Exposed so CallDemo/AudioSample can report without importing anything.
+    window.hdTrack = track;
+
+    var clean = function (s) {
+      return (s || '').replace(/\s+/g, ' ').trim().slice(0, 100);
+    };
+
+    /** Where on the page a link lives — inferred, so new CTAs are covered. */
+    function locationOf(a) {
+      if (a.closest('.site-head')) return 'nav';
+      if (a.closest('.site-foot')) return 'footer';
+      if (a.closest('.hero-cta')) return 'hero';
+      if (a.closest('.uc-card, .case-card, .card')) return 'card';
+      if (a.closest('article')) return 'guide_body';
+      var sec = a.closest('section[id], section[data-section]');
+      if (sec) return clean(sec.getAttribute('data-section') || sec.id) || 'section';
+      return 'body';
+    }
+
+    // ---- Link clicks: app CTA, outbound, use-case, nav ----------------------
+    document.addEventListener(
+      'click',
+      function (e) {
+        var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+        if (!a) return;
+        var href = a.getAttribute('href') || '';
+        var label = clean(a.textContent) || a.getAttribute('aria-label') || '';
+        var url;
+        try {
+          url = new URL(a.href, location.href);
+        } catch (_) {
+          return;
+        }
+
+        if (url.host === cfg.appHost) {
+          track(E.ctaClick, {
+            cta_location: locationOf(a),
+            cta_label: label,
+            link_url: url.href,
+          });
+          return;
+        }
+        if (url.host !== location.host) {
+          track(E.outboundClick, { link_domain: url.host, cta_label: label });
+          return;
+        }
+        if (a.classList.contains('lang')) return; // handled below
+        var m = url.pathname.match(/\/(?:use-cases|cas-dutilisation)\/([^/]+)\/?$/);
+        if (m) {
+          track(E.useCaseClick, { use_case: m[1], cta_location: locationOf(a) });
+          return;
+        }
+        if (a.closest('.site-head') || a.closest('.site-foot')) {
+          track(E.navClick, { cta_label: label, cta_location: locationOf(a) });
+        }
+      },
+      true
+    );
+
+    /* Everything below binds to real elements, so it must wait for the body:
+       this script lives in <head> and would otherwise query an empty DOM.
+       (Delegated document-level listeners above are safe either way.) */
+    function onReady(fn) {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', fn, { once: true });
+      } else {
+        fn();
+      }
+    }
+
+    onReady(function () {
+      // ---- Language switcher -------------------------------------------------
+      var lang = document.querySelector('a.lang');
+      if (lang) {
+        lang.addEventListener('click', function () {
+          track(E.languageSwitch, {
+            from_locale: cfg.locale,
+            to_locale: cfg.locale === 'en' ? 'fr-CA' : 'en',
+            link_url: lang.href,
+          });
+        });
+      }
+
+      // ---- FAQ opens ---------------------------------------------------------
+      document.querySelectorAll('details').forEach(function (d) {
+        d.addEventListener('toggle', function () {
+          if (!d.open) return;
+          var q = d.querySelector('summary');
+          track(E.faqOpen, { question: clean(q && q.textContent) });
+        });
+      });
+
+      // ---- Real audio sample -------------------------------------------------
+      document.querySelectorAll('audio').forEach(function (audio) {
+        var id = (audio.closest('[id]') || {}).id || 'sample-call';
+        var seen = {};
+        audio.addEventListener('play', function () {
+          if (!seen.play) {
+            seen.play = true;
+            track(E.audioPlay, { audio_id: id });
+          }
+        });
+        audio.addEventListener('timeupdate', function () {
+          if (!audio.duration) return;
+          var pct = (audio.currentTime / audio.duration) * 100;
+          [25, 50, 75].forEach(function (mark) {
+            if (pct >= mark && !seen[mark]) {
+              seen[mark] = true;
+              track(E.audioProgress, { audio_id: id, percent: mark });
+            }
+          });
+        });
+        audio.addEventListener('ended', function () {
+          if (!seen.done) {
+            seen.done = true;
+            track(E.audioComplete, { audio_id: id });
+          }
+        });
+      });
+    });
+
+    // ---- Scroll depth ------------------------------------------------------
+    var marks = [25, 50, 75, 90];
+    var hit = {};
+    var ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        ticking = false;
+        var h = document.documentElement;
+        var max = h.scrollHeight - window.innerHeight;
+        if (max < 200) return;
+        var pct = Math.round((window.scrollY / max) * 100);
+        marks.forEach(function (m) {
+          if (pct >= m && !hit[m]) {
+            hit[m] = true;
+            track(E.scrollDepth, { percent: m });
+            maybeGuideEngaged();
+          }
+        });
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // ---- Engagement: readers vs bounces -----------------------------------
+    var start = Date.now();
+    var interacted = false;
+    ['pointerdown', 'keydown', 'scroll'].forEach(function (evt) {
+      window.addEventListener(evt, function () { interacted = true; }, {
+        passive: true,
+        once: true,
+      });
+    });
+    var engagedSent = false;
+    setTimeout(function () {
+      if (interacted && !engagedSent && !document.hidden) {
+        engagedSent = true;
+        track(E.engagedSession, { seconds: 30 });
+      }
+    }, 30000);
+
+    // A guide counts as read only with depth AND dwell — either alone lies.
+    var guideSent = false;
+    function maybeGuideEngaged() {
+      if (guideSent || cfg.pageType !== 'guide') return;
+      if (!hit[75]) return;
+      if (Date.now() - start < 45000) return;
+      guideSent = true;
+      track(E.guideEngaged, {
+        seconds: Math.round((Date.now() - start) / 1000),
+        page_path: location.pathname,
+      });
+    }
+    setInterval(maybeGuideEngaged, 5000);
+  })();
+</script>
