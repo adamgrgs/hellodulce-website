@@ -7,7 +7,7 @@ import AudioSample from '../components/AudioSample.astro';
 
 const title = 'Meet Dulce, the voice that makes your call';
 const description =
-  'Dulce is a Montreal CEGEP student, a lifeguard, and the character behind Hello Dulce: patient with people, calm under pressure, and curious about everyone. Here is who she is.';
+  'Dulce is the voice Hello Dulce uses on the phone: she introduces herself, says the call is for you, and never invents an answer. Here is how she behaves on a call.';
 
 const jsonLd = [
   {
@@ -18,8 +18,7 @@ const jsonLd = [
     image: new URL(DULCE.images.hero, SITE.domain).href,
     homeLocation: { '@type': 'Place', name: DULCE.city },
     knowsLanguage: ['fr', 'en', 'es'],
-    disambiguatingDescription:
-      'Dulce is a fictional character created as the mascot and voice persona of the Hello Dulce phone interpretation service. She is not a real person.',
+    disambiguatingDescription: DULCE.fiction,
     worksFor: { '@type': 'Organization', name: SITE.name, url: SITE.domain },
   },
   {
@@ -44,15 +43,7 @@ const jsonLd = [
           <p class="kicker">Meet Dulce</p>
           <h1>The friend who <span class="em grad">makes the call</span> for you</h1>
           <p class="lede">{DULCE.oneLiner}</p>
-          <div class="answer" style="margin-top:26px;max-width:60ch">
-            <p class="answer-q">Who is Dulce?</p>
-            <p>
-              Dulce is {DULCE.age}, lives in {DULCE.city}, studies special care counselling at CEGEP, works with
-              children who need extra patience, lifeguards in the summer, and drives an orange Kia Rio she has
-              already taken further than it was designed to go. She is a character, not a real person — but every
-              rule about how Hello Dulce behaves on the phone comes from her.
-            </p>
-          </div>
+          <p class="fine">{DULCE.fiction}</p>
           <div class="hero-cta">
             <a class="btn" href={APP_URL}>Let Dulce make the call &rarr;</a>
             <a class="btn btn-ghost" href="#sample-call">Hear her voice</a>
@@ -63,29 +54,18 @@ const jsonLd = [
             src={DULCE.images.hero}
             width="399"
             height="980"
-            alt="Dulce, an 18-year-old Montreal student in an orange lifeguard hoodie with a whistle and a pin-covered tote bag, on the phone and waving"
+            alt="Dulce, the Hello Dulce character, in an orange hoodie, on the phone and waving"
             fetchpriority="high"
           />
         </div>
       </div>
-
-      <ul class="facts">
-        {
-          DULCE.facts.map((f) => (
-            <li>
-              <span class="l" style="margin:0 0 4px">{f.label}</span>
-              <span class="v" style="font-size:1rem">{f.value}</span>
-            </li>
-          ))
-        }
-      </ul>
     </div>
   </section>
 
   <section class="sec">
     <div class="wrap">
-      <p class="kicker">Her personality, and why it is the product</p>
-      <h2>Four things about Dulce that show up on every call</h2>
+      <p class="kicker">On the call</p>
+      <h2>Three things you hear right away</h2>
       <div class="trait-list">
         {
           DULCE.traits.map((t) => (
@@ -104,10 +84,10 @@ const jsonLd = [
 
   <section class="sec">
     <div class="wrap" style="max-width:860px">
-      <p class="kicker">How she behaves on the phone</p>
-      <h2>Dulce’s rules</h2>
+      <p class="kicker">Her rules</p>
+      <h2>Four rules she never breaks</h2>
       <ol class="rules">
-        {DULCE.traits && DULCE.voiceRules.map((r) => <li>{r}</li>)}
+        {DULCE.voiceRules.map((r) => <li>{r}</li>)}
       </ol>
       <p class="quote-line" style="margin-top:26px">{DULCE.quote}</p>
     </div>
@@ -118,8 +98,7 @@ const jsonLd = [
       <p class="kicker">Her actual voice</p>
       <h2>This is what the school heard</h2>
       <p class="lede" style="margin-bottom:20px">
-        Listen to the first line: she names herself, says she is a virtual interpreter, and says whose
-        call this is. That disclosure is not optional — it is rule one.
+        Listen to the first line — that is rule one, out loud.
       </p>
       <AudioSample />
     </div>
@@ -142,7 +121,7 @@ const jsonLd = [
   .dulce-portrait { display: flex; justify-content: center; }
   .dulce-portrait img { width: min(300px, 74%); height: auto; filter: drop-shadow(0 24px 44px rgba(255, 106, 43, 0.28)); }
   .trait-list { display: grid; gap: 18px; margin-top: 22px; }
-  @media (min-width: 820px) { .trait-list { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 820px) { .trait-list { grid-template-columns: repeat(3, 1fr); } }
   .trait {
     display: grid; grid-template-columns: 110px 1fr; gap: 18px; align-items: start;
     border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 20px;
@@ -153,4 +132,5 @@ const jsonLd = [
   .trait p { color: var(--muted); font-size: 0.95rem; margin: 0; }
   .rules { display: grid; gap: 12px; margin: 20px 0 0; padding-left: 22px; }
   .rules li { color: #f0e2d6; font-size: 1.02rem; line-height: 1.6; }
+  .fine { color: var(--muted); font-size: 0.88rem; margin: 14px 0 0; }
 </style>

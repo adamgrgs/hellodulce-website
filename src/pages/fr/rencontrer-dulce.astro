@@ -8,7 +8,7 @@ import AudioSample from '../../components/AudioSample.astro';
 
 const title = 'Rencontrez Dulce, la voix qui fait votre appel';
 const description =
-  'Dulce est étudiante au cégep à Montréal, sauveteuse, et le personnage derrière Hello Dulce : patiente avec le monde, calme sous pression, curieuse de tout. Voici qui elle est.';
+  'Dulce, c’est la voix que Hello Dulce utilise au téléphone : elle se nomme, dit que l’appel est pour vous, et n’invente jamais de réponse. Voici comment elle se comporte.';
 
 const jsonLd = [
   {
@@ -20,8 +20,7 @@ const jsonLd = [
     homeLocation: { '@type': 'Place', name: DULCE.city },
     inLanguage: 'fr-CA',
     knowsLanguage: ['fr', 'en', 'es'],
-    disambiguatingDescription:
-      'Dulce est un personnage fictif créé comme mascotte et voix du service d’interprétation téléphonique Hello Dulce. Ce n’est pas une personne réelle.',
+    disambiguatingDescription: DULCE.fiction,
     worksFor: { '@type': 'Organization', name: SITE.name, url: SITE.domain },
   },
   {
@@ -53,18 +52,10 @@ const jsonLd = [
           <p class="kicker">Rencontrer Dulce</p>
           <h1>L’amie qui <span class="em grad">fait l’appel</span> à votre place</h1>
           <p class="lede">{DULCE.oneLiner}</p>
-          <div class="answer" style="margin-top:26px;max-width:60ch">
-            <p class="answer-q">C’est qui, Dulce?</p>
-            <p>
-              Dulce a {DULCE.age} ans, vit à {DULCE.city}, étudie en techniques d’éducation spécialisée au cégep,
-              travaille avec des enfants qui ont besoin de plus de patience, est sauveteuse l’été, et conduit une
-              Kia Rio orange qu’elle a déjà menée plus loin que prévu. C’est un personnage, pas une personne
-              réelle — mais chaque règle sur la façon dont Hello Dulce se comporte au téléphone vient d’elle.
-            </p>
-          </div>
+          <p class="fine">{DULCE.fiction}</p>
           <div class="hero-cta">
-            <a class="btn" href={APP_URL}>Laissez Dulce faire l’appel &rarr;</a>
-            <a class="btn btn-ghost" href="#sample-call">{UI_FR.cta.hearVoice}</a>
+            <a class="btn" href={APP_URL}>{UI_FR.cta.startArrow}</a>
+            <a class="btn btn-ghost" href="#sample-call">Écouter sa voix</a>
           </div>
         </div>
         <div class="dulce-portrait">
@@ -72,29 +63,18 @@ const jsonLd = [
             src={DULCE.images.hero}
             width="399"
             height="980"
-            alt="Dulce, étudiante montréalaise de 18 ans en coton ouaté orange de sauveteuse, sifflet au cou et sac fourre-tout couvert d’épinglettes, au téléphone en train de saluer"
+            alt="Dulce, le personnage de Hello Dulce, en coton ouaté orange, au téléphone, la main levée"
             fetchpriority="high"
           />
         </div>
       </div>
-
-      <ul class="facts">
-        {
-          DULCE.facts.map((f) => (
-            <li>
-              <span class="l" style="margin:0 0 4px">{f.label}</span>
-              <span class="v" style="font-size:1rem">{f.value}</span>
-            </li>
-          ))
-        }
-      </ul>
     </div>
   </section>
 
   <section class="sec">
     <div class="wrap">
-      <p class="kicker">Sa personnalité, et pourquoi c’est le produit</p>
-      <h2>Quatre choses sur Dulce qui paraissent dans chaque appel</h2>
+      <p class="kicker">Pendant l’appel</p>
+      <h2>Trois choses qu’on entend tout de suite</h2>
       <div class="trait-list">
         {
           DULCE.traits.map((t) => (
@@ -113,10 +93,10 @@ const jsonLd = [
 
   <section class="sec">
     <div class="wrap" style="max-width:860px">
-      <p class="kicker">Comment elle se comporte au téléphone</p>
-      <h2>Les règles de Dulce</h2>
+      <p class="kicker">Ses règles</p>
+      <h2>Quatre règles qu’elle ne brise jamais</h2>
       <ol class="rules">
-        {DULCE.traits && DULCE.voiceRules.map((r) => <li>{r}</li>)}
+        {DULCE.voiceRules.map((r) => <li>{r}</li>)}
       </ol>
       <p class="quote-line" style="margin-top:26px">{DULCE.quote}</p>
     </div>
@@ -127,8 +107,7 @@ const jsonLd = [
       <p class="kicker">Sa vraie voix</p>
       <h2>Voici ce que l’école a entendu</h2>
       <p class="lede" style="margin-bottom:20px">
-        Écoutez la première phrase : elle se nomme, dit qu’elle est interprète virtuelle, et dit à qui
-        appartient cet appel. Cette divulgation n’est pas optionnelle — c’est la règle numéro un.
+        Écoutez la première phrase — c’est la règle numéro un, à voix haute.
       </p>
       <AudioSample locale="fr" />
     </div>
@@ -151,7 +130,7 @@ const jsonLd = [
   .dulce-portrait { display: flex; justify-content: center; }
   .dulce-portrait img { width: min(300px, 74%); height: auto; filter: drop-shadow(0 24px 44px rgba(255, 106, 43, 0.28)); }
   .trait-list { display: grid; gap: 18px; margin-top: 22px; }
-  @media (min-width: 820px) { .trait-list { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 820px) { .trait-list { grid-template-columns: repeat(3, 1fr); } }
   .trait {
     display: grid; grid-template-columns: 110px 1fr; gap: 18px; align-items: start;
     border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 20px;
@@ -162,4 +141,5 @@ const jsonLd = [
   .trait p { color: var(--muted); font-size: 0.95rem; margin: 0; }
   .rules { display: grid; gap: 12px; margin: 20px 0 0; padding-left: 22px; }
   .rules li { color: #f0e2d6; font-size: 1.02rem; line-height: 1.6; }
+  .fine { color: var(--muted); font-size: 0.88rem; margin: 14px 0 0; }
 </style>
