@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { USE_CASES, APP_URL } from '../../data/site';
+import { altForRoute } from '../../data/i18n';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -19,6 +20,7 @@ const jsonLd = {
   title="Use cases — every call Hello Dulce can make for you"
   description="Doctors, schools, landlords, utilities, customer service, government offices and elderly care. See a live simulation of each call in Hello Dulce."
   path="/use-cases"
+  alternates={altForRoute('useCases')}
   jsonLd={jsonLd}
 >
   <section class="hero">
