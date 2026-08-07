@@ -1,0 +1,151 @@
+---
+import { SITE, APP_URL, USE_CASES } from '../data/site';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  jsonLd?: Record<string, any> | Record<string, any>[];
+  noindex?: boolean;
+}
+const { title, description, path, jsonLd, noindex = false } = Astro.props as Props;
+const canonical = new URL(path, SITE.domain).href.replace(/(.+)\/$/, '$1/');
+const og = new URL('/og.png', SITE.domain).href;
+
+const baseLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE.name,
+    url: SITE.domain,
+    description: SITE.blurb,
+    inLanguage: 'en',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: SITE.name,
+    url: SITE.domain,
+    logo: new URL('/favicon.svg', SITE.domain).href,
+    description: SITE.blurb,
+  },
+];
+const pageLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+const ld = [...baseLd, ...pageLd];
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta
+      name="robots"
+      content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1'}
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={og} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Hello Dulce — your voice, in any language" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={og} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#12071f" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(ld)} />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-head">
+      <div class="wrap head-inner">
+        <a class="logo" href="/">
+          <span class="logo-mark" aria-hidden="true"></span>
+          <span>Hello&nbsp;Dulce</span>
+        </a>
+        <nav class="head-nav" aria-label="Main">
+          <a href="/how-it-works">How it works</a>
+          <a href="/use-cases">Use cases</a>
+          <a class="btn btn-sm" href={APP_URL}>Start a call</a>
+        </nav>
+        <button class="burger" aria-expanded="false" aria-controls="m-nav" aria-label="Open menu">
+          <span></span><span></span>
+        </button>
+      </div>
+      <nav class="mobile-nav" id="m-nav" aria-label="Mobile" hidden>
+        <a href="/how-it-works">How it works</a>
+        <a href="/use-cases">Use cases</a>
+        {USE_CASES.map((u) => <a href={`/use-cases/${u.slug}`}>{u.emoji} {u.nav}</a>)}
+        <a class="btn" href={APP_URL}>Start a call</a>
+      </nav>
+    </header>
+
+    <main id="main"><slot /></main>
+
+    <footer class="site-foot">
+      <div class="wrap foot-grid">
+        <div>
+          <a class="logo" href="/">
+            <span class="logo-mark" aria-hidden="true"></span>
+            <span>Hello&nbsp;Dulce</span>
+          </a>
+          <p class="foot-blurb">{SITE.blurb}</p>
+          <a class="btn" href={APP_URL}>Start a call &rarr;</a>
+        </div>
+        <div>
+          <h2 class="foot-h">Use cases</h2>
+          <ul>
+            {USE_CASES.map((u) => (
+              <li><a href={`/use-cases/${u.slug}`}>{u.nav}</a></li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h2 class="foot-h">Hello Dulce</h2>
+          <ul>
+            <li><a href="/how-it-works">How it works</a></li>
+            <li><a href="/use-cases">All use cases</a></li>
+            <li><a href={APP_URL}>Open the app</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="wrap foot-base">
+        <p>&copy; {year} Hello Dulce. Made for anyone who has ever put off a phone call.</p>
+      </div>
+    </footer>
+
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', () => {
+        const b = document.querySelector('.burger');
+        const n = document.getElementById('m-nav');
+        if (!b || !n) return;
+        b.addEventListener('click', () => {
+          const open = b.getAttribute('aria-expanded') === 'true';
+          b.setAttribute('aria-expanded', String(!open));
+          n.hidden = open;
+          b.classList.toggle('is-open', !open);
+        });
+      });
+    </script>
+  </body>
+</html>

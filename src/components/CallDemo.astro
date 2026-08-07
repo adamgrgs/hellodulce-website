@@ -1,0 +1,324 @@
+---
+import type { Turn } from '../data/site';
+interface Props {
+  scenario: { label: string; yourLang: string; theirLang: string; turns: Turn[] };
+  accent?: string;
+  id?: string;
+}
+const { scenario, accent = '#a855f7', id = 'demo' } = Astro.props as Props;
+---
+
+<div class="demo" data-demo={JSON.stringify(scenario)} id={id} style={`--accent:${accent}`}>
+  <div class="phone">
+    <div class="phone-top">
+      <span class="dot" aria-hidden="true"></span>
+      <span class="phone-title">Hello Dulce</span>
+      <span class="phone-sub" data-state>Ready</span>
+    </div>
+
+    <div class="call-bar" data-callbar hidden>
+      <span class="live"><i></i>Live call</span>
+      <span class="callee" data-callee></span>
+      <span class="timer" data-timer>00:00</span>
+    </div>
+
+    <div class="thread" data-thread role="log" aria-live="polite" aria-label="Call transcript demo"></div>
+
+    <div class="composer">
+      <span class="composer-text" data-composer>Message Dulce&hellip;</span>
+      <span class="send" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+      </span>
+    </div>
+  </div>
+
+  <div class="demo-ctl">
+    <button type="button" class="ctl" data-replay>
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+      Replay
+    </button>
+    <span class="ctl-note">{scenario.yourLang} &rarr; {scenario.theirLang} &middot; {scenario.label}</span>
+  </div>
+</div>
+
+<style is:global>
+  .demo { position: relative; z-index: 1; }
+  .phone {
+    background: linear-gradient(180deg, #221033, #170b24);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 26px;
+    padding: 12px 12px 12px;
+    box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.9), 0 0 0 6px rgba(255, 255, 255, 0.03);
+    max-width: 430px; margin-inline: auto;
+  }
+  .phone-top {
+    display: flex; align-items: center; gap: 8px; padding: 4px 6px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
+  .phone-title { font-weight: 800; font-size: 0.92rem; letter-spacing: -0.01em; }
+  .phone-sub { margin-left: auto; font-size: 0.72rem; color: #b6a3c9; font-weight: 600; }
+
+  .call-bar {
+    display: flex; align-items: center; gap: 8px; margin: 10px 2px 0;
+    background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px; padding: 8px 10px; font-size: 0.72rem; color: #cbb9dc;
+    animation: pop 0.3s ease both;
+  }
+  .live { display: inline-flex; align-items: center; gap: 6px; font-weight: 800; color: #86efac; }
+  .live i { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; animation: pulse 1.1s infinite; }
+  .callee { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .timer { margin-left: auto; font-variant-numeric: tabular-nums; }
+
+  .thread::-webkit-scrollbar { display: none; }
+  .thread {
+    min-height: 330px; max-height: 400px; overflow-y: auto; scrollbar-width: none; padding: 12px 4px 8px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  @media (min-width: 480px) { .thread { min-height: 360px; max-height: 430px; } }
+
+  .msg { animation: pop 0.34s cubic-bezier(0.22, 1, 0.36, 1) both; max-width: 88%; }
+  .msg .who { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #9c8bb0; margin-bottom: 4px; }
+  .bubble { padding: 10px 13px; border-radius: 16px; font-size: 0.9rem; line-height: 1.45; }
+
+  .msg.you { align-self: flex-end; text-align: right; }
+  .msg.you .bubble {
+    background: linear-gradient(120deg, #f472b6, #a855f7); color: #fff; border-bottom-right-radius: 5px;
+    text-align: left;
+  }
+  .msg.them .bubble {
+    background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom-left-radius: 5px; color: #f2e8f8;
+  }
+  .msg.them .trans {
+    margin-top: 6px; font-size: 0.86rem; color: #e9d5ff; padding-left: 10px;
+    border-left: 2px solid var(--accent); animation: fade 0.4s ease both;
+  }
+  .msg.dulce .bubble {
+    background: rgba(168, 85, 247, 0.14); border: 1px dashed rgba(244, 114, 182, 0.5); color: #fbe4f4;
+  }
+  .msg.dulce .wave { display: inline-flex; align-items: flex-end; gap: 2px; height: 12px; margin-right: 7px; vertical-align: -1px; }
+  .msg.dulce .wave i { width: 2px; background: var(--accent); border-radius: 2px; animation: eq 0.9s ease-in-out infinite; }
+  .msg.dulce .wave i:nth-child(2) { animation-delay: 0.12s; }
+  .msg.dulce .wave i:nth-child(3) { animation-delay: 0.24s; }
+  .msg.dulce .wave i:nth-child(4) { animation-delay: 0.36s; }
+
+  .sys {
+    align-self: center; font-size: 0.74rem; color: #b6a3c9; background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1); padding: 6px 12px; border-radius: 999px;
+    animation: pop 0.3s ease both; text-align: center;
+  }
+  .summary {
+    align-self: stretch; border-radius: 16px; padding: 14px;
+    background: linear-gradient(140deg, rgba(34, 197, 94, 0.16), rgba(168, 85, 247, 0.12));
+    border: 1px solid rgba(34, 197, 94, 0.35); animation: pop 0.4s ease both;
+  }
+  .summary h4 { margin: 0 0 8px; font-size: 0.92rem; display: flex; align-items: center; gap: 7px; }
+  .summary ul { display: grid; gap: 5px; }
+  .summary li { font-size: 0.84rem; color: #e6dcef; padding-left: 14px; position: relative; }
+  .summary li::before { content: '\2022'; position: absolute; left: 2px; color: #86efac; }
+
+  .typing { display: inline-flex; gap: 3px; }
+  .typing i { width: 5px; height: 5px; border-radius: 50%; background: #fff; opacity: 0.75; animation: blink 1s infinite; }
+  .typing i:nth-child(2) { animation-delay: 0.15s; }
+  .typing i:nth-child(3) { animation-delay: 0.3s; }
+
+  .composer {
+    display: flex; align-items: center; gap: 10px; margin-top: 6px;
+    background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px; padding: 10px 8px 10px 14px;
+  }
+  .composer-text { font-size: 0.86rem; color: #d6c8e4; min-height: 1.2em; flex: 1; text-align: left; }
+  .composer-text.ph { color: #8a789d; }
+  .composer-text .caret { display: inline-block; width: 1px; background: #f472b6; height: 1em; vertical-align: -2px; animation: blink 0.8s steps(1) infinite; }
+  .send {
+    width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; color: #fff;
+    background: linear-gradient(120deg, #f472b6, #a855f7); flex: 0 0 auto;
+  }
+
+  .demo-ctl { display: flex; align-items: center; gap: 12px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+  .ctl {
+    display: inline-flex; align-items: center; gap: 7px; background: transparent; cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.16); color: #f7eefc; border-radius: 999px;
+    padding: 7px 14px; font: inherit; font-size: 0.82rem; font-weight: 700;
+  }
+  .ctl:hover { border-color: #f472b6; }
+  .ctl-note { font-size: 0.78rem; color: #6b5b7d; }
+
+  @keyframes pop { from { opacity: 0; transform: translateY(10px) scale(0.98); } to { opacity: 1; transform: none; } }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes blink { 0%, 60% { opacity: 1; } 61%, 100% { opacity: 0.2; } }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.55); } 70% { box-shadow: 0 0 0 7px rgba(34, 197, 94, 0); } 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); } }
+  @keyframes eq { 0%, 100% { height: 4px; } 50% { height: 12px; } }
+</style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const wait = (ms) => new Promise((r) => setTimeout(r, reduce ? Math.min(ms, 60) : ms));
+
+    document.querySelectorAll('.demo').forEach((root) => {
+      const data = JSON.parse(root.getAttribute('data-demo'));
+      const thread = root.querySelector('[data-thread]');
+      const composer = root.querySelector('[data-composer]');
+      const state = root.querySelector('[data-state]');
+      const bar = root.querySelector('[data-callbar]');
+      const callee = root.querySelector('[data-callee]');
+      const timerEl = root.querySelector('[data-timer]');
+      let run = 0;
+      let timer = null;
+      let secs = 0;
+
+      const el = (tag, cls, html) => {
+        const n = document.createElement(tag);
+        if (cls) n.className = cls;
+        if (html != null) n.innerHTML = html;
+        return n;
+      };
+      const esc = (s) =>
+        String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      const add = (node) => {
+        thread.appendChild(node);
+        thread.scrollTop = thread.scrollHeight;
+        return node;
+      };
+      const startTimer = () => {
+        secs = 0;
+        clearInterval(timer);
+        timer = setInterval(() => {
+          secs++;
+          const m = String(Math.floor(secs / 60)).padStart(2, '0');
+          const s = String(secs % 60).padStart(2, '0');
+          timerEl.textContent = m + ':' + s;
+        }, 1000);
+      };
+
+      async function typeInto(target, text, token) {
+        target.classList.remove('ph');
+        const step = reduce ? text.length : 1;
+        for (let i = 0; i <= text.length; i += step) {
+          if (token !== run) return;
+          target.innerHTML = esc(text.slice(0, i)) + '<span class="caret"></span>';
+          await wait(22);
+        }
+        target.innerHTML = esc(text) + '<span class="caret"></span>';
+      }
+
+      async function play() {
+        const token = ++run;
+        clearInterval(timer);
+        thread.innerHTML = '';
+        bar.hidden = true;
+        timerEl.textContent = '00:00';
+        composer.className = 'composer-text ph';
+        composer.textContent = 'Message Dulce…';
+        state.textContent = 'Ready';
+        await wait(500);
+
+        for (const t of data.turns) {
+          if (token !== run) return;
+
+          if (t.kind === 'type') {
+            state.textContent = 'You are writing';
+            await typeInto(composer, t.text, token);
+            await wait(420);
+            if (token !== run) return;
+            const m = add(el('div', 'msg you'));
+            m.appendChild(el('div', 'who', esc(t.lang)));
+            m.appendChild(el('div', 'bubble', esc(t.text)));
+            composer.className = 'composer-text ph';
+            composer.textContent = 'Message Dulce…';
+            await wait(650);
+          }
+
+          if (t.kind === 'dial') {
+            state.textContent = 'Dialling';
+            add(el('div', 'sys', '📞 Dulce is calling ' + esc(t.label) + ' · ' + esc(t.number)));
+            await wait(1100);
+            if (token !== run) return;
+            callee.textContent = t.label;
+            bar.hidden = false;
+            startTimer();
+            state.textContent = 'On the call';
+            await wait(600);
+          }
+
+          if (t.kind === 'speak') {
+            const m = add(el('div', 'msg dulce'));
+            m.appendChild(el('div', 'who', 'Dulce is speaking · ' + esc(t.lang.split('· ')[1] || '')));
+            const b = el('div', 'bubble');
+            b.innerHTML =
+              '<span class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="txt"></span>';
+            m.appendChild(b);
+            const txt = b.querySelector('.txt');
+            const words = t.text.split(' ');
+            for (let i = 0; i < words.length; i++) {
+              if (token !== run) return;
+              txt.textContent = words.slice(0, i + 1).join(' ');
+              thread.scrollTop = thread.scrollHeight;
+              await wait(105);
+            }
+            await wait(500);
+          }
+
+          if (t.kind === 'hear') {
+            const m = add(el('div', 'msg them'));
+            m.appendChild(el('div', 'who', esc(t.lang)));
+            const b = el('div', 'bubble');
+            b.innerHTML = '<span class="typing" aria-hidden="true"><i></i><i></i><i></i></span>';
+            m.appendChild(b);
+            await wait(900);
+            if (token !== run) return;
+            b.textContent = t.text;
+            thread.scrollTop = thread.scrollHeight;
+            await wait(700);
+            if (token !== run) return;
+            const tr = el('div', 'trans', '↳ ' + esc(t.translation) + ' <em style="opacity:.6">(' + esc(t.transLang) + ')</em>');
+            m.appendChild(tr);
+            thread.scrollTop = thread.scrollHeight;
+            await wait(800);
+          }
+
+          if (t.kind === 'done') {
+            clearInterval(timer);
+            bar.hidden = true;
+            state.textContent = 'Call ended';
+            add(el('div', 'sys', 'Call ended · ' + timerEl.textContent));
+            await wait(400);
+            if (token !== run) return;
+            const s = add(el('div', 'summary'));
+            s.appendChild(el('h4', null, '✅ ' + esc(t.title)));
+            const ul = el('ul');
+            t.lines.forEach((l) => ul.appendChild(el('li', null, esc(l))));
+            s.appendChild(ul);
+            await wait(200);
+          }
+        }
+      }
+
+      root.querySelector('[data-replay]').addEventListener('click', play);
+
+      if ('IntersectionObserver' in window) {
+        let started = false;
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              const enough =
+                e.isIntersecting &&
+                (e.intersectionRatio > 0.35 ||
+                  e.intersectionRect.height > window.innerHeight * 0.45);
+              if (enough && !started) {
+                started = true;
+                play();
+              }
+            });
+          },
+          { threshold: [0, 0.2, 0.35, 0.6] }
+        );
+        io.observe(root);
+      } else {
+        play();
+      }
+    });
+  });
+</script>

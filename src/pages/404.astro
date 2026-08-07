@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import { APP_URL, USE_CASES } from '../data/site';
+---
+<Base title="Page not found — Hello Dulce" description="That page does not exist." path="/404" noindex={true}>
+  <section class="hero">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="wrap" style="position:relative;z-index:1;max-width:640px;padding-bottom:60px">
+      <span class="kicker">404</span>
+      <h1>This line is <span class="em grad">disconnected</span></h1>
+      <p class="lede">The page you were looking for is not here. These ones are.</p>
+      <div class="chips">
+        <a class="chip" href="/">Home</a>
+        <a class="chip" href="/how-it-works">How it works</a>
+        {USE_CASES.map((u) => <a class="chip" href={`/use-cases/${u.slug}`}>{u.nav}</a>)}
+      </div>
+      <div class="hero-cta"><a class="btn" href={APP_URL}>Start a call &rarr;</a></div>
+    </div>
+  </section>
+</Base>

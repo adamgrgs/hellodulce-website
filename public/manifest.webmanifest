@@ -1,0 +1,10 @@
+{
+  "name": "Hello Dulce",
+  "short_name": "Hello Dulce",
+  "description": "Make phone calls in any language, without speaking it.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#12071f",
+  "theme_color": "#12071f",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}

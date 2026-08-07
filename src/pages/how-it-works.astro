@@ -1,0 +1,114 @@
+---
+import Base from '../layouts/Base.astro';
+import CallDemo from '../components/CallDemo.astro';
+import { STEPS, APP_URL, USE_CASES } from '../data/site';
+
+const demo = USE_CASES.find((u) => u.slug === 'healthcare')!.scenario;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'How to make a phone call in a language you do not speak',
+  description:
+    'Hello Dulce places the call, speaks the other language for you, and relays the whole conversation back to you as translated text.',
+  step: STEPS.map((s, i) => ({
+    '@type': 'HowToStep',
+    position: i + 1,
+    name: s.title,
+    text: s.body,
+  })),
+};
+
+const detail = [
+  {
+    h: 'The voice is chosen for the region, not just the language',
+    p: 'A call to a Montreal school is answered in Quebec French, so Dulce speaks Quebec French. Accent and register are part of being taken seriously on the phone.',
+  },
+  {
+    h: 'Latency is the product',
+    p: 'Dulce begins speaking about a second after you press send, and relayed text reaches you about a second after the other person finishes a sentence. That is the difference between a conversation and an awkward silence.',
+  },
+  {
+    h: 'A hold, not a guess',
+    p: 'When the other side asks something you have not told Dulce, it says a natural holding line — “un instant, je vérifie” — and pings you. It waits for your words rather than inventing any.',
+  },
+  {
+    h: 'You can change direction mid-call',
+    p: 'Type a new instruction at any moment: ask for a different time, push back on a price, ask them to repeat. Dulce says it on the next turn.',
+  },
+  {
+    h: 'Dulce is transparent about what it is',
+    p: 'It introduces itself as calling on your behalf. It never claims to be you, and it never records anyone without the call being visible to you.',
+  },
+  {
+    h: 'The call ends in writing',
+    p: 'Dates, names, amounts, ticket numbers and next steps, summarised in your language, with the full bilingual transcript attached for later.',
+  },
+];
+---
+
+<Base
+  title="How Hello Dulce works — you type, Dulce talks"
+  description="Hello Dulce places your phone call, speaks the other language with a natural regional voice, relays every sentence back to you translated in about a second, and never invents facts."
+  path="/how-it-works"
+  jsonLd={jsonLd}
+>
+  <section class="hero">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="wrap hero-grid">
+      <div>
+        <span class="kicker">How it works</span>
+        <h1>You type. Dulce <span class="em grad">talks.</span></h1>
+        <p class="lede">
+          Hello Dulce is not a translation app you hold up to your ear. It is a fluent speaker who
+          makes the call for you, tells you everything that was said, and says whatever you write
+          next.
+        </p>
+        <div class="hero-cta">
+          <a class="btn" href={APP_URL}>Start a call &rarr;</a>
+          <a class="btn btn-ghost" href="/use-cases">Browse use cases</a>
+        </div>
+      </div>
+      <div><CallDemo scenario={demo} accent="#e11d48" id="hiw-demo" /></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <h2>The four steps</h2>
+      <div class="steps" style="margin-top:26px">
+        {STEPS.map((s) => (
+          <div class="step">
+            <div class="n">{s.n}</div>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec-tight">
+    <div class="wrap">
+      <span class="kicker">The details that decide the call</span>
+      <h2>Why it feels like a conversation</h2>
+      <div class="cards cards-3" style="margin-top:26px">
+        {detail.map((d) => (
+          <div class="card">
+            <h3>{d.h}</h3>
+            <p>{d.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="band">
+        <h2>Try it on a real call</h2>
+        <p>Pick a number you have been avoiding. Write the first line in your language.</p>
+        <a class="btn" href={APP_URL}>Start a call &rarr;</a>
+      </div>
+    </div>
+  </section>
+</Base>

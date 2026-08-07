@@ -1,0 +1,65 @@
+---
+import Base from '../../layouts/Base.astro';
+import { USE_CASES, APP_URL } from '../../data/site';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Hello Dulce use cases',
+  itemListElement: USE_CASES.map((u, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: u.title,
+    url: `https://hellodulce.com/use-cases/${u.slug}`,
+  })),
+};
+---
+
+<Base
+  title="Use cases — every call Hello Dulce can make for you"
+  description="Doctors, schools, landlords, utilities, customer service, government offices and elderly care. See a live simulation of each call in Hello Dulce."
+  path="/use-cases"
+  jsonLd={jsonLd}
+>
+  <section class="hero">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="wrap" style="position:relative;z-index:1;max-width:780px">
+      <span class="kicker">Use cases</span>
+      <h1>Every call you have been <span class="em grad">putting off</span></h1>
+      <p class="lede">
+        Six situations, six pages. Each one shows the real conversation as it plays out — what you
+        type, what Dulce says, what comes back.
+      </p>
+      <div class="hero-cta"><a class="btn" href={APP_URL}>Start a call &rarr;</a></div>
+    </div>
+  </section>
+
+  <section class="sec-tight">
+    <div class="wrap">
+      <div class="cards cards-3">
+        {USE_CASES.map((u) => (
+          <a class="card" href={`/use-cases/${u.slug}`}>
+            <div class="card-emoji">{u.emoji}</div>
+            <h3>{u.title}</h3>
+            <p>{u.intro.split('. ')[0]}.</p>
+            <p class="quote-line">&ldquo;{u.jobs[0].quote}&rdquo;</p>
+            <span class="more">See the call &rarr;</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="band">
+        <h2>Not on the list?</h2>
+        <p>
+          If it is a phone call in a language you do not speak, Dulce can make it. Open the app and
+          write your first line.
+        </p>
+        <a class="btn" href={APP_URL}>Start a call &rarr;</a>
+      </div>
+    </div>
+  </section>
+</Base>

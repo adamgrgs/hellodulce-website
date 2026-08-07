@@ -1,0 +1,239 @@
+---
+import Base from '../layouts/Base.astro';
+import CallDemo from '../components/CallDemo.astro';
+import { APP_URL, USE_CASES, STEPS, SITE } from '../data/site';
+
+const hero = USE_CASES[0].scenario;
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Hello Dulce',
+    applicationCategory: 'CommunicationApplication',
+    operatingSystem: 'Web',
+    url: SITE.domain,
+    description: SITE.blurb,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'Does Hello Dulce sound like a robot?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'No. Dulce speaks with a natural human-sounding voice in the local accent, and it starts talking about a second after you send your line, so the conversation keeps its rhythm.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Do I have to speak during the call?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Never. You only type, in your own language. Dulce does all the speaking and listening, and sends every sentence back to you as translated text.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Which languages does Hello Dulce work in?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'You can write in over 100 languages. Dulce speaks the language of the person you are calling — French, English, Spanish and many more — with a regional accent, such as Quebec French for calls in Montreal.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Can Dulce invent an answer if it does not know something?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'No. If the other person asks something you have not told Dulce, it politely holds the line, asks you, waits for your typed answer, and only then speaks.',
+        },
+      },
+    ],
+  },
+];
+---
+
+<Base
+  title="Hello Dulce — make phone calls in any language, without speaking it"
+  description="Text Hello Dulce in your language. It calls, speaks fluently in theirs, and sends every word back to you translated, live. Doctors, schools, landlords, government lines."
+  path="/"
+  jsonLd={jsonLd}
+>
+  <section class="hero">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="wrap hero-grid">
+      <div>
+        <span class="kicker">Your voice, in any language</span>
+        <h1>
+          The phone call you keep<br class="d-br" /> putting off,
+          <span class="em grad">made for you.</span>
+        </h1>
+        <p class="lede">
+          Text Hello Dulce what you want to say — in your language. Dulce dials, speaks it naturally in
+          theirs, and sends every sentence back to you translated while the call is still happening.
+        </p>
+        <div class="hero-cta">
+          <a class="btn" href={APP_URL}>Start a call &rarr;</a>
+          <a class="btn btn-ghost" href="#watch">Watch it happen</a>
+        </div>
+        <p class="hero-note">
+          No download. You type, Dulce talks. 100+ languages in, a native-sounding voice out.
+        </p>
+        <div class="chips">
+          {USE_CASES.map((u) => (
+            <a class="chip" href={`/use-cases/${u.slug}`}>{u.emoji} {u.nav}</a>
+          ))}
+        </div>
+      </div>
+      <div id="watch">
+        <CallDemo scenario={hero} accent="#f472b6" id="hero-demo" />
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <span class="kicker">The problem</span>
+          <h2>You know exactly what you want to say. Just not in their language.</h2>
+        </div>
+        <div>
+          <p class="lede">
+            So the call waits. Until a cousin is free, until a child gets home from school, until the
+            heating has been broken for a week. Hello Dulce removes the waiting: the words are yours,
+            the fluency is ours, and the answer arrives in writing in the language you think in.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec-tight">
+    <div class="wrap">
+      <span class="kicker center" style="display:block;text-align:center">How it works</span>
+      <h2 class="center" style="max-width:20ch">Four steps, one phone call</h2>
+      <p class="lede center" style="margin-bottom:34px">
+        No app for the other person to install. They just answer their phone and have a normal
+        conversation.
+      </p>
+      <div class="steps">
+        {STEPS.map((s) => (
+          <div class="step">
+            <div class="n">{s.n}</div>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </div>
+        ))}
+      </div>
+      <p class="center" style="margin-top:28px">
+        <a class="btn btn-ghost" href="/how-it-works">See the whole call, step by step &rarr;</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <span class="kicker">Use cases</span>
+      <h2>Pick the call you have been avoiding</h2>
+      <p class="lede" style="margin-bottom:30px">
+        Each one gets its own page, with a live simulation of how that exact conversation goes.
+      </p>
+      <div class="cards cards-3">
+        {USE_CASES.map((u) => (
+          <a class="card" href={`/use-cases/${u.slug}`}>
+            <div class="card-emoji">{u.emoji}</div>
+            <h3>{u.title}</h3>
+            <p>{u.jobs[0].body}</p>
+            <span class="more">See the call &rarr;</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec-tight">
+    <div class="wrap">
+      <div class="cards cards-3">
+        <div class="card">
+          <h3>It sounds human</h3>
+          <p>
+            A natural voice with the local accent — Quebec French in Montreal, not a textbook robot.
+            First words land about a second after you hit send.
+          </p>
+        </div>
+        <div class="card">
+          <h3>It never invents</h3>
+          <p>
+            If the other person asks something Dulce does not know, it holds the line and asks you.
+            Nothing gets made up on your behalf.
+          </p>
+        </div>
+        <div class="card">
+          <h3>You keep the record</h3>
+          <p>
+            Every call ends with dates, names and file numbers in your language, plus the full
+            bilingual transcript.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec-tight faq-sec">
+    <div class="wrap" style="max-width:820px">
+      <h2>Questions people ask first</h2>
+      <div class="faq">
+        <details open>
+          <summary>Does it sound like a robot?</summary>
+          <p>
+            No. Dulce speaks with a natural human-sounding voice in the local accent, and starts
+            talking about a second after you send your line — so the conversation keeps its rhythm
+            instead of stalling.
+          </p>
+        </details>
+        <details>
+          <summary>Do I have to speak during the call?</summary>
+          <p>
+            Never. You only type, in your own language. Dulce does the speaking and the listening and
+            relays every sentence back to you as translated text.
+          </p>
+        </details>
+        <details>
+          <summary>Which languages does it work in?</summary>
+          <p>
+            You can write in over 100 languages. Dulce speaks the language of the person you are
+            calling, with a regional accent where it matters.
+          </p>
+        </details>
+        <details>
+          <summary>Can Dulce invent an answer?</summary>
+          <p>
+            No. When it does not know something, it politely holds the line, asks you, waits for your
+            typed answer, and only then speaks.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="band">
+        <h2>Make the call today, not next week</h2>
+        <p>Write your first message in your own language. Dulce takes it from there.</p>
+        <a class="btn" href={APP_URL}>Start a call &rarr;</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .split { display: grid; gap: 18px; }
+  @media (min-width: 900px) { .split { grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; } }
+  .d-br { display: none; }
+  @media (min-width: 520px) { .d-br { display: inline; } }
+</style>
