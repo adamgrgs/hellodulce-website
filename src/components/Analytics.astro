@@ -12,11 +12,14 @@
  * 2. Hits only fire on the real domain (see SEND_ON_HOSTS). Preview deploys and
  *    automated screenshot runs would otherwise show up as engaged users.
  *
- * 3. Consent Mode v2 defaults are set BEFORE config, with advertising storage
- *    denied. Quebec's Law 25 and the GDPR both bite here, and the audience for
- *    this site is exactly the population least able to afford a privacy
- *    mistake. Analytics storage defaults to granted; flip DEFAULT_ANALYTICS to
- *    'denied' and call gtag('consent','update',...) from a banner to go stricter.
+ * 3. OPT-IN consent, not opt-out. Quebec's Law 25 (s. 8.1) and the GDPR both
+ *    require consent BEFORE non-essential tracking, so:
+ *      - every Consent Mode v2 signal defaults to 'denied', analytics included;
+ *      - gtag/js is not even downloaded until the visitor accepts;
+ *      - refusing is one click, exactly as prominent as accepting.
+ *    Consent is remembered in localStorage (not a cookie: storing the refusal
+ *    must not itself require the thing being refused) and can be withdrawn from
+ *    the footer link on every page. window.hdConsent is the whole API.
  *
  * 4. No message content, phone numbers, or identities are ever sent. See
  *    NEVER_SEND in src/data/analytics.ts.
@@ -42,21 +45,23 @@ const config = {
 };
 ---
 
-{/* Consent defaults + gtag. Loaded on every page from Base.astro. */}
+{/* Consent gate + gtag. Loaded on every page from Base.astro. */}
 <script is:inline define:vars={{ gaId: GA_ID, hosts: SEND_ON_HOSTS }}>
   (function () {
+    var KEY = 'hd_consent_v1';
     window.dataLayer = window.dataLayer || [];
     function gtag() {
       dataLayer.push(arguments);
     }
     window.gtag = gtag;
 
-    // Consent Mode v2 — must be queued before config for GA to honour it.
+    /* Everything denied until the visitor says otherwise. This is the whole
+       legal posture in one object — do not soften it without legal advice. */
     gtag('consent', 'default', {
       ad_storage: 'denied',
       ad_user_data: 'denied',
       ad_personalization: 'denied',
-      analytics_storage: 'granted',
+      analytics_storage: 'denied',
       functionality_storage: 'granted',
       security_storage: 'granted',
       wait_for_update: 500,
@@ -64,25 +69,83 @@ const config = {
     gtag('js', new Date());
 
     var live = hosts.indexOf(location.hostname) !== -1;
-    if (!live) {
-      // Off the production domain we still exercise the whole pipeline, but
-      // nothing leaves the browser. Makes local QA of events possible.
-      window.__hdAnalyticsDryRun = true;
-      gtag('config', gaId, { send_page_view: false });
-      return;
+    var loaded = false;
+
+    function read() {
+      try {
+        return localStorage.getItem(KEY);
+      } catch (e) {
+        return null; // Safari private mode etc: treat as "no consent recorded".
+      }
     }
 
-    var s = document.createElement('script');
-    s.async = true;
-    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
-    document.head.appendChild(s);
+    function loadGa() {
+      if (loaded) return;
+      loaded = true;
+      if (live) {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+        document.head.appendChild(s);
+      }
+      gtag('config', gaId, {
+        anonymize_ip: true,
+        // Google Signals/ads features are off: no advertising consent collected.
+        allow_google_signals: false,
+        allow_ad_personalization_signals: false,
+        send_page_view: live,
+      });
+    }
 
-    gtag('config', gaId, {
-      anonymize_ip: true,
-      // Google Signals/ads features are off: no advertising consent collected.
-      allow_google_signals: false,
-      allow_ad_personalization_signals: false,
-    });
+    /* Off production nothing leaves the browser, so the pipeline runs in dry
+       mode and the banner is still exercised by tests. */
+    if (!live) window.__hdAnalyticsDryRun = true;
+
+    var state = read();
+
+    window.hdConsent = {
+      status: function () {
+        return read() || 'unset';
+      },
+      /** value: 'granted' | 'denied'. Safe to call repeatedly. */
+      set: function (value) {
+        var granted = value === 'granted';
+        try {
+          localStorage.setItem(KEY, granted ? 'granted' : 'denied');
+        } catch (e) {
+          /* Storage blocked: honour the choice for this page view only. */
+        }
+        gtag('consent', 'update', {
+          analytics_storage: granted ? 'granted' : 'denied',
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+        });
+        if (granted) {
+          loadGa();
+          /* GA missed the automatic page_view while it was unloaded. */
+          if (window.hdTrack) window.hdTrack('page_view', {});
+        }
+        document.dispatchEvent(
+          new CustomEvent('hd:consent', { detail: { value: granted ? 'granted' : 'denied' } })
+        );
+      },
+      /** Reopens the banner so a visitor can change their mind. */
+      reset: function () {
+        try {
+          localStorage.removeItem(KEY);
+        } catch (e) {}
+        gtag('consent', 'update', {
+          analytics_storage: 'denied',
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+        });
+        document.dispatchEvent(new CustomEvent('hd:consent', { detail: { value: 'unset' } }));
+      },
+    };
+
+    if (state === 'granted') loadGa();
   })();
 </script>
 
@@ -91,6 +154,13 @@ const config = {
   (function () {
     var E = cfg.events;
     var dry = !!window.__hdAnalyticsDryRun;
+
+    /* Hard gate: with no consent, events are discarded rather than queued.
+       Queueing then flushing on accept would still be tracking-before-consent
+       for everything that happened before the click. */
+    function allowed() {
+      return !window.hdConsent || window.hdConsent.status() === 'granted';
+    }
 
     /** Single funnel for every event: stamps locale + page type, drops empties. */
     function track(name, params) {
@@ -105,6 +175,7 @@ const config = {
           delete payload[k];
         }
       });
+      if (!allowed()) return;
       if (dry) {
         // Off production: keep a readable buffer so events can be asserted in a
         // browser test without sending anything. See temp QA script / skill.

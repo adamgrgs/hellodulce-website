@@ -6,6 +6,7 @@ import {
   routePath, useCasePath, type Locale, type Alternates,
 } from '../data/i18n';
 import Analytics from '../components/Analytics.astro';
+import Consent from '../components/Consent.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -199,9 +200,14 @@ const year = new Date().getFullYear();
         </div>
       </div>
       <div class="wrap foot-base">
+        <p class="foot-legal">
+          <a href="#" data-consent-manage>{fr ? 'Témoins' : 'Cookies'}</a>
+        </p>
         <p>&copy; {year} Hello Dulce. {fr ? UI_FR.footer.tagline : 'Made for anyone who has ever put off a phone call.'}</p>
       </div>
     </footer>
+
+    <Consent locale={locale} />
 
     <script is:inline>
       document.addEventListener('DOMContentLoaded', () => {

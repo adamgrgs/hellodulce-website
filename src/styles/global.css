@@ -199,6 +199,9 @@ section { position: relative; }
 .site-foot a:hover { color: var(--pink); }
 .foot-base { border-top: 1px solid var(--line); margin-top: 42px; padding-top: 20px; padding-bottom: 30px; }
 .foot-base p { color: var(--dark-muted); font-size: 0.84rem; margin: 0; }
+.foot-base { display: flex; flex-wrap: wrap-reverse; gap: 8px 20px; align-items: baseline; justify-content: space-between; }
+.foot-legal a { color: var(--dark-muted); font-size: 0.84rem; text-decoration: underline; text-underline-offset: 2px; }
+.foot-legal a:hover { color: var(--text); }
 
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }

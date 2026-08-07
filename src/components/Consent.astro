@@ -1,0 +1,221 @@
+---
+/**
+ * Cookie/analytics consent banner — opt-in, bilingual.
+ *
+ * Legal shape (Quebec Law 25 s. 8.1 + GDPR art. 6/7, and CNIL's guidance which
+ * Quebec's CAI follows closely):
+ *  - nothing non-essential loads until the visitor accepts (the gate itself
+ *    lives in Analytics.astro; this file is only the UI);
+ *  - "Refuse" is a single click and styled with the SAME visual weight as
+ *    "Accept" — a greyed-out refusal is the most commonly fined dark pattern;
+ *  - no pre-ticked boxes, no "by continuing you agree", no cookie wall;
+ *  - the choice is withdrawable at any time from the footer link on every page.
+ *
+ * The banner is rendered hidden and revealed by script only when no choice has
+ * been recorded, so a returning visitor never sees it and it cannot flash for
+ * users with JS disabled (who are not tracked at all anyway).
+ */
+import type { Locale } from '../data/i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props as Props;
+const fr = locale === 'fr';
+
+const t = fr
+  ? {
+      title: 'Un mot sur les témoins',
+      body:
+        'On aimerait mesurer comment le site est utilisé (pages visitées, boutons cliqués) pour l’améliorer. Rien n’est activé sans votre accord, et on ne partage rien avec des annonceurs.',
+      accept: 'Accepter',
+      refuse: 'Refuser',
+      aria: 'Choix concernant les témoins',
+      done: 'Merci, votre choix est enregistré.',
+      manage: 'Témoins',
+    }
+  : {
+      title: 'A word about cookies',
+      body:
+        'We’d like to measure how the site is used — pages visited, buttons clicked — so we can improve it. Nothing is switched on without your say-so, and we never share it with advertisers.',
+      accept: 'Accept',
+      refuse: 'Refuse',
+      aria: 'Cookie choices',
+      done: 'Thanks — your choice is saved.',
+      manage: 'Cookies',
+    };
+---
+
+<div
+  id="hd-consent"
+  class="consent"
+  role="dialog"
+  aria-modal="false"
+  aria-label={t.aria}
+  aria-live="polite"
+  hidden
+>
+  <div class="consent-in">
+    <div class="consent-copy">
+      <p class="consent-h">{t.title}</p>
+      <p class="consent-b">{t.body}</p>
+    </div>
+    <div class="consent-acts">
+      <button type="button" class="c-btn c-yes" data-consent="granted">{t.accept}</button>
+      <button type="button" class="c-btn c-no" data-consent="denied">{t.refuse}</button>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ manageLabel: t.manage }}>
+  (function () {
+    function ready(fn) {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', fn);
+      } else {
+        fn();
+      }
+    }
+
+    ready(function () {
+      var el = document.getElementById('hd-consent');
+      if (!el || !window.hdConsent) return;
+
+      function show() {
+        el.hidden = false;
+        // Delay the transition class so it animates in rather than snapping.
+        requestAnimationFrame(function () {
+          el.classList.add('is-up');
+        });
+      }
+      function hide() {
+        el.classList.remove('is-up');
+        window.setTimeout(function () {
+          el.hidden = true;
+        }, 260);
+      }
+
+      if (window.hdConsent.status() === 'unset') show();
+
+      el.addEventListener('click', function (e) {
+        var b = e.target.closest('[data-consent]');
+        if (!b) return;
+        window.hdConsent.set(b.getAttribute('data-consent'));
+        hide();
+      });
+
+      /* Withdrawal path: any element with [data-consent-manage] reopens the
+         banner. The footer link uses it on every page, in both locales. */
+      document.addEventListener('click', function (e) {
+        var m = e.target.closest('[data-consent-manage]');
+        if (!m) return;
+        e.preventDefault();
+        window.hdConsent.reset();
+        show();
+        el.querySelector('.c-yes').focus();
+      });
+
+      document.addEventListener('hd:consent', function (e) {
+        if (e.detail && e.detail.value === 'unset') return;
+        hide();
+      });
+
+      /* Keeps the footer link's label honest if a page ever wants to read it. */
+      el.dataset.manageLabel = manageLabel;
+    });
+  })();
+</script>
+
+<style is:global>
+  .consent {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 60;
+    padding: 0.85rem clamp(0.9rem, 4vw, 2rem) calc(0.85rem + env(safe-area-inset-bottom));
+    background: rgba(23, 16, 12, 0.96);
+    border-top: 1px solid rgba(255, 106, 43, 0.35);
+    backdrop-filter: blur(10px);
+    transform: translateY(110%);
+    transition: transform 0.26s ease;
+  }
+  .consent.is-up {
+    transform: translateY(0);
+  }
+  .consent-in {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .consent-h {
+    margin: 0 0 0.15rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+  .consent-b {
+    margin: 0;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+  .consent-acts {
+    display: flex;
+    gap: 0.5rem;
+  }
+  /* Equal weight by design: same size, same padding, same font. Only the fill
+     differs, and the outline button is high-contrast, not greyed out. */
+  .c-btn {
+    flex: 1 1 auto;
+    min-height: 44px;
+    padding: 0.6rem 1.15rem;
+    border-radius: 999px;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 650;
+    cursor: pointer;
+    transition: filter 0.15s ease, background 0.15s ease;
+  }
+  .c-yes {
+    border: 1px solid transparent;
+    background: linear-gradient(135deg, var(--orange), var(--amber));
+    color: #21150d;
+  }
+  .c-no {
+    border: 1px solid rgba(253, 243, 234, 0.5);
+    background: transparent;
+    color: var(--text);
+  }
+  .c-btn:hover {
+    filter: brightness(1.08);
+  }
+  .c-no:hover {
+    background: rgba(253, 243, 234, 0.1);
+  }
+  .c-btn:focus-visible {
+    outline: 2px solid var(--amber);
+    outline-offset: 2px;
+  }
+  @media (min-width: 720px) {
+    .consent-in {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .consent-acts {
+      flex: 0 0 auto;
+    }
+    .c-btn {
+      flex: 0 0 auto;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .consent {
+      transition: none;
+    }
+  }
+</style>
