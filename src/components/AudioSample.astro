@@ -1,0 +1,32 @@
+---
+import { existsSync } from 'node:fs';
+import path from 'node:path';
+import { SAMPLE } from '../data/audio';
+
+/* import.meta.url is virtualised during the Vite SSR build, so resolve from the
+   project root instead — otherwise the player silently never renders. */
+const hasAudio = existsSync(path.join(process.cwd(), 'public', SAMPLE.file));
+---
+
+<div class="audio-card" id="sample-call">
+  <h3>{hasAudio ? SAMPLE.title : 'The call, word for word'}</h3>
+  <p class="audio-sub">{SAMPLE.sub}</p>
+  {
+    hasAudio && (
+      <audio controls preload="none" src={SAMPLE.file} aria-label="Recording of a Hello Dulce call to a Montreal school office, spoken in Quebec French">
+        Your browser cannot play audio. <a href={SAMPLE.file}>Download the recording</a> instead.
+      </audio>
+    )
+  }
+  <ul class="audio-lines">
+    {
+      SAMPLE.lines.map((l) => (
+        <li class={l.dulce ? 'dulce' : ''}>
+          <span class="who">{l.who}</span>
+          <p class="said" lang="fr">{l.said}</p>
+          <p class="tr" lang="es">{l.tr}</p>
+        </li>
+      ))
+    }
+  </ul>
+</div>

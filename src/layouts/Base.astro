@@ -8,8 +8,9 @@ interface Props {
   path: string;
   jsonLd?: Record<string, any> | Record<string, any>[];
   noindex?: boolean;
+  articleDates?: { published: string; modified: string };
 }
-const { title, description, path, jsonLd, noindex = false } = Astro.props as Props;
+const { title, description, path, jsonLd, noindex = false, articleDates } = Astro.props as Props;
 const canonical = new URL(path, SITE.domain).href.replace(/(.+)\/$/, '$1/');
 const og = new URL('/og.png', SITE.domain).href;
 
@@ -21,6 +22,12 @@ const baseLd = [
     url: SITE.domain,
     description: SITE.blurb,
     inLanguage: 'en',
+    publisher: { '@type': 'Organization', name: SITE.name, url: SITE.domain },
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: { '@type': 'EntryPoint', urlTemplate: `${SITE.domain}/blog` },
+      'query-input': 'required name=q',
+    },
   },
   {
     '@context': 'https://schema.org',
@@ -29,6 +36,15 @@ const baseLd = [
     url: SITE.domain,
     logo: new URL('/favicon.svg', SITE.domain).href,
     description: SITE.blurb,
+    slogan: SITE.tagline,
+    areaServed: ['CA', 'US'],
+    knowsAbout: [
+      'phone interpretation',
+      'over-the-phone interpreting',
+      'real-time speech translation',
+      'language access',
+      'limited English proficiency',
+    ],
   },
 ];
 const pageLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
@@ -48,7 +64,9 @@ const year = new Date().getFullYear();
       name="robots"
       content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1'}
     />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={articleDates ? 'article' : 'website'} />
+    {articleDates && <meta property="article:published_time" content={articleDates.published} />}
+    {articleDates && <meta property="article:modified_time" content={articleDates.modified} />}
     <meta property="og:site_name" content={SITE.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -65,8 +83,10 @@ const year = new Date().getFullYear();
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.webmanifest" />
-    <meta name="theme-color" content="#12071f" />
+    <meta name="theme-color" content="#17100c" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="Plain-text summary for AI agents" />
+    <link rel="alternate" type="application/json" href="/api/site.json" title="Machine-readable site data" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -86,6 +106,9 @@ const year = new Date().getFullYear();
         <nav class="head-nav" aria-label="Main">
           <a href="/how-it-works">How it works</a>
           <a href="/use-cases">Use cases</a>
+          <a href="/meet-dulce">Meet Dulce</a>
+          <a href="/blog">Guides</a>
+          <a href="/faq">FAQ</a>
           <a class="btn btn-sm" href={APP_URL}>Start a call</a>
         </nav>
         <button class="burger" aria-expanded="false" aria-controls="m-nav" aria-label="Open menu">
@@ -95,6 +118,9 @@ const year = new Date().getFullYear();
       <nav class="mobile-nav" id="m-nav" aria-label="Mobile" hidden>
         <a href="/how-it-works">How it works</a>
         <a href="/use-cases">Use cases</a>
+        <a href="/meet-dulce">Meet Dulce</a>
+        <a href="/blog">Guides</a>
+        <a href="/faq">FAQ</a>
         {USE_CASES.map((u) => <a href={`/use-cases/${u.slug}`}>{u.emoji} {u.nav}</a>)}
         <a class="btn" href={APP_URL}>Start a call</a>
       </nav>
@@ -123,8 +149,11 @@ const year = new Date().getFullYear();
         <div>
           <h2 class="foot-h">Hello Dulce</h2>
           <ul>
+            <li><a href="/meet-dulce">Meet Dulce</a></li>
             <li><a href="/how-it-works">How it works</a></li>
             <li><a href="/use-cases">All use cases</a></li>
+            <li><a href="/blog">Guides</a></li>
+            <li><a href="/faq">FAQ</a></li>
             <li><a href={APP_URL}>Open the app</a></li>
           </ul>
         </div>

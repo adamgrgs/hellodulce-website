@@ -1,0 +1,188 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { SITE, APP_URL, USE_CASES } from '../../data/site';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const d = post.data;
+const { Content, headings } = await render(post);
+const url = new URL(`/blog/${post.id}`, SITE.domain).href;
+const iso = (x: Date) => x.toISOString().slice(0, 10);
+
+const related = USE_CASES.filter((u) => d.relatedUseCases.includes(u.slug));
+const others = (await getCollection('blog')).filter((p) => p.id !== post.id).slice(0, 2);
+const h2s = headings.filter((h) => h.depth === 2);
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: d.title,
+    description: d.description,
+    url,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    datePublished: iso(d.publishDate),
+    dateModified: iso(d.updatedDate),
+    inLanguage: 'en',
+    keywords: [d.primaryKeyword, ...d.secondaryKeywords].join(', '),
+    wordCount: post.body?.split(/\s+/).length ?? undefined,
+    author: { '@type': 'Organization', name: SITE.name, url: SITE.domain },
+    publisher: { '@type': 'Organization', name: SITE.name, url: SITE.domain },
+    abstract: d.answer,
+    citation: d.citations.map((c) => ({
+      '@type': 'CreativeWork',
+      name: c.title,
+      publisher: c.publisher,
+      datePublished: c.year,
+      url: c.url,
+    })),
+    speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.answer', '.facts'] },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: d.faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.domain },
+      { '@type': 'ListItem', position: 2, name: 'Guides', item: new URL('/blog', SITE.domain).href },
+      { '@type': 'ListItem', position: 3, name: d.title, item: url },
+    ],
+  },
+];
+const fmt = (x: Date) => x.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<Base
+  title={`${d.metaTitle} | Hello Dulce`}
+  description={d.description}
+  path={`/blog/${post.id}`}
+  jsonLd={jsonLd}
+  articleDates={{ published: iso(d.publishDate), modified: iso(d.updatedDate) }}
+>
+  <section class="sec">
+    <div class="wrap">
+      <p class="crumbs"><a href="/">Home</a> / <a href="/blog">Guides</a> / {d.primaryKeyword}</p>
+      <h1 style="max-width:22ch">{d.title}</h1>
+      <p class="post-meta">
+        <span>Published {fmt(d.publishDate)}</span>
+        <span>Updated {fmt(d.updatedDate)}</span>
+        <span>{d.readingMinutes} min read</span>
+      </p>
+
+      <div class="answer" style="max-width:72ch">
+        <p class="answer-q">The short answer</p>
+        <p>{d.answer}</p>
+      </div>
+
+      <ul class="facts facts-4">
+        {
+          d.keyNumbers.map((k) => (
+            <li>
+              <span class="v">{k.value}</span>
+              <span class="l">{k.label}</span>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="prose" style="margin-top:40px">
+        {
+          h2s.length > 2 && (
+            <nav class="toc" aria-label="On this page">
+              <p>On this page</p>
+              <ol>
+                {h2s.map((h) => (
+                  <li><a href={`#${h.slug}`}>{h.text}</a></li>
+                ))}
+              </ol>
+            </nav>
+          )
+        }
+        <Content />
+      </div>
+
+      <section class="faq" style="margin-top:52px;max-width:72ch">
+        <h2 style="margin-bottom:18px">Questions people ask</h2>
+        {
+          d.faqs.map((f) => (
+            <details>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))
+        }
+      </section>
+
+      <section style="margin-top:48px;max-width:72ch" class="refs">
+        <h2 style="font-size:1.1rem">Sources</h2>
+        <ul style="display:grid;gap:8px;padding-left:20px">
+          {
+            d.citations.map((c) => (
+              <li>
+                [{c.id}] <a href={c.url} rel="nofollow noopener" target="_blank">{c.title}</a> &mdash; {c.publisher}, {c.year}.
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      {
+        related.length > 0 && (
+          <section style="margin-top:52px">
+            <h2 style="font-size:1.2rem">See how the call goes</h2>
+            <ul class="post-list" style="margin-top:16px">
+              {related.map((u) => (
+                <li>
+                  <a class="card" href={`/use-cases/${u.slug}`} style={`border-top:3px solid ${u.accent}`}>
+                    <div class="card-emoji" aria-hidden="true">{u.emoji}</div>
+                    <h2>{u.title}</h2>
+                    <p>{u.intro.slice(0, 130)}&hellip;</p>
+                    <span class="more">Watch the simulation &rarr;</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+
+      {
+        others.length > 0 && (
+          <section style="margin-top:44px">
+            <h2 style="font-size:1.2rem">Keep reading</h2>
+            <ul class="post-list" style="margin-top:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+              {others.map((p) => (
+                <li>
+                  <a class="card" href={`/blog/${p.id}`}>
+                    <h2>{p.data.title}</h2>
+                    <p>{p.data.description.slice(0, 120)}&hellip;</p>
+                    <span class="more">Read &rarr;</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+
+      <div class="band" style="margin-top:52px">
+        <h2>Make the call in your own words</h2>
+        <p>You write it in your language. Hello Dulce speaks it in theirs and texts you every answer.</p>
+        <a class="btn" href={APP_URL}>Start a call &rarr;</a>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -37,7 +37,7 @@ const flagship: UseCase = {
   h1: "Talk to your child's school, even if you don't speak the language",
   kicker: 'Education',
   emoji: '🎒',
-  accent: '#7c3aed',
+  accent: '#ff6a2b',
   intro:
     "Parent-teacher meetings, absences, bus changes, extra help in reading — the calls that decide how your child's year goes. Write to Dulce in your language; the school hears fluent, polite French, English or whatever the office speaks.",
   metaTitle: "Call your child's school in any language | Hello Dulce",
@@ -116,7 +116,7 @@ export const USE_CASES: UseCase[] = [
     h1: 'Book the appointment. Describe the symptom. In your own words.',
     kicker: 'Healthcare',
     emoji: '🩺',
-    accent: '#e11d48',
+    accent: '#ff4d3d',
     intro:
       'Health calls are the ones you cannot postpone and cannot afford to get half-right. Type what hurts in the language you think in — Dulce says it precisely to the clinic and brings the answer back the same way.',
     metaTitle: 'Call a doctor or clinic in any language | Hello Dulce',
@@ -192,7 +192,7 @@ export const USE_CASES: UseCase[] = [
     h1: 'Get the heat fixed without needing a translator',
     kicker: 'Housing',
     emoji: '🏠',
-    accent: '#0d9488',
+    accent: '#e8952a',
     intro:
       'Repairs, rent questions, a move-in date, a power outage. These calls reward whoever sounds confident and precise — so let Dulce be precise for you, and keep the written record it produces.',
     metaTitle: 'Call your landlord or utility company in any language | Hello Dulce',
@@ -264,7 +264,7 @@ export const USE_CASES: UseCase[] = [
     h1: 'Win the billing argument in a language you never studied',
     kicker: 'Support lines',
     emoji: '💳',
-    accent: '#2563eb',
+    accent: '#ffb020',
     intro:
       'Phone menus, hold music, an agent who talks fast. Dulce navigates the menu, waits on hold, and argues your case politely and exactly — you just read along and steer.',
     metaTitle: 'Call customer service in any language | Hello Dulce',
@@ -336,7 +336,7 @@ export const USE_CASES: UseCase[] = [
     h1: 'Immigration, benefits, licences — asked correctly the first time',
     kicker: 'Public services',
     emoji: '🏛️',
-    accent: '#b45309',
+    accent: '#d97706',
     intro:
       'Government lines punish vague questions. Dulce asks yours in clean, formal language, notes the file number, the deadline and the exact document they asked for, and gives it all back to you translated.',
     metaTitle: 'Call government offices in any language | Hello Dulce',
@@ -408,7 +408,7 @@ export const USE_CASES: UseCase[] = [
     h1: 'Give your parents back the phone',
     kicker: 'Family care',
     emoji: '💛',
-    accent: '#db2777',
+    accent: '#ff7a45',
     intro:
       'The calls adult children end up making for their parents — pharmacy, insurance, home care, the specialist’s office. With Dulce, your mother makes them herself, in her own language, and you can see the transcript afterwards.',
     metaTitle: 'Help elderly parents make phone calls in any language | Hello Dulce',
@@ -496,4 +496,70 @@ export const STEPS = [
     title: 'You keep the outcome',
     body: 'Dates, names, file numbers and next steps, written down in your language, with the full bilingual transcript attached.',
   },
+];
+
+/* ── Answer-engine layer ─────────────────────────────────────────────────────
+   Short, self-contained, quotable answers. These render as visible page copy
+   AND feed the FAQPage / QAPage JSON-LD, /faq, /llms.txt and /api/site.json.  */
+
+export type QA = { q: string; a: string; slug: string };
+
+export const CORE_QA: QA[] = [
+  {
+    slug: 'what-is-hello-dulce',
+    q: 'What is Hello Dulce?',
+    a: 'Hello Dulce is an AI phone-call interpreter. You text what you want to say in your own language, Hello Dulce places the call and speaks it out loud in the other person\u2019s language with a natural human-sounding voice, then texts every sentence of their reply back to you translated, while the call is still live. It works with any phone number and the other person needs no app, no account and no setup.',
+  },
+  {
+    slug: 'how-does-it-work',
+    q: 'How does Hello Dulce work, step by step?',
+    a: 'Four steps. 1) You open the app and write your message in your language. 2) You enter the number and Hello Dulce dials it. 3) When someone answers, Hello Dulce introduces itself as calling on your behalf and speaks your message in their language; each sentence they say comes back to you as text in your language about a second later. 4) When the call ends you keep a written summary and the full bilingual transcript.',
+  },
+  {
+    slug: 'do-i-have-to-speak',
+    q: 'Do I have to speak during the call?',
+    a: 'No. You type, Hello Dulce speaks. You can listen to the live call if you want to, but you never have to say a word in a language you are not comfortable with. Typing is also why the call stays accurate: what you wrote is exactly what gets said.',
+  },
+  {
+    slug: 'is-it-a-robot-voice',
+    q: 'Does it sound like a robot?',
+    a: 'No. Hello Dulce uses a natural, human-sounding voice with the local accent \u2014 Quebec French in Montreal, not textbook French \u2014 and it starts speaking about a second after you send your line, so the conversation keeps its normal rhythm instead of stalling. Most people on the other end simply answer as they would any other call.',
+  },
+  {
+    slug: 'how-fast-is-it',
+    q: 'How fast is the translation?',
+    a: 'About one second. In internal testing on the Hello Dulce voice bridge, a typed message became spoken speech in the other language in roughly 0.9 to 1.3 seconds end to end. That is fast enough that the person on the phone does not feel a pause worth commenting on.',
+  },
+  {
+    slug: 'which-languages',
+    q: 'Which languages does Hello Dulce support?',
+    a: 'Hello Dulce is built for high-resource language pairs in both directions \u2014 Spanish, French, English, Arabic, Mandarin, Portuguese, Haitian Creole, Vietnamese, Russian, Hindi, Tagalog and more. The first market is Spanish and Arabic speakers calling French-speaking institutions in Quebec.',
+  },
+  {
+    slug: 'is-it-an-interpreter-service',
+    q: 'Is Hello Dulce the same as a phone interpreter service?',
+    a: 'The job is the same, the shape is different. A traditional over-the-phone interpreting service is a three-way call with a human interpreter, billed per minute \u2014 LanguageLine\u2019s published pay-as-you-go rate is $3.95 per minute for audio. Hello Dulce has no third human on the line and no scheduling: you text, it speaks, and you get a written record. Human interpreters remain the right choice for legal proceedings, complex medical consent and anything where a certified interpreter is required.',
+  },
+  {
+    slug: 'does-the-other-person-need-the-app',
+    q: 'Does the other person need to install anything?',
+    a: 'No. They receive a normal phone call on a normal phone line. There is nothing to download, click or agree to on their side.',
+  },
+  {
+    slug: 'is-it-honest-about-being-ai',
+    q: 'Does Hello Dulce tell people it is AI?',
+    a: 'Yes. Hello Dulce announces at the start of the call that it is an interpretation service calling on behalf of a named person. It never impersonates you, and it never invents an answer \u2014 if it is asked something you have not told it, it holds the line and asks you.',
+  },
+  {
+    slug: 'what-does-it-cost',
+    q: 'What does Hello Dulce cost?',
+    a: 'Pricing is not published yet \u2014 Hello Dulce is in early access at bonjour.hellodulce.com. The design target is a cost per call far below per-minute human interpreting, because no third person has to join the line.',
+  },
+];
+
+export const FACTS = [
+  { label: 'Time from your text to spoken speech', value: '~1 second', note: 'measured at 0.9\u20131.3s in internal testing' },
+  { label: 'What the other person needs', value: 'Nothing', note: 'a normal phone call on a normal line' },
+  { label: 'What you have to say out loud', value: 'Nothing', note: 'you type, Dulce speaks' },
+  { label: 'What you keep afterwards', value: 'A written record', note: 'summary plus the full bilingual transcript' },
 ];

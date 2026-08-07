@@ -5,7 +5,7 @@ interface Props {
   accent?: string;
   id?: string;
 }
-const { scenario, accent = '#a855f7', id = 'demo' } = Astro.props as Props;
+const { scenario, accent = '#ff6a2b', id = 'demo' } = Astro.props as Props;
 ---
 
 <div class="demo" data-demo={JSON.stringify(scenario)} id={id} style={`--accent:${accent}`}>
@@ -83,7 +83,7 @@ const { scenario, accent = '#a855f7', id = 'demo' } = Astro.props as Props;
 
   .msg.you { align-self: flex-end; text-align: right; }
   .msg.you .bubble {
-    background: linear-gradient(120deg, #f472b6, #a855f7); color: #fff; border-bottom-right-radius: 5px;
+    background: linear-gradient(120deg, #ff6a2b, #ffb020); color: #fff; border-bottom-right-radius: 5px;
     text-align: left;
   }
   .msg.them .bubble {
@@ -95,7 +95,7 @@ const { scenario, accent = '#a855f7', id = 'demo' } = Astro.props as Props;
     border-left: 2px solid var(--accent); animation: fade 0.4s ease both;
   }
   .msg.dulce .bubble {
-    background: rgba(168, 85, 247, 0.14); border: 1px dashed rgba(244, 114, 182, 0.5); color: #fbe4f4;
+    background: rgba(255, 176, 32, 0.14); border: 1px dashed rgba(255, 106, 43, 0.5); color: #ffe9d6;
   }
   .msg.dulce .wave { display: inline-flex; align-items: flex-end; gap: 2px; height: 12px; margin-right: 7px; vertical-align: -1px; }
   .msg.dulce .wave i { width: 2px; background: var(--accent); border-radius: 2px; animation: eq 0.9s ease-in-out infinite; }
@@ -110,7 +110,7 @@ const { scenario, accent = '#a855f7', id = 'demo' } = Astro.props as Props;
   }
   .summary {
     align-self: stretch; border-radius: 16px; padding: 14px;
-    background: linear-gradient(140deg, rgba(34, 197, 94, 0.16), rgba(168, 85, 247, 0.12));
+    background: linear-gradient(140deg, rgba(34, 197, 94, 0.16), rgba(255, 176, 32, 0.14));
     border: 1px solid rgba(34, 197, 94, 0.35); animation: pop 0.4s ease both;
   }
   .summary h4 { margin: 0 0 8px; font-size: 0.92rem; display: flex; align-items: center; gap: 7px; }
@@ -130,10 +130,10 @@ const { scenario, accent = '#a855f7', id = 'demo' } = Astro.props as Props;
   }
   .composer-text { font-size: 0.86rem; color: #d6c8e4; min-height: 1.2em; flex: 1; text-align: left; }
   .composer-text.ph { color: #8a789d; }
-  .composer-text .caret { display: inline-block; width: 1px; background: #f472b6; height: 1em; vertical-align: -2px; animation: blink 0.8s steps(1) infinite; }
+  .composer-text .caret { display: inline-block; width: 1px; background: #ff6a2b; height: 1em; vertical-align: -2px; animation: blink 0.8s steps(1) infinite; }
   .send {
     width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; color: #fff;
-    background: linear-gradient(120deg, #f472b6, #a855f7); flex: 0 0 auto;
+    background: linear-gradient(120deg, #ff6a2b, #ffb020); flex: 0 0 auto;
   }
 
   .demo-ctl { display: flex; align-items: center; gap: 12px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
@@ -142,7 +142,7 @@ const { scenario, accent = '#a855f7', id = 'demo' } = Astro.props as Props;
     border: 1px solid rgba(255, 255, 255, 0.16); color: #f7eefc; border-radius: 999px;
     padding: 7px 14px; font: inherit; font-size: 0.82rem; font-weight: 700;
   }
-  .ctl:hover { border-color: #f472b6; }
+  .ctl:hover { border-color: #ff8c3c; }
   .ctl-note { font-size: 0.78rem; color: #6b5b7d; }
 
   @keyframes pop { from { opacity: 0; transform: translateY(10px) scale(0.98); } to { opacity: 1; transform: none; } }
