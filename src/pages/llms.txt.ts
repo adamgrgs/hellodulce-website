@@ -5,7 +5,9 @@ import { SITE, APP_URL, CORE_QA, USE_CASES, STEPS } from '../data/site';
 export const prerender = true;
 
 export const GET: APIRoute = async () => {
-  const posts = (await getCollection('blog')).sort(
+  const posts = (await getCollection('blog'))
+    .filter((p) => !p.id.startsWith('fr/'))
+    .sort(
     (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
   );
 
@@ -58,6 +60,18 @@ ${posts
 - [FAQ](${SITE.domain}/faq)
 - [Guides](${SITE.domain}/blog)
 - [Open the app](${APP_URL})
+
+## French (Quebec) version
+
+The whole site exists in Quebec French under /fr. Reciprocal hreflang (en / fr-CA / x-default)
+is declared on every page pair.
+
+- ${SITE.domain}/fr — Accueil
+- ${SITE.domain}/fr/fonctionnement — Comment ça marche
+- ${SITE.domain}/fr/cas-dutilisation — Cas d'utilisation
+- ${SITE.domain}/fr/rencontrer-dulce — Rencontrer Dulce
+- ${SITE.domain}/fr/faq — FAQ
+- ${SITE.domain}/fr/guides — Guides
 
 ## Citation
 

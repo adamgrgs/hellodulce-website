@@ -1,0 +1,122 @@
+---
+import Base from '../../layouts/Base.astro';
+import CallDemo from '../../components/CallDemo.astro';
+import { APP_URL, SITE } from '../../data/site';
+import { STEPS_FR, USE_CASES_FR, UI_FR } from '../../data/fr';
+import { altForRoute, routePath } from '../../data/i18n';
+
+const demo = USE_CASES_FR.find((u) => u.slug === 'healthcare')!.scenario;
+
+const detail = [
+  {
+    h: 'Environ une seconde, pas cinq',
+    p: 'Dulce commence à parler pendant qu’elle traite encore la fin de votre phrase. La personne au téléphone n’entend pas un silence gênant — elle entend quelqu’un qui prend une seconde pour réfléchir.',
+  },
+  {
+    h: 'L’accent d’ici',
+    p: 'Du français québécois à Montréal, pas du français de manuel. Les mots, le rythme et la politesse correspondent à l’endroit où vous appelez.',
+  },
+  {
+    h: 'Elle se présente',
+    p: 'Dulce dit dès le départ qu’elle est une interprète virtuelle et au nom de qui elle appelle. Personne ne se fait duper, et c’est justement pour ça que les gens coopèrent.',
+  },
+  {
+    h: 'Elle n’invente rien',
+    p: 'Si on lui demande une date de naissance ou un numéro de dossier que vous ne lui avez pas donné, elle garde la ligne, vous pose la question et attend votre réponse.',
+  },
+  {
+    h: 'Elle attend en ligne',
+    p: 'La musique d’attente est son problème, pas le vôtre. Vous revenez quand quelqu’un décroche.',
+  },
+  {
+    h: 'Vous repartez avec des preuves',
+    p: 'Dates, noms, montants, numéros de billet et prochaines étapes, résumés dans votre langue, avec la transcription bilingue complète en pièce jointe.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'Comment faire un appel téléphonique dans une langue que vous ne parlez pas',
+  inLanguage: 'fr-CA',
+  description:
+    'Hello Dulce fait l’appel, parle l’autre langue avec une voix naturelle et vous renvoie chaque phrase traduite en environ une seconde.',
+  totalTime: 'PT3M',
+  step: STEPS_FR.map((s, i) => ({
+    '@type': 'HowToStep',
+    position: i + 1,
+    name: s.title,
+    text: s.body,
+    url: new URL(`${routePath('howItWorks', 'fr')}#etape-${i + 1}`, SITE.domain).href,
+  })),
+};
+---
+
+<Base
+  title="Comment fonctionne Hello Dulce — vous écrivez, Dulce parle"
+  description="Hello Dulce fait votre appel, parle l’autre langue avec une voix naturelle et régionale, vous relaie chaque phrase traduite en une seconde environ, et n’invente jamais rien."
+  path="/fr/fonctionnement"
+  jsonLd={jsonLd}
+  locale="fr"
+  alternates={altForRoute('howItWorks')}
+>
+  <section class="hero">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="wrap hero-grid">
+      <div>
+        <span class="kicker">Comment ça marche</span>
+        <h1>Vous écrivez. Dulce <span class="em grad">parle.</span></h1>
+        <p class="lede">
+          Hello Dulce n’est pas une appli de traduction que vous collez sur votre oreille. C’est
+          quelqu’un qui parle couramment, qui fait l’appel pour vous, qui vous dit tout ce qui a été
+          dit, et qui dit ce que vous écrivez ensuite.
+        </p>
+        <div class="hero-cta">
+          <a class="btn" href={APP_URL}>{UI_FR.cta.startArrow}</a>
+          <a class="btn btn-ghost" href={routePath('useCases', 'fr')}>Voir les cas d’utilisation</a>
+        </div>
+      </div>
+      <div><CallDemo scenario={demo} accent="#ff8c3c" id="hiw-demo" locale="fr" /></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <h2>Les quatre étapes</h2>
+      <div class="steps" style="margin-top:26px">
+        {STEPS_FR.map((s, i) => (
+          <div class="step" id={`etape-${i + 1}`}>
+            <div class="n">{s.n}</div>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec-tight">
+    <div class="wrap">
+      <span class="kicker">Les détails qui décident de l’appel</span>
+      <h2>Pourquoi ça ressemble à une conversation</h2>
+      <div class="cards cards-3" style="margin-top:26px">
+        {detail.map((d) => (
+          <div class="card">
+            <h3>{d.h}</h3>
+            <p>{d.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="band">
+        <h2>Essayez sur un vrai appel</h2>
+        <p>Choisissez un numéro que vous évitez. Écrivez la première ligne dans votre langue.</p>
+        <a class="btn" href={APP_URL}>{UI_FR.cta.startArrow}</a>
+      </div>
+    </div>
+  </section>
+</Base>

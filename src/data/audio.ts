@@ -5,6 +5,10 @@
 export const SAMPLE = {
   file: '/audio/school-call-quebec-french.mp3',
   title: 'Hear a real call',
+  fallbackTitle: 'The call, word for word',
+  audioLabel: 'Recording of a Hello Dulce call to a Montreal school office, spoken in Quebec French',
+  noSupport: 'Your browser cannot play audio.',
+  download: 'Download the recording',
   sub: 'Recorded from a Hello Dulce call to a Montreal school office. The mother typed in Spanish; this is the audio the school heard, in Quebec French. Dulce introduces herself as a virtual interpreter calling on the mother’s behalf — she never pretends to be her.',
   durationLabel: '49 seconds',
   transcriptLangs: 'French spoken · Spanish written',
@@ -46,4 +50,22 @@ export const SAMPLE = {
       dulce: true,
     },
   ],
+};
+
+
+/** Same recording, French-language framing. The spoken lines are identical —
+ *  they are the actual audio — and the caller's Spanish stays Spanish. */
+export const SAMPLE_FR = {
+  title: 'Écoutez un vrai appel',
+  fallbackTitle: 'L’appel, mot pour mot',
+  audioLabel: 'Enregistrement d’un appel Hello Dulce au secrétariat d’une école montréalaise, en français québécois',
+  noSupport: 'Votre navigateur ne peut pas lire l’audio.',
+  download: 'Télécharger l’enregistrement',
+  sub: 'Enregistré lors d’un appel Hello Dulce au secrétariat d’une école de Montréal. La mère écrivait en espagnol; voici ce que l’école a entendu, en français québécois. Dulce se présente comme interprète virtuelle qui appelle au nom de la mère — elle ne se fait jamais passer pour elle.',
+  durationLabel: '49 secondes',
+  transcriptLangs: 'Parlé en français · lu en espagnol',
+  lines: SAMPLE.lines.map((l) => ({
+    ...l,
+    who: l.who.replace('School office · French', 'Secrétariat · français').replace('Dulce · French', 'Dulce · français'),
+  })),
 };

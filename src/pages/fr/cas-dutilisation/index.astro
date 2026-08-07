@@ -1,0 +1,70 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { APP_URL, SITE } from '../../../data/site';
+import { USE_CASES_FR, UI_FR } from '../../../data/fr';
+import { altForRoute, useCasePath } from '../../../data/i18n';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Cas d’utilisation de Hello Dulce',
+  inLanguage: 'fr-CA',
+  itemListElement: USE_CASES_FR.map((u, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: u.title,
+    url: new URL(useCasePath(u.slug, 'fr'), SITE.domain).href,
+  })),
+};
+---
+
+<Base
+  title="Cas d’utilisation — chaque appel que Dulce peut faire pour vous"
+  description="Médecins, écoles, propriétaires, fournisseurs, service à la clientèle, services publics et aide aux parents vieillissants. Voyez une simulation en direct de chaque appel."
+  path="/fr/cas-dutilisation"
+  jsonLd={jsonLd}
+  locale="fr"
+  alternates={altForRoute('useCases')}
+>
+  <section class="hero">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="wrap" style="position:relative;z-index:1;max-width:780px">
+      <span class="kicker">Cas d’utilisation</span>
+      <h1>Tous les appels que vous <span class="em grad">remettez à demain</span></h1>
+      <p class="lede">
+        Six situations, six pages. Chacune montre la vraie conversation telle qu’elle se déroule : ce
+        que vous écrivez, ce que Dulce dit, ce qui revient.
+      </p>
+      <div class="hero-cta"><a class="btn" href={APP_URL}>{UI_FR.cta.startArrow}</a></div>
+    </div>
+  </section>
+
+  <section class="sec-tight">
+    <div class="wrap">
+      <div class="cards cards-3">
+        {USE_CASES_FR.map((u) => (
+          <a class="card" href={useCasePath(u.slug, 'fr')}>
+            <div class="card-emoji">{u.emoji}</div>
+            <h3>{u.title}</h3>
+            <p>{u.intro.split('. ')[0]}.</p>
+            <p class="quote-line">&laquo;&nbsp;{u.jobs[0].quote}&nbsp;&raquo;</p>
+            <span class="more">{UI_FR.cta.seeCall}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="band">
+        <h2>Pas dans la liste?</h2>
+        <p>
+          Si c’est un appel téléphonique dans une langue que vous ne parlez pas, Dulce peut le faire.
+          Ouvrez l’application et écrivez votre première ligne.
+        </p>
+        <a class="btn" href={APP_URL}>{UI_FR.cta.startArrow}</a>
+      </div>
+    </div>
+  </section>
+</Base>

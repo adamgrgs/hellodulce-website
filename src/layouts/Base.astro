@@ -1,5 +1,10 @@
 ---
 import { SITE, APP_URL, USE_CASES } from '../data/site';
+import { SITE_FR, UI_FR, USE_CASES_FR } from '../data/fr';
+import {
+  HREFLANG, OG_LOCALE, LOCALES, DEFAULT_LOCALE,
+  routePath, useCasePath, type Locale, type Alternates,
+} from '../data/i18n';
 import '../styles/global.css';
 
 interface Props {
@@ -9,8 +14,30 @@ interface Props {
   jsonLd?: Record<string, any> | Record<string, any>[];
   noindex?: boolean;
   articleDates?: { published: string; modified: string };
+  locale?: Locale;
+  /** Absolute-path equivalents of this page in every locale. Drives hreflang
+   *  and the language switcher. Omit only for pages with no translation. */
+  alternates?: Alternates;
 }
-const { title, description, path, jsonLd, noindex = false, articleDates } = Astro.props as Props;
+const {
+  title, description, path, jsonLd, noindex = false, articleDates,
+  locale = DEFAULT_LOCALE, alternates,
+} = Astro.props as Props;
+const fr = locale === 'fr';
+const S = fr ? SITE_FR : SITE;
+const nav = fr
+  ? UI_FR.nav
+  : {
+      howItWorks: 'How it works', useCases: 'Use cases', meetDulce: 'Meet Dulce',
+      guides: 'Guides', faq: 'FAQ', start: 'Start a call', openApp: 'Open the app',
+      allUseCases: 'All use cases', home: 'Home',
+    };
+const cases = fr ? USE_CASES_FR : USE_CASES;
+const L = (k: Parameters<typeof routePath>[0]) => routePath(k, locale);
+const other: Locale = fr ? 'en' : 'fr';
+const switchHref = alternates ? alternates[other] : routePath('home', other);
+const switchLabel = fr ? 'English' : 'Français';
+const switchAria = fr ? 'Read this page in English' : 'Lire cette page en français';
 const canonical = new URL(path, SITE.domain).href.replace(/(.+)\/$/, '$1/');
 const og = new URL('/og.png', SITE.domain).href;
 
@@ -18,10 +45,10 @@ const baseLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: SITE.name,
-    url: SITE.domain,
-    description: SITE.blurb,
-    inLanguage: 'en',
+    name: S.name,
+    url: new URL(routePath('home', locale), SITE.domain).href,
+    description: S.blurb,
+    inLanguage: HREFLANG[locale],
     publisher: { '@type': 'Organization', name: SITE.name, url: SITE.domain },
     potentialAction: {
       '@type': 'SearchAction',
@@ -53,13 +80,20 @@ const year = new Date().getFullYear();
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={HREFLANG[locale]}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {
+      alternates &&
+        LOCALES.map((l) => (
+          <link rel="alternate" hreflang={HREFLANG[l]} href={new URL(alternates[l], SITE.domain).href} />
+        ))
+    }
+    {alternates && <link rel="alternate" hreflang="x-default" href={new URL(alternates[DEFAULT_LOCALE], SITE.domain).href} />}
     <meta
       name="robots"
       content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1'}
@@ -75,7 +109,8 @@ const year = new Date().getFullYear();
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Hello Dulce — your voice, in any language" />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content={OG_LOCALE[locale]} />
+    {alternates && <meta property="og:locale:alternate" content={OG_LOCALE[other]} />}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
@@ -96,33 +131,35 @@ const year = new Date().getFullYear();
     <script type="application/ld+json" is:inline set:html={JSON.stringify(ld)} />
   </head>
   <body>
-    <a class="skip" href="#main">Skip to content</a>
+    <a class="skip" href="#main">{fr ? 'Aller au contenu' : 'Skip to content'}</a>
     <header class="site-head">
       <div class="wrap head-inner">
-        <a class="logo" href="/">
+        <a class="logo" href={L('home')}>
           <span class="logo-mark" aria-hidden="true"></span>
           <span>Hello&nbsp;Dulce</span>
         </a>
         <nav class="head-nav" aria-label="Main">
-          <a href="/how-it-works">How it works</a>
-          <a href="/use-cases">Use cases</a>
-          <a href="/meet-dulce">Meet Dulce</a>
-          <a href="/blog">Guides</a>
-          <a href="/faq">FAQ</a>
-          <a class="btn btn-sm" href={APP_URL}>Start a call</a>
+          <a href={L('howItWorks')}>{nav.howItWorks}</a>
+          <a href={L('useCases')}>{nav.useCases}</a>
+          <a href={L('meetDulce')}>{nav.meetDulce}</a>
+          <a href={L('blog')}>{nav.guides}</a>
+          <a href={L('faq')}>{nav.faq}</a>
+          <a class="lang" href={switchHref} hreflang={HREFLANG[other]} aria-label={switchAria} lang={HREFLANG[other]}>{switchLabel}</a>
+          <a class="btn btn-sm" href={APP_URL}>{nav.start}</a>
         </nav>
         <button class="burger" aria-expanded="false" aria-controls="m-nav" aria-label="Open menu">
           <span></span><span></span>
         </button>
       </div>
       <nav class="mobile-nav" id="m-nav" aria-label="Mobile" hidden>
-        <a href="/how-it-works">How it works</a>
-        <a href="/use-cases">Use cases</a>
-        <a href="/meet-dulce">Meet Dulce</a>
-        <a href="/blog">Guides</a>
-        <a href="/faq">FAQ</a>
-        {USE_CASES.map((u) => <a href={`/use-cases/${u.slug}`}>{u.emoji} {u.nav}</a>)}
-        <a class="btn" href={APP_URL}>Start a call</a>
+        <a href={L('howItWorks')}>{nav.howItWorks}</a>
+        <a href={L('useCases')}>{nav.useCases}</a>
+        <a href={L('meetDulce')}>{nav.meetDulce}</a>
+        <a href={L('blog')}>{nav.guides}</a>
+        <a href={L('faq')}>{nav.faq}</a>
+        {cases.map((u) => <a href={useCasePath(u.slug, locale)}>{u.emoji} {u.nav}</a>)}
+        <a href={switchHref} hreflang={HREFLANG[other]} lang={HREFLANG[other]}>{switchLabel}</a>
+        <a class="btn" href={APP_URL}>{nav.start}</a>
       </nav>
     </header>
 
@@ -131,7 +168,7 @@ const year = new Date().getFullYear();
     <footer class="site-foot">
       <div class="wrap foot-grid">
         <div>
-          <a class="logo" href="/">
+          <a class="logo" href={L('home')}>
             <span class="logo-mark" aria-hidden="true"></span>
             <span>Hello&nbsp;Dulce</span>
           </a>
@@ -139,27 +176,28 @@ const year = new Date().getFullYear();
           <a class="btn" href={APP_URL}>Start a call &rarr;</a>
         </div>
         <div>
-          <h2 class="foot-h">Use cases</h2>
+          <h2 class="foot-h">{nav.useCases}</h2>
           <ul>
-            {USE_CASES.map((u) => (
-              <li><a href={`/use-cases/${u.slug}`}>{u.nav}</a></li>
+            {cases.map((u) => (
+              <li><a href={useCasePath(u.slug, locale)}>{u.nav}</a></li>
             ))}
           </ul>
         </div>
         <div>
           <h2 class="foot-h">Hello Dulce</h2>
           <ul>
-            <li><a href="/meet-dulce">Meet Dulce</a></li>
-            <li><a href="/how-it-works">How it works</a></li>
-            <li><a href="/use-cases">All use cases</a></li>
-            <li><a href="/blog">Guides</a></li>
-            <li><a href="/faq">FAQ</a></li>
-            <li><a href={APP_URL}>Open the app</a></li>
+            <li><a href={L('meetDulce')}>{nav.meetDulce}</a></li>
+            <li><a href={L('howItWorks')}>{nav.howItWorks}</a></li>
+            <li><a href={L('useCases')}>{nav.allUseCases}</a></li>
+            <li><a href={L('blog')}>{nav.guides}</a></li>
+            <li><a href={L('faq')}>{nav.faq}</a></li>
+            <li><a href={switchHref} hreflang={HREFLANG[other]} lang={HREFLANG[other]}>{switchLabel}</a></li>
+            <li><a href={APP_URL}>{nav.openApp}</a></li>
           </ul>
         </div>
       </div>
       <div class="wrap foot-base">
-        <p>&copy; {year} Hello Dulce. Made for anyone who has ever put off a phone call.</p>
+        <p>&copy; {year} Hello Dulce. {fr ? UI_FR.footer.tagline : 'Made for anyone who has ever put off a phone call.'}</p>
       </div>
     </footer>
 

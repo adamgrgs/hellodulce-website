@@ -1,0 +1,278 @@
+---
+import Base from '../../layouts/Base.astro';
+import CallDemo from '../../components/CallDemo.astro';
+import AudioSample from '../../components/AudioSample.astro';
+import { APP_URL, SITE } from '../../data/site';
+import { SITE_FR, UI_FR, STEPS_FR, USE_CASES_FR, CORE_QA_FR, FACTS_FR } from '../../data/fr';
+import { altForRoute, routePath, useCasePath, blogPath } from '../../data/i18n';
+import { getCollection } from 'astro:content';
+
+const hero = USE_CASES_FR[0].scenario;
+const posts = (await getCollection('blog'))
+  .filter((p) => p.id.startsWith('fr/'))
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+
+const frUrl = (p: string) => new URL(p, SITE.domain).href;
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Hello Dulce',
+    applicationCategory: 'CommunicationApplication',
+    operatingSystem: 'Web',
+    url: frUrl('/fr'),
+    description: SITE_FR.blurb,
+    inLanguage: 'fr-CA',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'CAD' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    inLanguage: 'fr-CA',
+    mainEntity: CORE_QA_FR.map((q) => ({
+      '@type': 'Question',
+      name: q.q,
+      acceptedAnswer: { '@type': 'Answer', text: q.a },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    url: frUrl('/fr'),
+    inLanguage: 'fr-CA',
+    speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.answer', '.facts'] },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Cas d’utilisation de Hello Dulce',
+    itemListElement: USE_CASES_FR.map((u, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: u.title,
+      url: frUrl(useCasePath(u.slug, 'fr')),
+    })),
+  },
+];
+---
+
+<Base
+  title="Hello Dulce — faites vos appels dans toutes les langues, sans les parler"
+  description="Écrivez à Hello Dulce dans votre langue. Elle appelle, parle couramment dans la leur, et vous renvoie chaque phrase traduite, en direct. Médecins, écoles, propriétaires, services publics."
+  path="/fr"
+  jsonLd={jsonLd}
+  locale="fr"
+  alternates={altForRoute('home')}
+>
+  <section class="hero">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="wrap hero-grid">
+      <div>
+        <span class="kicker">{SITE_FR.tagline}</span>
+        <h1>
+          L’appel que vous remettez<br class="d-br" /> toujours à demain,
+          <span class="em grad">fait pour vous.</span>
+        </h1>
+        <p class="lede">
+          Écrivez à Hello Dulce ce que vous voulez dire — dans votre langue. Dulce compose le numéro,
+          le dit naturellement dans la leur, et vous renvoie chaque phrase traduite pendant que
+          l’appel se déroule.
+        </p>
+        <div class="hero-cta">
+          <a class="btn" href={APP_URL}>{UI_FR.cta.startArrow}</a>
+          <a class="btn btn-ghost" href="#voir">{UI_FR.cta.watch}</a>
+        </div>
+        <p class="hero-note">
+          Rien à télécharger. Vous écrivez, Dulce parle. Plus de 100 langues à l’entrée, une voix
+          naturelle à la sortie.
+        </p>
+        <a class="meet-strip" href={routePath('meetDulce', 'fr')}>
+          <img src="/dulce/dulce-avatar.webp" width="72" height="72" alt="Portrait de Dulce, le personnage de Hello Dulce" loading="eager" />
+          <span>
+            <strong>Dites bonjour à Dulce</strong>
+            <em>Étudiante au cégep, sauveteuse, Kia Rio orange. La rencontrer →</em>
+          </span>
+        </a>
+        <div class="chips">
+          {USE_CASES_FR.map((u) => (
+            <a class="chip" href={useCasePath(u.slug, 'fr')}>{u.emoji} {u.nav}</a>
+          ))}
+        </div>
+      </div>
+      <div id="voir">
+        <CallDemo scenario={hero} accent="#ff6a2b" id="hero-demo" replayLabel={UI_FR.cta.replay} />
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <span class="kicker">Le problème</span>
+          <h2>Vous savez exactement quoi dire. Juste pas dans leur langue.</h2>
+        </div>
+        <div>
+          <p class="lede">
+            Alors l’appel attend. Qu’une cousine se libère, qu’un enfant revienne de l’école, que le
+            chauffage soit brisé depuis une semaine. Hello Dulce enlève l’attente : les mots sont les
+            vôtres, la fluidité est la nôtre, et la réponse arrive par écrit dans la langue où vous
+            pensez.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec-tight">
+    <div class="wrap">
+      <div class="answer" style="max-width:76ch;margin-inline:auto">
+        <p class="answer-q">{UI_FR.labels.inOneParagraph}</p>
+        <p>{CORE_QA_FR[0].a}</p>
+      </div>
+      <ul class="facts facts-4">
+        {
+          FACTS_FR.map((f) => (
+            <li>
+              <span class="v">{f.value}</span>
+              <span class="l">{f.label} &mdash; {f.note}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <span class="kicker">À écouter</span>
+          <h2>Ça, c’est un vrai appel de Hello Dulce</h2>
+          <p class="lede">
+            La mère a écrit à Dulce en espagnol. Voici l’audio que le secrétariat de l’école
+            montréalaise a réellement entendu — en français québécois. Dulce commence par dire qui
+            elle est et pour qui elle appelle, puis elle relaie les réponses écrites de la mère.
+          </p>
+          <p><a class="btn btn-ghost" href={routePath('meetDulce', 'fr')}>{UI_FR.cta.whoIsDulce}</a></p>
+        </div>
+        <AudioSample locale="fr" />
+      </div>
+    </div>
+  </section>
+
+  <section class="sec-tight">
+    <div class="wrap">
+      <span class="kicker center" style="display:block;text-align:center">Comment ça marche</span>
+      <h2 class="center" style="max-width:22ch">Quatre étapes, un appel</h2>
+      <p class="lede center" style="margin-bottom:34px">
+        Aucune application à installer pour l’autre personne. Elle répond au téléphone et a une
+        conversation normale.
+      </p>
+      <div class="steps">
+        {STEPS_FR.map((s) => (
+          <div class="step">
+            <div class="n">{s.n}</div>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </div>
+        ))}
+      </div>
+      <p class="center" style="margin-top:28px">
+        <a class="btn btn-ghost" href={routePath('howItWorks', 'fr')}>{UI_FR.cta.seeSteps}</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <span class="kicker">Cas d’utilisation</span>
+      <h2>Choisissez l’appel que vous évitez</h2>
+      <p class="lede" style="margin-bottom:30px">
+        Chacun a sa page, avec une simulation en direct de la conversation exacte.
+      </p>
+      <div class="cards cards-3">
+        {USE_CASES_FR.map((u) => (
+          <a class="card" href={useCasePath(u.slug, 'fr')}>
+            <div class="card-emoji">{u.emoji}</div>
+            <h3>{u.title}</h3>
+            <p>{u.jobs[0].body}</p>
+            <span class="more">{UI_FR.cta.seeCall}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec-tight faq-sec">
+    <div class="wrap" style="max-width:820px">
+      <h2>Les questions qu’on pose en premier</h2>
+      <p class="lede" style="margin-bottom:8px">
+        Des réponses plus longues sur la <a href={routePath('faq', 'fr')} style="color:var(--orange)">page FAQ</a>.
+      </p>
+      <div class="faq">
+        {
+          CORE_QA_FR.slice(0, 5).map((f, i) => (
+            <details open={i === 0}>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <span class="kicker">{UI_FR.labels.guides}</span>
+      <h2>Avant de faire l’appel</h2>
+      <p class="lede" style="margin-bottom:26px">
+        Ce que coûte l’interprétation téléphonique, ce que dit la recherche sur les barrières
+        linguistiques en santé, et comment obtenir une réponse d’un secrétariat qui ne parle que
+        français.
+      </p>
+      <ul class="post-list">
+        {
+          posts.map((post) => (
+            <li>
+              <a class="card" href={`${routePath('blog', 'fr')}/${post.id.replace('fr/', '')}`} style={`border-top:3px solid ${post.data.accent}`}>
+                <h3>{post.data.title}</h3>
+                <p>{post.data.description}</p>
+                <span class="more">{UI_FR.cta.readGuide}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="band">
+        <h2>Faites l’appel aujourd’hui, pas la semaine prochaine</h2>
+        <p>Écrivez votre premier message dans votre langue. Dulce s’occupe du reste.</p>
+        <a class="btn" href={APP_URL}>{UI_FR.cta.startArrow}</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .meet-strip {
+    display: inline-flex; align-items: center; gap: 14px; margin-top: 22px; padding: 10px 18px 10px 10px;
+    border: 1px solid var(--line); border-radius: 999px; text-decoration: none;
+    background: linear-gradient(120deg, rgba(255, 106, 43, 0.14), rgba(255, 176, 32, 0.08));
+    transition: 0.2s;
+  }
+  .meet-strip:hover { border-color: rgba(255, 176, 32, 0.6); transform: translateY(-2px); }
+  .meet-strip img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; object-position: 50% 22%; background: rgba(255, 246, 239, 0.9); }
+  .meet-strip strong { display: block; font-size: 0.96rem; }
+  .meet-strip em { display: block; font-style: normal; font-size: 0.84rem; color: var(--muted); }
+  .split { display: grid; gap: 18px; }
+  @media (min-width: 900px) { .split { grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; } }
+  .d-br { display: none; }
+  @media (min-width: 520px) { .d-br { display: inline; } }
+</style>

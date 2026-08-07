@@ -2,8 +2,11 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { SITE, APP_URL } from '../../data/site';
+import { altForRoute } from '../../data/i18n';
 
-const posts = (await getCollection('blog')).sort(
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.id.startsWith('fr/'))
+  .sort(
   (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
 );
 
@@ -40,7 +43,7 @@ const jsonLd = [
 const fmt = (d: Date) => d.toLocaleDateString('en-CA', { year: 'numeric', month: 'short', day: 'numeric' });
 ---
 
-<Base title={title} description={description} path="/blog" jsonLd={jsonLd}>
+<Base title={title} description={description} path="/blog" alternates={altForRoute('blog')} jsonLd={jsonLd}>
   <section class="sec">
     <div class="wrap">
       <p class="crumbs"><a href="/">Home</a> / Guides</p>

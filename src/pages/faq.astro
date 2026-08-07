@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { SITE, APP_URL, CORE_QA, FACTS, USE_CASES, STEPS } from '../data/site';
+import { altForRoute } from '../data/i18n';
 
 const title = 'Hello Dulce FAQ: how the AI phone interpreter works';
 const description =
@@ -32,7 +33,7 @@ const jsonLd = [
 ];
 ---
 
-<Base title={`${title} | Hello Dulce`} description={description} path="/faq" jsonLd={jsonLd}>
+<Base title={`${title} | Hello Dulce`} description={description} path="/faq" alternates={altForRoute('faq')} jsonLd={jsonLd}>
   <section class="sec">
     <div class="wrap">
       <p class="crumbs"><a href="/">Home</a> / FAQ</p>

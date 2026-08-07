@@ -16,6 +16,7 @@ const blog = defineCollection({
     updatedDate: z.coerce.date(),
     readingMinutes: z.number().int().positive(),
     accent: z.string().default('#ff6a2b'),
+    lang: z.enum(['en', 'fr']).default('en'),
     keyNumbers: z.array(z.object({ value: z.string(), label: z.string() })).min(3),
     faqs: z.array(z.object({ q: z.string(), a: z.string() })).min(4),
     citations: z

@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import CallDemo from '../components/CallDemo.astro';
 import { STEPS, APP_URL, USE_CASES } from '../data/site';
+import { altForRoute } from '../data/i18n';
 
 const demo = USE_CASES.find((u) => u.slug === 'healthcare')!.scenario;
 const jsonLd = {
@@ -49,7 +50,7 @@ const detail = [
 <Base
   title="How Hello Dulce works — you type, Dulce talks"
   description="Hello Dulce places your phone call, speaks the other language with a natural regional voice, relays every sentence back to you translated in about a second, and never invents facts."
-  path="/how-it-works"
+  path="/how-it-works" alternates={altForRoute('howItWorks')}
   jsonLd={jsonLd}
 >
   <section class="hero">

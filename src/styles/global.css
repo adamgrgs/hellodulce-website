@@ -266,3 +266,10 @@ section { position: relative; }
 .crumbs { font-size: 0.82rem; color: var(--dark-muted); margin: 0 0 18px; }
 .crumbs a { color: var(--muted); text-decoration: none; }
 .crumbs a:hover { color: var(--pink); }
+
+/* ---------- language switcher ---------- */
+.head-nav .lang {
+  border: 1px solid var(--line); border-radius: 999px; padding: 6px 13px;
+  font-size: 0.84rem; letter-spacing: 0.02em;
+}
+.head-nav .lang:hover { border-color: var(--orange); color: var(--text); }

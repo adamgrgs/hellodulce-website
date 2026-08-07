@@ -1,24 +1,26 @@
 ---
 import { getCollection, render } from 'astro:content';
-import Base from '../../layouts/Base.astro';
-import { SITE, APP_URL, USE_CASES } from '../../data/site';
-import { altForBlog } from '../../data/i18n';
+import Base from '../../../layouts/Base.astro';
+import { SITE, APP_URL } from '../../../data/site';
+import { USE_CASES_FR, UI_FR } from '../../../data/fr';
+import { altForBlog, blogEnSlug, useCasePath, routePath } from '../../../data/i18n';
 
 export async function getStaticPaths() {
-  // English posts only; French versions live under src/pages/fr/guides/.
-  const posts = (await getCollection('blog')).filter((p) => !p.id.startsWith('fr/'));
-  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+  const posts = (await getCollection('blog')).filter((p) => p.id.startsWith('fr/'));
+  return posts.map((post) => ({ params: { slug: post.id.replace('fr/', '') }, props: { post } }));
 }
 
 const { post } = Astro.props;
 const d = post.data;
 const { Content, headings } = await render(post);
-const url = new URL(`/blog/${post.id}`, SITE.domain).href;
+const enSlug = blogEnSlug(post.id);
+const path = `/fr/guides/${post.id.replace('fr/', '')}`;
+const url = new URL(path, SITE.domain).href;
 const iso = (x: Date) => x.toISOString().slice(0, 10);
 
-const related = USE_CASES.filter((u) => d.relatedUseCases.includes(u.slug));
+const related = USE_CASES_FR.filter((u) => d.relatedUseCases.includes(u.slug));
 const others = (await getCollection('blog'))
-  .filter((p) => p.id !== post.id && !p.id.startsWith('fr/'))
+  .filter((p) => p.id.startsWith('fr/') && p.id !== post.id)
   .slice(0, 2);
 const h2s = headings.filter((h) => h.depth === 2);
 
@@ -32,7 +34,7 @@ const jsonLd = [
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
     datePublished: iso(d.publishDate),
     dateModified: iso(d.updatedDate),
-    inLanguage: 'en',
+    inLanguage: 'fr-CA',
     keywords: [d.primaryKeyword, ...d.secondaryKeywords].join(', '),
     wordCount: post.body?.split(/\s+/).length ?? undefined,
     author: { '@type': 'Organization', name: SITE.name, url: SITE.domain },
@@ -50,6 +52,7 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
+    inLanguage: 'fr-CA',
     mainEntity: d.faqs.map((f) => ({
       '@type': 'Question',
       name: f.q,
@@ -60,35 +63,38 @@ const jsonLd = [
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.domain },
-      { '@type': 'ListItem', position: 2, name: 'Guides', item: new URL('/blog', SITE.domain).href },
+      { '@type': 'ListItem', position: 1, name: 'Accueil', item: new URL('/fr', SITE.domain).href },
+      { '@type': 'ListItem', position: 2, name: 'Guides', item: new URL('/fr/guides', SITE.domain).href },
       { '@type': 'ListItem', position: 3, name: d.title, item: url },
     ],
   },
 ];
-const fmt = (x: Date) => x.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
+const fmt = (x: Date) => x.toLocaleDateString('fr-CA', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
 <Base
   title={`${d.metaTitle} | Hello Dulce`}
   description={d.description}
-  path={`/blog/${post.id}`}
+  path={path}
   jsonLd={jsonLd}
+  locale="fr"
   articleDates={{ published: iso(d.publishDate), modified: iso(d.updatedDate) }}
-  alternates={altForBlog(post.id)}
+  alternates={altForBlog(enSlug)}
 >
   <section class="sec">
     <div class="wrap">
-      <p class="crumbs"><a href="/">Home</a> / <a href="/blog">Guides</a> / {d.primaryKeyword}</p>
+      <p class="crumbs">
+        <a href="/fr">Accueil</a> / <a href={routePath('blog', 'fr')}>Guides</a> / {d.primaryKeyword}
+      </p>
       <h1 style="max-width:22ch">{d.title}</h1>
       <p class="post-meta">
-        <span>Published {fmt(d.publishDate)}</span>
-        <span>Updated {fmt(d.updatedDate)}</span>
-        <span>{d.readingMinutes} min read</span>
+        <span>{UI_FR.labels.published} {fmt(d.publishDate)}</span>
+        <span>{UI_FR.labels.updated} {fmt(d.updatedDate)}</span>
+        <span>{d.readingMinutes} {UI_FR.labels.readTime}</span>
       </p>
 
       <div class="answer" style="max-width:72ch">
-        <p class="answer-q">The short answer</p>
+        <p class="answer-q">{UI_FR.labels.shortAnswer}</p>
         <p>{d.answer}</p>
       </div>
 
@@ -106,8 +112,8 @@ const fmt = (x: Date) => x.toLocaleDateString('en-CA', { year: 'numeric', month:
       <div class="prose" style="margin-top:40px">
         {
           h2s.length > 2 && (
-            <nav class="toc" aria-label="On this page">
-              <p>On this page</p>
+            <nav class="toc" aria-label={UI_FR.labels.onThisPage}>
+              <p>{UI_FR.labels.onThisPage}</p>
               <ol>
                 {h2s.map((h) => (
                   <li><a href={`#${h.slug}`}>{h.text}</a></li>
@@ -120,7 +126,7 @@ const fmt = (x: Date) => x.toLocaleDateString('en-CA', { year: 'numeric', month:
       </div>
 
       <section class="faq" style="margin-top:52px;max-width:72ch">
-        <h2 style="margin-bottom:18px">Questions people ask</h2>
+        <h2 style="margin-bottom:18px">{UI_FR.labels.questionsAsked}</h2>
         {
           d.faqs.map((f) => (
             <details>
@@ -132,7 +138,7 @@ const fmt = (x: Date) => x.toLocaleDateString('en-CA', { year: 'numeric', month:
       </section>
 
       <section style="margin-top:48px;max-width:72ch" class="refs">
-        <h2 style="font-size:1.1rem">Sources</h2>
+        <h2 style="font-size:1.1rem">{UI_FR.labels.sources}</h2>
         <ul style="display:grid;gap:8px;padding-left:20px">
           {
             d.citations.map((c) => (
@@ -147,15 +153,15 @@ const fmt = (x: Date) => x.toLocaleDateString('en-CA', { year: 'numeric', month:
       {
         related.length > 0 && (
           <section style="margin-top:52px">
-            <h2 style="font-size:1.2rem">See how the call goes</h2>
+            <h2 style="font-size:1.2rem">{UI_FR.labels.seeTheCall}</h2>
             <ul class="post-list" style="margin-top:16px">
               {related.map((u) => (
                 <li>
-                  <a class="card" href={`/use-cases/${u.slug}`} style={`border-top:3px solid ${u.accent}`}>
+                  <a class="card" href={useCasePath(u.slug, 'fr')} style={`border-top:3px solid ${u.accent}`}>
                     <div class="card-emoji" aria-hidden="true">{u.emoji}</div>
                     <h2>{u.title}</h2>
                     <p>{u.intro.slice(0, 130)}&hellip;</p>
-                    <span class="more">Watch the simulation &rarr;</span>
+                    <span class="more">{UI_FR.cta.watchSim}</span>
                   </a>
                 </li>
               ))}
@@ -167,14 +173,14 @@ const fmt = (x: Date) => x.toLocaleDateString('en-CA', { year: 'numeric', month:
       {
         others.length > 0 && (
           <section style="margin-top:44px">
-            <h2 style="font-size:1.2rem">Keep reading</h2>
+            <h2 style="font-size:1.2rem">{UI_FR.labels.keepReading}</h2>
             <ul class="post-list" style="margin-top:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
               {others.map((p) => (
                 <li>
-                  <a class="card" href={`/blog/${p.id}`}>
+                  <a class="card" href={`/fr/guides/${p.id.replace('fr/', '')}`}>
                     <h2>{p.data.title}</h2>
                     <p>{p.data.description.slice(0, 120)}&hellip;</p>
-                    <span class="more">Read &rarr;</span>
+                    <span class="more">{UI_FR.cta.read}</span>
                   </a>
                 </li>
               ))}
@@ -184,9 +190,9 @@ const fmt = (x: Date) => x.toLocaleDateString('en-CA', { year: 'numeric', month:
       }
 
       <div class="band" style="margin-top:52px">
-        <h2>Make the call in your own words</h2>
-        <p>You write it in your language. Hello Dulce speaks it in theirs and texts you every answer.</p>
-        <a class="btn" href={APP_URL}>Start a call &rarr;</a>
+        <h2>Faites l’appel dans vos mots</h2>
+        <p>Vous l’écrivez dans votre langue. Dulce le dit dans la leur et vous renvoie chaque réponse.</p>
+        <a class="btn" href={APP_URL}>{UI_FR.cta.startArrow}</a>
       </div>
     </div>
   </section>

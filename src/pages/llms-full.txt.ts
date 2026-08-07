@@ -8,7 +8,9 @@ export const prerender = true;
 /** Every piece of substantive site copy as one plain-text document, so an agent
  *  or answer engine can ingest the whole site in a single request. */
 export const GET: APIRoute = async () => {
-  const posts = (await getCollection('blog')).sort(
+  const posts = (await getCollection('blog'))
+    .filter((p) => !p.id.startsWith('fr/'))
+    .sort(
     (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
   );
 

@@ -5,8 +5,11 @@ import { APP_URL, USE_CASES, STEPS, SITE, CORE_QA, FACTS } from '../data/site';
 import { DULCE } from '../data/dulce';
 import AudioSample from '../components/AudioSample.astro';
 import { getCollection } from 'astro:content';
+import { altForRoute } from '../data/i18n';
 
-const posts = (await getCollection('blog')).sort(
+const posts = (await getCollection('blog'))
+    .filter((p) => !p.id.startsWith('fr/'))
+    .sort(
   (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
 );
 
@@ -54,7 +57,7 @@ const jsonLd = [
 <Base
   title="Hello Dulce — make phone calls in any language, without speaking it"
   description="Text Hello Dulce in your language. It calls, speaks fluently in theirs, and sends every word back to you translated, live. Doctors, schools, landlords, government lines."
-  path="/"
+  path="/" alternates={altForRoute('home')}
   jsonLd={jsonLd}
 >
   <section class="hero">

@@ -1,13 +1,14 @@
 ---
-import Base from '../layouts/Base.astro';
-import { SITE, APP_URL } from '../data/site';
-import { DULCE } from '../data/dulce';
-import { altForRoute } from '../data/i18n';
-import AudioSample from '../components/AudioSample.astro';
+import Base from '../../layouts/Base.astro';
+import { SITE, APP_URL } from '../../data/site';
+import { DULCE_FR as DULCE } from '../../data/dulce';
+import { UI_FR } from '../../data/fr';
+import { altForRoute } from '../../data/i18n';
+import AudioSample from '../../components/AudioSample.astro';
 
-const title = 'Meet Dulce, the voice that makes your call';
+const title = 'Rencontrez Dulce, la voix qui fait votre appel';
 const description =
-  'Dulce is a Montreal CEGEP student, a lifeguard, and the character behind Hello Dulce: patient with people, calm under pressure, and curious about everyone. Here is who she is.';
+  'Dulce est étudiante au cégep à Montréal, sauveteuse, et le personnage derrière Hello Dulce : patiente avec le monde, calme sous pression, curieuse de tout. Voici qui elle est.';
 
 const jsonLd = [
   {
@@ -17,17 +18,18 @@ const jsonLd = [
     description: DULCE.oneLiner,
     image: new URL(DULCE.images.hero, SITE.domain).href,
     homeLocation: { '@type': 'Place', name: DULCE.city },
+    inLanguage: 'fr-CA',
     knowsLanguage: ['fr', 'en', 'es'],
     disambiguatingDescription:
-      'Dulce is a fictional character created as the mascot and voice persona of the Hello Dulce phone interpretation service. She is not a real person.',
+      'Dulce est un personnage fictif créé comme mascotte et voix du service d’interprétation téléphonique Hello Dulce. Ce n’est pas une personne réelle.',
     worksFor: { '@type': 'Organization', name: SITE.name, url: SITE.domain },
   },
   {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.domain },
-      { '@type': 'ListItem', position: 2, name: 'Meet Dulce', item: new URL('/meet-dulce', SITE.domain).href },
+      { '@type': 'ListItem', position: 1, name: 'Accueil', item: new URL('/fr', SITE.domain).href },
+      { '@type': 'ListItem', position: 2, name: 'Rencontrer Dulce', item: new URL('/fr/rencontrer-dulce', SITE.domain).href },
     ],
   },
 ];
@@ -38,24 +40,24 @@ const jsonLd = [
 
   <section class="sec">
     <div class="wrap">
-      <p class="crumbs"><a href="/">Home</a> / Meet Dulce</p>
+      <p class="crumbs"><a href="/fr">Accueil</a> / Rencontrer Dulce</p>
       <div class="dulce-hero">
         <div>
-          <p class="kicker">Meet Dulce</p>
-          <h1>The friend who <span class="em grad">makes the call</span> for you</h1>
+          <p class="kicker">Rencontrer Dulce</p>
+          <h1>L’amie qui <span class="em grad">fait l’appel</span> à votre place</h1>
           <p class="lede">{DULCE.oneLiner}</p>
           <div class="answer" style="margin-top:26px;max-width:60ch">
-            <p class="answer-q">Who is Dulce?</p>
+            <p class="answer-q">C’est qui, Dulce?</p>
             <p>
-              Dulce is {DULCE.age}, lives in {DULCE.city}, studies special care counselling at CEGEP, works with
-              children who need extra patience, lifeguards in the summer, and drives an orange Kia Rio she has
-              already taken further than it was designed to go. She is a character, not a real person — but every
-              rule about how Hello Dulce behaves on the phone comes from her.
+              Dulce a {DULCE.age} ans, vit à {DULCE.city}, étudie en techniques d’éducation spécialisée au cégep,
+              travaille avec des enfants qui ont besoin de plus de patience, est sauveteuse l’été, et conduit une
+              Kia Rio orange qu’elle a déjà menée plus loin que prévu. C’est un personnage, pas une personne
+              réelle — mais chaque règle sur la façon dont Hello Dulce se comporte au téléphone vient d’elle.
             </p>
           </div>
           <div class="hero-cta">
-            <a class="btn" href={APP_URL}>Let Dulce make the call &rarr;</a>
-            <a class="btn btn-ghost" href="#sample-call">Hear her voice</a>
+            <a class="btn" href={APP_URL}>Laissez Dulce faire l’appel &rarr;</a>
+            <a class="btn btn-ghost" href="#sample-call">{UI_FR.cta.hearVoice}</a>
           </div>
         </div>
         <div class="dulce-portrait">
@@ -63,7 +65,7 @@ const jsonLd = [
             src={DULCE.images.hero}
             width="399"
             height="980"
-            alt="Dulce, an 18-year-old Montreal student in an orange lifeguard hoodie with a whistle and a pin-covered tote bag, on the phone and waving"
+            alt="Dulce, étudiante montréalaise de 18 ans en coton ouaté orange de sauveteuse, sifflet au cou et sac fourre-tout couvert d’épinglettes, au téléphone en train de saluer"
             fetchpriority="high"
           />
         </div>
@@ -84,8 +86,8 @@ const jsonLd = [
 
   <section class="sec">
     <div class="wrap">
-      <p class="kicker">Her personality, and why it is the product</p>
-      <h2>Four things about Dulce that show up on every call</h2>
+      <p class="kicker">Sa personnalité, et pourquoi c’est le produit</p>
+      <h2>Quatre choses sur Dulce qui paraissent dans chaque appel</h2>
       <div class="trait-list">
         {
           DULCE.traits.map((t) => (
@@ -104,8 +106,8 @@ const jsonLd = [
 
   <section class="sec">
     <div class="wrap" style="max-width:860px">
-      <p class="kicker">How she behaves on the phone</p>
-      <h2>Dulce’s rules</h2>
+      <p class="kicker">Comment elle se comporte au téléphone</p>
+      <h2>Les règles de Dulce</h2>
       <ol class="rules">
         {DULCE.traits && DULCE.voiceRules.map((r) => <li>{r}</li>)}
       </ol>
@@ -115,22 +117,22 @@ const jsonLd = [
 
   <section class="sec">
     <div class="wrap" style="max-width:860px">
-      <p class="kicker">Her actual voice</p>
-      <h2>This is what the school heard</h2>
+      <p class="kicker">Sa vraie voix</p>
+      <h2>Voici ce que l’école a entendu</h2>
       <p class="lede" style="margin-bottom:20px">
-        Listen to the first line: she names herself, says she is a virtual interpreter, and says whose
-        call this is. That disclosure is not optional — it is rule one.
+        Écoutez la première phrase : elle se nomme, dit qu’elle est interprète virtuelle, et dit à qui
+        appartient cet appel. Cette divulgation n’est pas optionnelle — c’est la règle numéro un.
       </p>
-      <AudioSample />
+      <AudioSample locale="fr" />
     </div>
   </section>
 
   <section class="sec-tight">
     <div class="wrap">
       <div class="band">
-        <h2>Give her a call to make</h2>
-        <p>Write it in your language. Dulce takes it from there.</p>
-        <a class="btn" href={APP_URL}>Start a call &rarr;</a>
+        <h2>Donnez-lui un appel à faire</h2>
+        <p>Écrivez-le dans votre langue. Dulce s’occupe du reste.</p>
+        <a class="btn" href={APP_URL}>{UI_FR.cta.startArrow}</a>
       </div>
     </div>
   </section>

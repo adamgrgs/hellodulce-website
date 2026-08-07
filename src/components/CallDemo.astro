@@ -4,28 +4,44 @@ interface Props {
   scenario: { label: string; yourLang: string; theirLang: string; turns: Turn[] };
   accent?: string;
   id?: string;
+  locale?: 'en' | 'fr';
 }
-const { scenario, accent = '#ff6a2b', id = 'demo' } = Astro.props as Props;
+const { scenario, accent = '#ff6a2b', id = 'demo', locale = 'en' } = Astro.props as Props;
+
+/* All runtime strings live in one dict handed to the client script via a data
+   attribute — the animation code stays locale-agnostic. */
+const T =
+  locale === 'fr'
+    ? {
+        ready: 'Prête', writing: 'Vous écrivez', dialling: 'Appel en cours', onCall: 'En appel',
+        ended: 'Appel terminé', placeholder: 'Écrire à Dulce…', live: 'Appel en direct',
+        replay: 'Rejouer', transcript: 'Démonstration de transcription d’appel',
+      }
+    : {
+        ready: 'Ready', writing: 'You are writing', dialling: 'Dialling', onCall: 'On the call',
+        ended: 'Call ended', placeholder: 'Message Dulce…', live: 'Live call',
+        replay: 'Replay', transcript: 'Call transcript demo',
+      };
 ---
 
-<div class="demo" data-demo={JSON.stringify(scenario)} id={id} style={`--accent:${accent}`}>
+<div class="demo" data-demo={JSON.stringify(scenario)} data-t={JSON.stringify(T)} id={id} style={`--accent:${accent}`}>
   <div class="phone">
     <div class="phone-top">
       <span class="dot" aria-hidden="true"></span>
       <span class="phone-title">Hello Dulce</span>
-      <span class="phone-sub" data-state>Ready</span>
+      <span class="phone-sub" data-state>{T.ready}</span>
     </div>
 
     <div class="call-bar" data-callbar hidden>
-      <span class="live"><i></i>Live call</span>
+      <span class="live"><i></i>{T.live}</span>
       <span class="callee" data-callee></span>
       <span class="timer" data-timer>00:00</span>
     </div>
 
-    <div class="thread" data-thread role="log" aria-live="polite" aria-label="Call transcript demo"></div>
+    <div class="thread" data-thread role="log" aria-live="polite" aria-label={T.transcript}></div>
 
     <div class="composer">
-      <span class="composer-text" data-composer>Message Dulce&hellip;</span>
+      <span class="composer-text" data-composer>{T.placeholder}</span>
       <span class="send" aria-hidden="true">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
       </span>
@@ -35,7 +51,7 @@ const { scenario, accent = '#ff6a2b', id = 'demo' } = Astro.props as Props;
   <div class="demo-ctl">
     <button type="button" class="ctl" data-replay>
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
-      Replay
+      {T.replay}
     </button>
     <span class="ctl-note">{scenario.yourLang} &rarr; {scenario.theirLang} &middot; {scenario.label}</span>
   </div>
@@ -159,6 +175,7 @@ const { scenario, accent = '#ff6a2b', id = 'demo' } = Astro.props as Props;
 
     document.querySelectorAll('.demo').forEach((root) => {
       const data = JSON.parse(root.getAttribute('data-demo'));
+      const T = JSON.parse(root.getAttribute('data-t'));
       const thread = root.querySelector('[data-thread]');
       const composer = root.querySelector('[data-composer]');
       const state = root.querySelector('[data-state]');
@@ -211,15 +228,15 @@ const { scenario, accent = '#ff6a2b', id = 'demo' } = Astro.props as Props;
         bar.hidden = true;
         timerEl.textContent = '00:00';
         composer.className = 'composer-text ph';
-        composer.textContent = 'Message Dulce…';
-        state.textContent = 'Ready';
+        composer.textContent = T.placeholder;
+        state.textContent = T.ready;
         await wait(500);
 
         for (const t of data.turns) {
           if (token !== run) return;
 
           if (t.kind === 'type') {
-            state.textContent = 'You are writing';
+            state.textContent = T.writing;
             await typeInto(composer, t.text, token);
             await wait(420);
             if (token !== run) return;
@@ -227,19 +244,19 @@ const { scenario, accent = '#ff6a2b', id = 'demo' } = Astro.props as Props;
             m.appendChild(el('div', 'who', esc(t.lang)));
             m.appendChild(el('div', 'bubble', esc(t.text)));
             composer.className = 'composer-text ph';
-            composer.textContent = 'Message Dulce…';
+            composer.textContent = T.placeholder;
             await wait(650);
           }
 
           if (t.kind === 'dial') {
-            state.textContent = 'Dialling';
+            state.textContent = T.dialling;
             add(el('div', 'sys', '📞 Dulce is calling ' + esc(t.label) + ' · ' + esc(t.number)));
             await wait(1100);
             if (token !== run) return;
             callee.textContent = t.label;
             bar.hidden = false;
             startTimer();
-            state.textContent = 'On the call';
+            state.textContent = T.onCall;
             await wait(600);
           }
 
@@ -282,7 +299,7 @@ const { scenario, accent = '#ff6a2b', id = 'demo' } = Astro.props as Props;
           if (t.kind === 'done') {
             clearInterval(timer);
             bar.hidden = true;
-            state.textContent = 'Call ended';
+            state.textContent = T.ended;
             add(el('div', 'sys', 'Call ended · ' + timerEl.textContent));
             await wait(400);
             if (token !== run) return;

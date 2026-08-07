@@ -8,7 +8,9 @@ export const prerender = true;
  *  crawlers that would rather read JSON than parse HTML. Stable shape: bump
  *  `version` if a field changes meaning. */
 export const GET: APIRoute = async () => {
-  const posts = (await getCollection('blog')).sort(
+  const posts = (await getCollection('blog'))
+    .filter((p) => !p.id.startsWith('fr/'))
+    .sort(
     (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
   );
 
@@ -59,6 +61,10 @@ export const GET: APIRoute = async () => {
       updated: p.data.updatedDate.toISOString().slice(0, 10),
       sources: p.data.citations.map((c) => ({ title: c.title, publisher: c.publisher, url: c.url })),
     })),
+    locales: [
+      { code: 'en', hreflang: 'en', root: `${SITE.domain}/`, default: true },
+      { code: 'fr-CA', hreflang: 'fr-CA', root: `${SITE.domain}/fr`, note: 'Quebec French, full translation of every page' },
+    ],
     resources: {
       llms: `${SITE.domain}/llms.txt`,
       llmsFull: `${SITE.domain}/llms-full.txt`,
