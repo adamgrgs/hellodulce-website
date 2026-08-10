@@ -7,11 +7,11 @@
   --dark-muted: #8a7263;
   /* brand: tangerine -> amber. --pink/--purple kept as aliases so every
      existing rule inherits the new palette without a rewrite. */
-  --orange: #ff6a2b;
-  --amber: #ffb020;
-  --pink: #ff6a2b;
-  --purple: #ffb020;
-  --pink-soft: #ffe6d2;
+  --pink: #f43f8e;
+  --pink-2: #ff8fc0;
+  --pink: #f43f8e;
+  --purple: #ff8fc0;
+  --pink-soft: #ffe0ef;
   --line: rgba(255, 236, 220, 0.14);
   --radius: 18px;
   --radius-lg: 28px;
@@ -49,14 +49,14 @@ p { margin: 0 0 1em; }
 
 .em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -0.01em; }
 .grad {
-  background: linear-gradient(96deg, var(--orange), var(--amber) 78%);
+  background: linear-gradient(96deg, var(--pink), var(--pink-2) 78%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 
 /* ---------- buttons ---------- */
 .btn {
   display: inline-flex; align-items: center; gap: 8px; justify-content: center;
-  background: linear-gradient(96deg, var(--orange), var(--amber));
+  background: linear-gradient(96deg, var(--pink), var(--pink-2));
   color: #fff; text-decoration: none; font-weight: 700; font-size: 1rem;
   padding: 14px 24px; border-radius: 999px; border: 0;
   box-shadow: 0 10px 30px -12px rgba(168, 85, 247, 0.9);
@@ -83,7 +83,7 @@ p { margin: 0 0 1em; }
 }
 .logo-mark {
   width: 26px; height: 26px; border-radius: 9px; flex: 0 0 auto;
-  background: linear-gradient(140deg, var(--orange), var(--amber));
+  background: linear-gradient(140deg, var(--pink), var(--pink-2));
   box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.22);
 }
 .head-nav { display: none; align-items: center; gap: 26px; font-weight: 600; font-size: 0.95rem; }
@@ -222,7 +222,7 @@ section { position: relative; }
 @media (min-width: 760px) { .facts { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1040px) { .facts.facts-4 { grid-template-columns: repeat(4, 1fr); } }
 .facts li { border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; }
-.facts .v { display: block; font-weight: 800; font-size: 1.22rem; letter-spacing: -0.02em; background: linear-gradient(96deg, var(--orange), var(--amber)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.facts .v { display: block; font-weight: 800; font-size: 1.22rem; letter-spacing: -0.02em; background: linear-gradient(96deg, var(--pink), var(--pink-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .facts .l { display: block; color: var(--muted); font-size: 0.88rem; margin-top: 6px; }
 
 /* ---------- audio sample ---------- */
@@ -235,7 +235,7 @@ section { position: relative; }
 .audio-lines .who { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dark-muted); font-weight: 800; }
 .audio-lines .said { margin: 4px 0 0; font-size: 0.98rem; }
 .audio-lines .tr { margin: 4px 0 0; color: var(--muted); font-size: 0.9rem; font-family: var(--serif); font-style: italic; }
-.audio-lines li.dulce { border-left-color: var(--pink); }
+.audio-lines li.melanie { border-left-color: var(--pink); }
 
 /* ---------- prose (blog) ---------- */
 .prose { max-width: 72ch; }
@@ -275,4 +275,4 @@ section { position: relative; }
   border: 1px solid var(--line); border-radius: 999px; padding: 6px 13px;
   font-size: 0.84rem; letter-spacing: 0.02em;
 }
-.head-nav .lang:hover { border-color: var(--orange); color: var(--text); }
+.head-nav .lang:hover { border-color: var(--pink); color: var(--text); }

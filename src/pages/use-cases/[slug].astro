@@ -14,9 +14,9 @@ const jsonLd = [
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://hellodulce.com/' },
-      { '@type': 'ListItem', position: 2, name: 'Use cases', item: 'https://hellodulce.com/use-cases' },
-      { '@type': 'ListItem', position: 3, name: u.title, item: `https://hellodulce.com/use-cases/${u.slug}` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://montrealreception.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Use cases', item: 'https://montrealreception.com/use-cases' },
+      { '@type': 'ListItem', position: 3, name: u.title, item: `https://montrealreception.com/use-cases/${u.slug}` },
     ],
   },
   {
@@ -106,10 +106,10 @@ const jsonLd = [
     <div class="wrap">
       <div class="band">
         <h2>Make this call today</h2>
-        <p>Write the first line in your language. Dulce dials and does the talking.</p>
+        <p>Write the first line in your language. Melanie dials and does the talking.</p>
         <a class="btn" href={APP_URL}>Start a call &rarr;</a>
       </div>
-      <h2 style="margin-top:56px">Other calls Dulce handles</h2>
+      <h2 style="margin-top:56px">Other calls Melanie handles</h2>
       <div class="cards cards-3" style="margin-top:20px">
         {others.map((o) => (
           <a class="card" href={`/use-cases/${o.slug}`}>

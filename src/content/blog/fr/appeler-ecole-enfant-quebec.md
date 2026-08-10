@@ -12,7 +12,7 @@ secondaryKeywords:
 publishDate: 2026-08-07
 updatedDate: 2026-08-07
 readingMinutes: 8
-accent: '#ff6a2b'
+accent: '#f43f8e'
 lang: fr
 keyNumbers:
   - value: '82 075'
@@ -106,7 +106,7 @@ Et décidez d’avance ce que vous devez absolument avoir en main en raccrochant
 
 **3. Passez par l’écrit pour tout ce qui n’est pas urgent.** Le courriel et le portail de l’école vous donnent le temps de composer votre message et vous laissent une trace. Écrivez un français court, simple et bien découpé — trois lignes avec le nom de l’enfant, les dates et la demande — plutôt qu’un long texte dans une autre langue.
 
-**4. Utilisez un interprète téléphonique pour les appels en direct.** Pour les appels de deux minutes, c’est la solution pratique. Un service d’interprétation téléphonique classique met une personne en ligne et facture à la minute. Un interprète d’appel par IA comme Hello Dulce fonctionne autrement : vous écrivez votre message en espagnol, en arabe, en mandarin ou dans votre langue; il appelle l’école et le dit dans un français québécois naturel; chaque phrase de la secrétaire vous revient par écrit dans votre langue pendant que l’appel se déroule; et à la fin, vous gardez la date, le numéro de local et le nom, notés noir sur blanc.
+**4. Utilisez un interprète téléphonique pour les appels en direct.** Pour les appels de deux minutes, c’est la solution pratique. Un service d’interprétation téléphonique classique met une personne en ligne et facture à la minute. Un interprète d’appel par IA comme Montreal Reception fonctionne autrement : vous écrivez votre message en espagnol, en arabe, en mandarin ou dans votre langue; il appelle l’école et le dit dans un français québécois naturel; chaque phrase de la secrétaire vous revient par écrit dans votre langue pendant que l’appel se déroule; et à la fin, vous gardez la date, le numéro de local et le nom, notés noir sur blanc.
 
 ## Quoi dire : des phrases à avoir sous la main
 

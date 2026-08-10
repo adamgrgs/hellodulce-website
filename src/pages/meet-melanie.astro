@@ -1,24 +1,24 @@
 ---
 import Base from '../layouts/Base.astro';
 import { SITE, APP_URL } from '../data/site';
-import { DULCE } from '../data/dulce';
+import { MELANIE } from '../data/melanie';
 import { altForRoute } from '../data/i18n';
 import AudioSample from '../components/AudioSample.astro';
 
-const title = 'Meet Dulce, the voice that makes your call';
+const title = 'Meet Melanie, the voice that makes your call';
 const description =
-  'Dulce is the voice Hello Dulce uses on the phone: she introduces herself, says the call is for you, and never invents an answer. Here is how she behaves on a call.';
+  'Melanie is the voice Montreal Reception uses on the phone: she introduces herself, says the call is for you, and never invents an answer. Here is how she behaves on a call.';
 
 const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    name: 'Dulce',
-    description: DULCE.oneLiner,
-    image: new URL(DULCE.images.hero, SITE.domain).href,
-    homeLocation: { '@type': 'Place', name: DULCE.city },
+    name: 'Melanie',
+    description: MELANIE.oneLiner,
+    image: new URL(MELANIE.images.hero, SITE.domain).href,
+    homeLocation: { '@type': 'Place', name: MELANIE.city },
     knowsLanguage: ['fr', 'en', 'es'],
-    disambiguatingDescription: DULCE.fiction,
+    disambiguatingDescription: MELANIE.fiction,
     worksFor: { '@type': 'Organization', name: SITE.name, url: SITE.domain },
   },
   {
@@ -26,35 +26,35 @@ const jsonLd = [
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.domain },
-      { '@type': 'ListItem', position: 2, name: 'Meet Dulce', item: new URL('/meet-dulce', SITE.domain).href },
+      { '@type': 'ListItem', position: 2, name: 'Meet Melanie', item: new URL('/meet-melanie', SITE.domain).href },
     ],
   },
 ];
 ---
 
-<Base title={`${title} | Hello Dulce`} description={description} path="/meet-dulce" alternates={altForRoute('meetDulce')} jsonLd={jsonLd}>
+<Base title={`${title} | Montreal Reception`} description={description} path="/meet-melanie" alternates={altForRoute('meetMelanie')} jsonLd={jsonLd}>
   <div class="glow" aria-hidden="true"></div>
 
   <section class="sec">
     <div class="wrap">
-      <p class="crumbs"><a href="/">Home</a> / Meet Dulce</p>
-      <div class="dulce-hero">
+      <p class="crumbs"><a href="/">Home</a> / Meet Melanie</p>
+      <div class="melanie-hero">
         <div>
-          <p class="kicker">Meet Dulce</p>
+          <p class="kicker">Meet Melanie</p>
           <h1>The friend who <span class="em grad">makes the call</span> for you</h1>
-          <p class="lede">{DULCE.oneLiner}</p>
-          <p class="fine">{DULCE.fiction}</p>
+          <p class="lede">{MELANIE.oneLiner}</p>
+          <p class="fine">{MELANIE.fiction}</p>
           <div class="hero-cta">
-            <a class="btn" href={APP_URL}>Let Dulce make the call &rarr;</a>
+            <a class="btn" href={APP_URL}>Let Melanie make the call &rarr;</a>
             <a class="btn btn-ghost" href="#sample-call">Hear her voice</a>
           </div>
         </div>
-        <div class="dulce-portrait">
+        <div class="melanie-portrait">
           <img
-            src={DULCE.images.hero}
+            src={MELANIE.images.hero}
             width="399"
             height="980"
-            alt="Dulce, the Hello Dulce character, in an orange hoodie, on the phone and waving"
+            alt="Melanie, the Montreal Reception character, in an orange hoodie, on the phone and waving"
             fetchpriority="high"
           />
         </div>
@@ -68,7 +68,7 @@ const jsonLd = [
       <h2>Three things you hear right away</h2>
       <div class="trait-list">
         {
-          DULCE.traits.map((t) => (
+          MELANIE.traits.map((t) => (
             <article class="trait">
               <img src={t.image} alt={t.alt} loading="lazy" width="320" height="420" />
               <div>
@@ -87,9 +87,9 @@ const jsonLd = [
       <p class="kicker">Her rules</p>
       <h2>Four rules she never breaks</h2>
       <ol class="rules">
-        {DULCE.voiceRules.map((r) => <li>{r}</li>)}
+        {MELANIE.voiceRules.map((r) => <li>{r}</li>)}
       </ol>
-      <p class="quote-line" style="margin-top:26px">{DULCE.quote}</p>
+      <p class="quote-line" style="margin-top:26px">{MELANIE.quote}</p>
     </div>
   </section>
 
@@ -108,7 +108,7 @@ const jsonLd = [
     <div class="wrap">
       <div class="band">
         <h2>Give her a call to make</h2>
-        <p>Write it in your language. Dulce takes it from there.</p>
+        <p>Write it in your language. Melanie takes it from there.</p>
         <a class="btn" href={APP_URL}>Start a call &rarr;</a>
       </div>
     </div>
@@ -116,10 +116,10 @@ const jsonLd = [
 </Base>
 
 <style>
-  .dulce-hero { display: grid; gap: 30px; align-items: center; }
-  @media (min-width: 940px) { .dulce-hero { grid-template-columns: 1.25fr 0.75fr; gap: 48px; } }
-  .dulce-portrait { display: flex; justify-content: center; }
-  .dulce-portrait img { width: min(300px, 74%); height: auto; filter: drop-shadow(0 24px 44px rgba(255, 106, 43, 0.28)); }
+  .melanie-hero { display: grid; gap: 30px; align-items: center; }
+  @media (min-width: 940px) { .melanie-hero { grid-template-columns: 1.25fr 0.75fr; gap: 48px; } }
+  .melanie-portrait { display: flex; justify-content: center; }
+  .melanie-portrait img { width: min(300px, 74%); height: auto; filter: drop-shadow(0 24px 44px rgba(255, 106, 43, 0.28)); }
   .trait-list { display: grid; gap: 18px; margin-top: 22px; }
   @media (min-width: 820px) { .trait-list { grid-template-columns: repeat(3, 1fr); } }
   .trait {

@@ -25,7 +25,7 @@ const hasAudio = existsSync(path.join(process.cwd(), 'public', SAMPLE.file));
   <ul class="audio-lines">
     {
       C.lines.map((l) => (
-        <li class={l.dulce ? 'dulce' : ''}>
+        <li class={l.melanie ? 'melanie' : ''}>
           <span class="who">{l.who}</span>
           <p class="said" lang="fr">{l.said}</p>
           <p class="tr" lang="es">{l.tr}</p>

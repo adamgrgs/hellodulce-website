@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 import vercel from '@astrojs/vercel';
 import sitemap from '@astrojs/sitemap';
 
-const SITE = 'https://hellodulce.com';
+const SITE = 'https://montrealreception.com';
 
 /** en path -> fr path. Mirrors src/data/i18n.ts; kept literal here because the
  *  sitemap `serialize` hook runs outside the TS module graph. */
@@ -11,7 +11,7 @@ const EN_TO_FR = {
   '/': '/fr',
   '/how-it-works': '/fr/fonctionnement',
   '/use-cases': '/fr/cas-dutilisation',
-  '/meet-dulce': '/fr/rencontrer-dulce',
+  '/meet-melanie': '/fr/rencontrer-melanie',
   '/faq': '/fr/faq',
   '/blog': '/fr/guides',
   '/use-cases/schools': '/fr/cas-dutilisation/ecoles',

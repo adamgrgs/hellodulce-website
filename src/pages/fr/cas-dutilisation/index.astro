@@ -7,7 +7,7 @@ import { altForRoute, useCasePath } from '../../../data/i18n';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'Cas d’utilisation de Hello Dulce',
+  name: 'Cas d’utilisation de Montreal Reception',
   inLanguage: 'fr-CA',
   itemListElement: USE_CASES_FR.map((u, i) => ({
     '@type': 'ListItem',
@@ -19,7 +19,7 @@ const jsonLd = {
 ---
 
 <Base
-  title="Cas d’utilisation — chaque appel que Dulce peut faire pour vous"
+  title="Cas d’utilisation — chaque appel que Melanie peut faire pour vous"
   description="Médecins, écoles, propriétaires, fournisseurs, service à la clientèle, services publics et aide aux parents vieillissants. Voyez une simulation en direct de chaque appel."
   path="/fr/cas-dutilisation"
   jsonLd={jsonLd}
@@ -33,7 +33,7 @@ const jsonLd = {
       <h1>Tous les appels que vous <span class="em grad">remettez à demain</span></h1>
       <p class="lede">
         Six situations, six pages. Chacune montre la vraie conversation telle qu’elle se déroule : ce
-        que vous écrivez, ce que Dulce dit, ce qui revient.
+        que vous écrivez, ce que Melanie dit, ce qui revient.
       </p>
       <div class="hero-cta"><a class="btn" href={APP_URL}>{UI_FR.cta.startArrow}</a></div>
     </div>
@@ -60,7 +60,7 @@ const jsonLd = {
       <div class="band">
         <h2>Pas dans la liste?</h2>
         <p>
-          Si c’est un appel téléphonique dans une langue que vous ne parlez pas, Dulce peut le faire.
+          Si c’est un appel téléphonique dans une langue que vous ne parlez pas, Melanie peut le faire.
           Ouvrez l’application et écrivez votre première ligne.
         </p>
         <a class="btn" href={APP_URL}>{UI_FR.cta.startArrow}</a>

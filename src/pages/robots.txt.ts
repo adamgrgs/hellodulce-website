@@ -31,7 +31,7 @@ const AI_AGENTS = [
 ];
 
 export const GET: APIRoute = () => {
-  const body = `# Hello Dulce - ${SITE.domain}
+  const body = `# Montreal Reception - ${SITE.domain}
 # Humans, search crawlers and AI agents are all welcome.
 # Structured entry points: /llms.txt  /llms-full.txt  /api/site.json
 

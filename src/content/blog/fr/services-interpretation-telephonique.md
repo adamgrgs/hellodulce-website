@@ -12,7 +12,7 @@ secondaryKeywords:
 publishDate: 2026-08-07
 updatedDate: 2026-08-07
 readingMinutes: 8
-accent: '#ffb020'
+accent: '#ff8fc0'
 lang: fr
 keyNumbers:
   - value: "3,95 $ US/min"
@@ -76,7 +76,7 @@ Il existe deux mondes de prix complètement différents, et les confondre est l�
 | Interprétation par contrat de volume | 0,64–0,69 $ US la minute selon le palier linguistique, sur une grille du secteur public | Hôpitaux, organismes, centres d’appels |
 | Un proche bilingue | Gratuit, plus une faveur à quémander | Appels courts et non confidentiels |
 | Une appli de traduction sur haut-parleur | Gratuit | Une ou deux phrases, enjeux faibles |
-| Une interprète IA au téléphone (Hello Dulce) | Accès anticipé, aucun prix publié pour l’instant | Les appels du quotidien que vous remettez toujours à demain |
+| Une interprète IA au téléphone (Montreal Reception) | Accès anticipé, aucun prix publié pour l’instant | Les appels du quotidien que vous remettez toujours à demain |
 
 Le tarif grand public est le seul que vous pouvez réellement acheter aujourd’hui avec une carte de crédit. À 3,95 $ US la minute, un appel de quinze minutes à une clinique pour déplacer un rendez-vous coûte environ 59 $ US. Ce n’est pas un scandale — le temps d’une interprète humaine formée vaut vraiment ça — mais ça explique pourquoi presque personne n’utilise l’interprétation professionnelle pour les appels ordinaires qui composent une vie normale.
 

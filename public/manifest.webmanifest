@@ -1,6 +1,6 @@
 {
-  "name": "Hello Dulce",
-  "short_name": "Hello Dulce",
+  "name": "Montreal Reception",
+  "short_name": "Montreal Reception",
   "description": "Make phone calls in any language, without speaking it.",
   "start_url": "/",
   "display": "standalone",

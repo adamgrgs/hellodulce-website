@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import CallDemo from '../components/CallDemo.astro';
 import { APP_URL, USE_CASES, STEPS, SITE, CORE_QA, FACTS } from '../data/site';
-import { DULCE } from '../data/dulce';
+import { MELANIE } from '../data/melanie';
 import AudioSample from '../components/AudioSample.astro';
 import { getCollection } from 'astro:content';
 import { altForRoute } from '../data/i18n';
@@ -18,7 +18,7 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
-    name: 'Hello Dulce',
+    name: 'Montreal Reception',
     applicationCategory: 'CommunicationApplication',
     operatingSystem: 'Web',
     url: SITE.domain,
@@ -43,7 +43,7 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'Hello Dulce use cases',
+    name: 'Montreal Reception use cases',
     itemListElement: USE_CASES.map((u, i) => ({
       '@type': 'ListItem',
       position: i + 1,
@@ -55,8 +55,8 @@ const jsonLd = [
 ---
 
 <Base
-  title="Hello Dulce — make phone calls in any language, without speaking it"
-  description="Text Hello Dulce in your language. It calls, speaks fluently in theirs, and sends every word back to you translated, live. Doctors, schools, landlords, government lines."
+  title="Montreal Reception — make phone calls in any language, without speaking it"
+  description="Text Montreal Reception in your language. It calls, speaks fluently in theirs, and sends every word back to you translated, live. Doctors, schools, landlords, government lines."
   path="/" alternates={altForRoute('home')}
   jsonLd={jsonLd}
 >
@@ -70,7 +70,7 @@ const jsonLd = [
           <span class="em grad">made for you.</span>
         </h1>
         <p class="lede">
-          Text Hello Dulce what you want to say — in your language. Dulce dials, speaks it naturally in
+          Text Montreal Reception what you want to say — in your language. Melanie dials, speaks it naturally in
           theirs, and sends every sentence back to you translated while the call is still happening.
         </p>
         <div class="hero-cta">
@@ -78,12 +78,12 @@ const jsonLd = [
           <a class="btn btn-ghost" href="#watch">Watch it happen</a>
         </div>
         <p class="hero-note">
-          No download. You type, Dulce talks. 100+ languages in, a natural-sounding voice out.
+          No download. You type, Melanie talks. 100+ languages in, a natural-sounding voice out.
         </p>
-        <a class="meet-strip" href="/meet-dulce">
-          <img src={DULCE.images.avatar} width="72" height="72" alt="Portrait of Dulce, the Hello Dulce character" loading="eager" />
+        <a class="meet-strip" href="/meet-melanie">
+          <img src={MELANIE.images.avatar} width="72" height="72" alt="Portrait of Melanie, the Montreal Reception character" loading="eager" />
           <span>
-            <strong>Say hi to Dulce</strong>
+            <strong>Say hi to Melanie</strong>
             <em>The voice that makes your call. Meet her &rarr;</em>
           </span>
         </a>
@@ -94,7 +94,7 @@ const jsonLd = [
         </div>
       </div>
       <div id="watch">
-        <CallDemo scenario={hero} accent="#ff6a2b" id="hero-demo" />
+        <CallDemo scenario={hero} accent="#f43f8e" id="hero-demo" />
       </div>
     </div>
   </section>
@@ -109,7 +109,7 @@ const jsonLd = [
         <div>
           <p class="lede">
             So the call waits. Until a cousin is free, until a child gets home from school, until the
-            heating has been broken for a week. Hello Dulce removes the waiting: the words are yours,
+            heating has been broken for a week. Montreal Reception removes the waiting: the words are yours,
             the fluency is ours, and the answer arrives in writing in the language you think in.
           </p>
         </div>
@@ -141,13 +141,13 @@ const jsonLd = [
       <div class="split">
         <div>
           <span class="kicker">Hear it</span>
-          <h2>This is a real Hello Dulce call</h2>
+          <h2>This is a real Montreal Reception call</h2>
           <p class="lede">
-            The mother wrote to Dulce in Spanish. This is the audio the Montreal school office actually
-            heard — in Quebec French. Dulce opens by saying who she is and who she is calling for, then
+            The mother wrote to Melanie in Spanish. This is the audio the Montreal school office actually
+            heard — in Quebec French. Melanie opens by saying who she is and who she is calling for, then
             relays the mother's typed answers. The Spanish under each line is what the mother was reading.
           </p>
-          <p><a class="btn btn-ghost" href="/meet-dulce">Who is Dulce? &rarr;</a></p>
+          <p><a class="btn btn-ghost" href="/meet-melanie">Who is Melanie? &rarr;</a></p>
         </div>
         <AudioSample />
       </div>
@@ -208,9 +208,9 @@ const jsonLd = [
           </p>
         </div>
         <div class="card">
-          <h3>She never invents</h3>
+          <h3>It never invents</h3>
           <p>
-            If the other person asks something Dulce does not know, she holds the line and asks you.
+            If the other person asks something Melanie does not know, it holds the line and asks you.
             Nothing gets made up on your behalf.
           </p>
         </div>
@@ -229,13 +229,13 @@ const jsonLd = [
     <div class="wrap" style="max-width:820px">
       <h2>Questions people ask first</h2>
       <p class="lede" style="margin-bottom:8px">
-        Longer answers on the <a href="/faq" style="color:var(--orange)">FAQ page</a>.
+        Longer answers on the <a href="/faq" style="color:var(--pink)">FAQ page</a>.
       </p>
       <div class="faq">
         <details open>
           <summary>Does it sound like a robot?</summary>
           <p>
-            No. Dulce speaks with a natural human-sounding voice in the local accent, and starts
+            No. Melanie speaks with a natural human-sounding voice in the local accent, and starts
             talking about a second after you send your line — so the conversation keeps its rhythm
             instead of stalling.
           </p>
@@ -243,19 +243,19 @@ const jsonLd = [
         <details>
           <summary>Do I have to speak during the call?</summary>
           <p>
-            Never. You only type, in your own language. Dulce does the speaking and the listening and
+            Never. You only type, in your own language. Melanie does the speaking and the listening and
             relays every sentence back to you as translated text.
           </p>
         </details>
         <details>
           <summary>Which languages does it work in?</summary>
           <p>
-            You can write in over 100 languages. Dulce speaks the language of the person you are
+            You can write in over 100 languages. Melanie speaks the language of the person you are
             calling, with a regional accent where it matters.
           </p>
         </details>
         <details>
-          <summary>Can Dulce invent an answer?</summary>
+          <summary>Can Melanie invent an answer?</summary>
           <p>
             No. When it does not know something, it politely holds the line, asks you, waits for your
             typed answer, and only then speaks.
@@ -293,7 +293,7 @@ const jsonLd = [
     <div class="wrap">
       <div class="band">
         <h2>Make the call today, not next week</h2>
-        <p>Write your first message in your own language. Dulce takes it from there.</p>
+        <p>Write your first message in your own language. Melanie takes it from there.</p>
         <a class="btn" href={APP_URL}>Start a call &rarr;</a>
       </div>
     </div>

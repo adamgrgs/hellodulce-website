@@ -14,14 +14,14 @@ export const USE_CASES_FR_A: UseCase[] = [
     emoji: '🩺',
     accent: '#ff4d3d',
     intro:
-      'Les appels de santé, c’est ceux qu’on ne peut pas remettre à plus tard et qu’on ne peut pas se permettre de faire à moitié. Écrivez ce qui fait mal dans la langue où vous pensez — Dulce le dit avec précision à la clinique et vous rapporte la réponse de la même façon.',
-    metaTitle: 'Appeler une clinique dans votre langue | Hello Dulce',
+      'Les appels de santé, c’est ceux qu’on ne peut pas remettre à plus tard et qu’on ne peut pas se permettre de faire à moitié. Écrivez ce qui fait mal dans la langue où vous pensez — Melanie le dit avec précision à la clinique et vous rapporte la réponse de la même façon.',
+    metaTitle: 'Appeler une clinique dans votre langue | Montreal Reception',
     metaDescription:
-      'Hello Dulce appelle cliniques, pharmacies et assureurs pour vous, parle leur langue couramment et vous renvoie toute la conversation traduite par écrit.',
+      'Montreal Reception appelle cliniques, pharmacies et assureurs pour vous, parle leur langue couramment et vous renvoie toute la conversation traduite par écrit.',
     jobs: [
       {
         title: 'Prendre et déplacer un rendez-vous',
-        body: 'Examen de routine, spécialiste, sans rendez-vous, résultats de laboratoire. Dulce attend en ligne pour que vous n’ayez pas à le faire.',
+        body: 'Examen de routine, spécialiste, sans rendez-vous, résultats de laboratoire. Melanie attend en ligne pour que vous n’ayez pas à le faire.',
         quote: 'Necesito ver a un cardiólogo la próxima semana',
       },
       {
@@ -51,8 +51,8 @@ export const USE_CASES_FR_A: UseCase[] = [
         },
         {
           kind: 'speak',
-          text: 'Bonjour! Je m’appelle Dulce, je suis une interprète virtuelle et j’appelle au nom de Mme Ramírez. Elle a une douleur à la poitrine en respirant et voudrait un rendez-vous cette semaine.',
-          lang: 'Dulce · français',
+          text: 'Bonjour! Je m’appelle Melanie, je suis une interprète virtuelle et j’appelle au nom de Mme Ramírez. Elle a une douleur à la poitrine en respirant et voudrait un rendez-vous cette semaine.',
+          lang: 'Melanie · français',
         },
         {
           kind: 'hear',
@@ -62,7 +62,7 @@ export const USE_CASES_FR_A: UseCase[] = [
           transLang: 'espagnol',
         },
         { kind: 'type', text: 'Sí, la tengo. Confirmo mañana a las 2:15.', lang: 'Vous · espagnol' },
-        { kind: 'speak', text: 'Oui, elle l’a. On confirme demain 14 h 15. Merci!', lang: 'Dulce · français' },
+        { kind: 'speak', text: 'Oui, elle l’a. On confirme demain 14 h 15. Merci!', lang: 'Melanie · français' },
         {
           kind: 'done',
           title: 'Rendez-vous confirmé',
@@ -73,11 +73,11 @@ export const USE_CASES_FR_A: UseCase[] = [
     faqs: [
       {
         q: 'Mes renseignements de santé restent-ils confidentiels?',
-        a: 'Les appels et les transcriptions vous appartiennent. Dulce ne dit que ce que vous avez écrit ou approuvé, et vous pouvez supprimer un appel et sa transcription quand vous voulez.',
+        a: 'Les appels et les transcriptions vous appartiennent. Melanie ne dit que ce que vous avez écrit ou approuvé, et vous pouvez supprimer un appel et sa transcription quand vous voulez.',
       },
       {
         q: 'Et si la clinique me met en attente?',
-        a: 'Dulce garde la ligne en silence et vous avertit dès qu’une personne revient au bout du fil.',
+        a: 'Melanie garde la ligne en silence et vous avertit dès qu’une personne revient au bout du fil.',
       },
     ],
   },
@@ -90,10 +90,10 @@ export const USE_CASES_FR_A: UseCase[] = [
     emoji: '🏠',
     accent: '#e8952a',
     intro:
-      'Réparations, questions de loyer, date d’emménagement, panne de courant. Ces appels récompensent celui qui a l’air sûr de lui et précis — laissez Dulce être précise pour vous, et gardez la trace écrite qu’elle produit.',
-    metaTitle: 'Appeler votre propriétaire dans votre langue | Hello Dulce',
+      'Réparations, questions de loyer, date d’emménagement, panne de courant. Ces appels récompensent celui qui a l’air sûr de lui et précis — laissez Melanie être précise pour vous, et gardez la trace écrite qu’elle produit.',
+    metaTitle: 'Appeler votre propriétaire dans votre langue | Montreal Reception',
     metaDescription:
-      'Réparations, loyer, services publics, déménagement : Dulce parle aux propriétaires et aux gestionnaires dans leur langue et garde tout par écrit pour vous.',
+      'Réparations, loyer, services publics, déménagement : Melanie parle aux propriétaires et aux gestionnaires dans leur langue et garde tout par écrit pour vous.',
     jobs: [
       {
         title: 'Propriétaires et réparations',
@@ -127,8 +127,8 @@ export const USE_CASES_FR_A: UseCase[] = [
         },
         {
           kind: 'speak',
-          text: 'Bonjour! Je m’appelle Dulce, je suis une interprète virtuelle et j’appelle au nom de la locataire du 4B. Son chauffage ne fonctionne plus depuis lundi.',
-          lang: 'Dulce · français',
+          text: 'Bonjour! Je m’appelle Melanie, je suis une interprète virtuelle et j’appelle au nom de la locataire du 4B. Son chauffage ne fonctionne plus depuis lundi.',
+          lang: 'Melanie · français',
         },
         {
           kind: 'hear',
@@ -138,7 +138,7 @@ export const USE_CASES_FR_A: UseCase[] = [
           transLang: 'espagnol',
         },
         { kind: 'type', text: 'Perfecto. ¿Me puede dar un número de seguimiento?', lang: 'Vous · espagnol' },
-        { kind: 'speak', text: 'Très bien. Pouvez-vous nous donner un numéro de suivi?', lang: 'Dulce · français' },
+        { kind: 'speak', text: 'Très bien. Pouvez-vous nous donner un numéro de suivi?', lang: 'Melanie · français' },
         {
           kind: 'done',
           title: 'Réparation planifiée',

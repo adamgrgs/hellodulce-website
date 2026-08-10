@@ -12,7 +12,7 @@ secondaryKeywords:
 publishDate: 2026-08-07
 updatedDate: 2026-08-07
 readingMinutes: 8
-accent: '#ff6a2b'
+accent: '#f43f8e'
 keyNumbers:
   - value: '82,075'
     label: 'People in Quebec who know neither English nor French (2021 Census)'
@@ -105,7 +105,7 @@ And decide in advance what you must leave the call holding: a date, a time, a ro
 
 **3. Use written channels for anything non-urgent.** Email and the school portal give you time to compose and a record afterwards. Write short, plain, formatted French — three lines with the child's name, the dates and the request — rather than long prose in another language.
 
-**4. Use a phone interpreter for the live calls.** For the two-minute calls, this is the practical answer. A traditional over-the-phone interpreting service puts a human on the line and bills by the minute. An AI call interpreter like Hello Dulce works differently: you write your message in Spanish, Arabic, Mandarin or your own language; it dials the school and says it in natural Quebec French; every sentence the secretary says comes back to you as text in your language while the call is still live; and at the end you keep the date, the room number and the name, written down.
+**4. Use a phone interpreter for the live calls.** For the two-minute calls, this is the practical answer. A traditional over-the-phone interpreting service puts a human on the line and bills by the minute. An AI call interpreter like Montreal Reception works differently: you write your message in Spanish, Arabic, Mandarin or your own language; it dials the school and says it in natural Quebec French; every sentence the secretary says comes back to you as text in your language while the call is still live; and at the end you keep the date, the room number and the name, written down.
 
 ## What to say: sentences worth having ready
 

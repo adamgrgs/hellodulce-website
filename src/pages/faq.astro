@@ -3,9 +3,9 @@ import Base from '../layouts/Base.astro';
 import { SITE, APP_URL, CORE_QA, FACTS, USE_CASES, STEPS } from '../data/site';
 import { altForRoute } from '../data/i18n';
 
-const title = 'Hello Dulce FAQ: how the AI phone interpreter works';
+const title = 'Montreal Reception FAQ: how the AI phone interpreter works';
 const description =
-  'Straight answers about Hello Dulce: what it is, how fast the translation is, whether it sounds like a robot, which languages it covers, what it costs, and how it compares to a phone interpreter.';
+  'Straight answers about Montreal Reception: what it is, how fast the translation is, whether it sounds like a robot, which languages it covers, what it costs, and how it compares to a phone interpreter.';
 
 const useCaseFaqs = USE_CASES.flatMap((u) => u.faqs.map((f) => ({ ...f, from: u.title, slug: u.slug })));
 
@@ -33,7 +33,7 @@ const jsonLd = [
 ];
 ---
 
-<Base title={`${title} | Hello Dulce`} description={description} path="/faq" alternates={altForRoute('faq')} jsonLd={jsonLd}>
+<Base title={`${title} | Montreal Reception`} description={description} path="/faq" alternates={altForRoute('faq')} jsonLd={jsonLd}>
   <section class="sec">
     <div class="wrap">
       <p class="crumbs"><a href="/">Home</a> / FAQ</p>
@@ -59,7 +59,7 @@ const jsonLd = [
           CORE_QA.map((f) => (
             <section id={f.slug} style="margin-bottom:30px">
               <h2 style="font-size:clamp(1.15rem,4.4vw,1.4rem)">{f.q}</h2>
-              <p style="color:#f0e4d8;line-height:1.7;margin:0">{f.a}</p>
+              <p style="color:#e6d9f2;line-height:1.7;margin:0">{f.a}</p>
             </section>
           ))
         }
