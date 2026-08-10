@@ -17,6 +17,7 @@ export const UI_FR = {
     howItWorks: 'Comment ça marche',
     useCases: 'Cas d’utilisation',
     meetMelanie: 'Rencontrer Melanie',
+    story: 'Notre histoire',
     guides: 'Guides',
     faq: 'FAQ',
     start: 'Faire un appel',
@@ -129,7 +130,7 @@ export const CORE_QA_FR: QA[] = [
   {
     slug: 'combien-ca-coute',
     q: 'Combien ça coûte?',
-    a: 'Les prix ne sont pas encore publiés — Montreal Reception est en accès anticipé sur bonjour.montrealreception.com. L’objectif de conception est un coût par appel bien inférieur à l’interprétation humaine à la minute, puisque personne n’a à se joindre à la ligne.',
+    a: 'Les prix ne sont pas encore publiés — Montreal Reception est en accès anticipé sur bonjour.hellodulce.com. L’objectif de conception est un coût par appel bien inférieur à l’interprétation humaine à la minute, puisque personne n’a à se joindre à la ligne.',
   },
 ];
 

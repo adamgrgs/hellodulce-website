@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 import vercel from '@astrojs/vercel';
 import sitemap from '@astrojs/sitemap';
 
-const SITE = 'https://montrealreception.com';
+const SITE = 'https://hellodulce.com'; // cutover to montrealreception.com once DNS exists
 
 /** en path -> fr path. Mirrors src/data/i18n.ts; kept literal here because the
  *  sitemap `serialize` hook runs outside the TS module graph. */

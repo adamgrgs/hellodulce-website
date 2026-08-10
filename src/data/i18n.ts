@@ -16,6 +16,7 @@ export const ROUTES = {
   howItWorks: { en: '/how-it-works', fr: '/fr/fonctionnement' },
   useCases: { en: '/use-cases', fr: '/fr/cas-dutilisation' },
   meetMelanie: { en: '/meet-melanie', fr: '/fr/rencontrer-melanie' },
+  story: { en: '/our-story', fr: '/fr/notre-histoire' },
   faq: { en: '/faq', fr: '/fr/faq' },
   blog: { en: '/blog', fr: '/fr/guides' },
 } as const;

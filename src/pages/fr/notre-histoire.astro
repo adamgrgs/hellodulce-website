@@ -1,0 +1,86 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, APP_URL } from '../../data/site';
+import { STORY_FR as STORY } from '../../data/story';
+import { UI_FR } from '../../data/fr';
+import { altForRoute } from '../../data/i18n';
+
+const title = 'Notre histoire';
+const description =
+  'Montreal Reception a été bâti par quelqu’un qui en avait besoin. Arrivé à Montréal en 2012, notre fondateur se débrouillait en français en personne, mais pas au téléphone — et devait demander à un ami d’interpréter chaque appel important.';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: `${title} | ${SITE.name}`,
+    description,
+    url: new URL('/fr/notre-histoire', SITE.domain).href,
+    inLanguage: 'fr-CA',
+    about: { '@type': 'Organization', name: SITE.name, url: SITE.domain },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Accueil', item: new URL('/fr', SITE.domain).href },
+      { '@type': 'ListItem', position: 2, name: title, item: new URL('/fr/notre-histoire', SITE.domain).href },
+    ],
+  },
+];
+---
+
+<Base
+  locale="fr"
+  title={`${title} — pourquoi on a bâti ${SITE.name} | ${SITE.name}`}
+  description={description}
+  path="/fr/notre-histoire"
+  alternates={altForRoute('story')}
+  jsonLd={jsonLd}
+>
+  <div class="glow" aria-hidden="true"></div>
+
+  <section class="sec">
+    <div class="wrap">
+      <p class="crumbs"><a href="/fr">{UI_FR.nav.home}</a> / {title}</p>
+      <p class="kicker">{STORY.kicker}</p>
+      <h1>{STORY.h1Lead}<br class="d-br" /><span class="em grad">{STORY.h1Accent}</span></h1>
+      <p class="lede" style="max-width:64ch">{STORY.lede}</p>
+    </div>
+  </section>
+
+  <section class="sec-tight">
+    <div class="wrap">
+      <div class="prose">
+        {STORY.sections.map((s, i) => (
+          <>
+            <h2>{s.h}</h2>
+            {s.p.map((para) => <p>{para}</p>)}
+            {i === 2 && (
+              <blockquote>{STORY.pull}</blockquote>
+            )}
+          </>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec-tight">
+    <div class="wrap">
+      <div class="answer" style="max-width:72ch">
+        <p class="answer-q">{STORY.closing.h}</p>
+        <p>{STORY.closing.p}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="band">
+        <h2>Faites l’appel que vous remettez depuis des jours</h2>
+        <p>Écrivez la première ligne dans votre langue. Melanie la dit dans la leur.</p>
+        <a class="btn" href={APP_URL}>{UI_FR.nav.start} &rarr;</a>
+      </div>
+    </div>
+  </section>
+</Base>

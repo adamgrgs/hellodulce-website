@@ -30,7 +30,7 @@ const S = fr ? SITE_FR : SITE;
 const nav = fr
   ? UI_FR.nav
   : {
-      howItWorks: 'How it works', useCases: 'Use cases', meetMelanie: 'Meet Melanie',
+      howItWorks: 'How it works', useCases: 'Use cases', meetMelanie: 'Meet Melanie', story: 'Our story',
       guides: 'Guides', faq: 'FAQ', start: 'Start a call', openApp: 'Open the app',
       allUseCases: 'All use cases', home: 'Home',
     };
@@ -139,12 +139,13 @@ const year = new Date().getFullYear();
       <div class="wrap head-inner">
         <a class="logo" href={L('home')}>
           <span class="logo-mark" aria-hidden="true"></span>
-          <span>Hello&nbsp;Melanie</span>
+          <span>Montreal&nbsp;Reception</span>
         </a>
         <nav class="head-nav" aria-label="Main">
           <a href={L('howItWorks')}>{nav.howItWorks}</a>
           <a href={L('useCases')}>{nav.useCases}</a>
           <a href={L('meetMelanie')}>{nav.meetMelanie}</a>
+          <a href={L('story')}>{nav.story}</a>
           <a href={L('blog')}>{nav.guides}</a>
           <a href={L('faq')}>{nav.faq}</a>
           <a class="lang" href={switchHref} hreflang={HREFLANG[other]} aria-label={switchAria} lang={HREFLANG[other]}>{switchLabel}</a>
@@ -158,6 +159,7 @@ const year = new Date().getFullYear();
         <a href={L('howItWorks')}>{nav.howItWorks}</a>
         <a href={L('useCases')}>{nav.useCases}</a>
         <a href={L('meetMelanie')}>{nav.meetMelanie}</a>
+        <a href={L('story')}>{nav.story}</a>
         <a href={L('blog')}>{nav.guides}</a>
         <a href={L('faq')}>{nav.faq}</a>
         {cases.map((u) => <a href={useCasePath(u.slug, locale)}>{u.emoji} {u.nav}</a>)}
@@ -173,7 +175,7 @@ const year = new Date().getFullYear();
         <div>
           <a class="logo" href={L('home')}>
             <span class="logo-mark" aria-hidden="true"></span>
-            <span>Hello&nbsp;Melanie</span>
+            <span>Montreal&nbsp;Reception</span>
           </a>
           <p class="foot-blurb">{SITE.blurb}</p>
           <a class="btn" href={APP_URL}>Start a call &rarr;</a>
@@ -190,6 +192,7 @@ const year = new Date().getFullYear();
           <h2 class="foot-h">Montreal Reception</h2>
           <ul>
             <li><a href={L('meetMelanie')}>{nav.meetMelanie}</a></li>
+            <li><a href={L('story')}>{nav.story}</a></li>
             <li><a href={L('howItWorks')}>{nav.howItWorks}</a></li>
             <li><a href={L('useCases')}>{nav.allUseCases}</a></li>
             <li><a href={L('blog')}>{nav.guides}</a></li>
