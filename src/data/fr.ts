@@ -151,7 +151,7 @@ const schoolsFr: UseCase = {
     h1: 'Parlez à l’école de votre enfant, même sans parler la langue',
     kicker: 'Éducation',
     emoji: '🎒',
-    accent: '#f43f8e',
+    accent: '#ff6a2b',
     intro:
       'Rencontres de parents, absences, changement d’autobus, aide en lecture — les appels qui décident comment se passe l’année de votre enfant. Écrivez à Melanie dans votre langue; le secrétariat entend un français clair et poli, ou la langue qu’on parle au bureau.',
     metaTitle: 'Appeler l’école de votre enfant dans votre langue | Montreal Reception',

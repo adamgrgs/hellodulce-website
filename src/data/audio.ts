@@ -10,7 +10,7 @@ export const SAMPLE = {
   noSupport: 'Your browser cannot play audio.',
   download: 'Download the recording',
   sub: 'Recorded from a Montreal Reception call to a Montreal school office. The mother typed in Spanish; this is the audio the school heard, in Quebec French. Melanie introduces herself as a virtual interpreter calling on the mother’s behalf — she never pretends to be her.',
-  durationLabel: '49 seconds',
+  durationLabel: '52 seconds',
   transcriptLangs: 'French spoken · Spanish written',
   lines: [
     {
@@ -33,8 +33,8 @@ export const SAMPLE = {
     },
     {
       who: 'Melanie · French',
-      said: "Un instant, je transmets la question à madame Ramírez... Elle me répond que jeudi quinze heures trente, c'est parfait. Est-ce qu'elle doit apporter quelque chose?",
-      tr: 'Un momento, le transmito la pregunta a la señora Ramírez... Me responde que el jueves a las 15:30 es perfecto. ¿Debe llevar algo?',
+      said: "Un moment, je transmets la question à madame Ramírez... Elle confirme que jeudi quinze heures trente, c'est parfait. Est-ce qu'elle doit apporter quelque chose?",
+      tr: 'Un momento, le transmito la pregunta a la señora Ramírez... Confirma que el jueves a las 15:30 es perfecto. ¿Debe llevar algo?',
       melanie: true,
     },
     {
@@ -62,7 +62,7 @@ export const SAMPLE_FR = {
   noSupport: 'Votre navigateur ne peut pas lire l’audio.',
   download: 'Télécharger l’enregistrement',
   sub: 'Enregistré lors d’un appel Montreal Reception au secrétariat d’une école de Montréal. La mère écrivait en espagnol; voici ce que l’école a entendu, en français québécois. Melanie se présente comme interprète virtuelle qui appelle au nom de la mère — elle ne se fait jamais passer pour elle.',
-  durationLabel: '49 secondes',
+  durationLabel: '52 secondes',
   transcriptLangs: 'Parlé en français · lu en espagnol',
   lines: SAMPLE.lines.map((l) => ({
     ...l,

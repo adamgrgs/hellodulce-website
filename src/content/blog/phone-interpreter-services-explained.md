@@ -12,7 +12,7 @@ secondaryKeywords:
 publishDate: 2026-08-07
 updatedDate: 2026-08-07
 readingMinutes: 8
-accent: '#ff8fc0'
+accent: '#ffb020'
 keyNumbers:
   - value: '$3.95/min'
     label: 'LanguageLine published pay-as-you-go rate for audio interpreting'

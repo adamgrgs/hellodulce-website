@@ -39,7 +39,7 @@ const flagship: UseCase = {
   h1: "Talk to your child's school, even if you don't speak the language",
   kicker: 'Education',
   emoji: '🎒',
-  accent: '#f43f8e',
+  accent: '#ff6a2b',
   intro:
     "Parent-teacher meetings, absences, bus changes, extra help in reading — the calls that decide how your child's year goes. Write to Melanie in your language; the school hears fluent, polite French, English or whatever the office speaks.",
   metaTitle: "Call your child's school in any language | Montreal Reception",
@@ -266,7 +266,7 @@ export const USE_CASES: UseCase[] = [
     h1: 'Win the billing argument in a language you never studied',
     kicker: 'Support lines',
     emoji: '💳',
-    accent: '#ff8fc0',
+    accent: '#ffb020',
     intro:
       'Phone menus, hold music, an agent who talks fast. Melanie navigates the menu, waits on hold, and argues your case politely and exactly — you just read along and steer.',
     metaTitle: 'Call customer service in any language | Montreal Reception',

@@ -13,7 +13,7 @@ export const USE_CASES_FR_B: UseCase[] = [
     h1: 'Gagnez la discussion sur votre facture dans une langue que vous n’avez jamais apprise',
     kicker: 'Lignes de soutien',
     emoji: '💳',
-    accent: '#ff8fc0',
+    accent: '#ffb020',
     intro:
       'Menus téléphoniques, musique d’attente, un agent qui parle vite. Melanie navigue dans le menu, patiente en attente et défend votre dossier avec politesse et précision — vous n’avez qu’à lire et à donner la suite.',
     metaTitle: 'Appeler le service à la clientèle dans votre langue | Montreal Reception',

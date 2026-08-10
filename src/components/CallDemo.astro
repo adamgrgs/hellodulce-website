@@ -6,7 +6,7 @@ interface Props {
   id?: string;
   locale?: 'en' | 'fr';
 }
-const { scenario, accent = '#f43f8e', id = 'demo', locale = 'en' } = Astro.props as Props;
+const { scenario, accent = '#ff6a2b', id = 'demo', locale = 'en' } = Astro.props as Props;
 
 /* All runtime strings live in one dict handed to the client script via a data
    attribute — the animation code stays locale-agnostic. */
@@ -60,7 +60,7 @@ const T =
 <style is:global>
   .demo { position: relative; z-index: 1; }
   .phone {
-    background: linear-gradient(180deg, #221033, #170b24);
+    background: linear-gradient(180deg, #241a12, #17100c);
     border: 1px solid rgba(255, 255, 255, 0.14);
     border-radius: 26px;
     padding: 12px 12px 12px;
@@ -73,12 +73,12 @@ const T =
   }
   .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
   .phone-title { font-weight: 800; font-size: 0.92rem; letter-spacing: -0.01em; }
-  .phone-sub { margin-left: auto; font-size: 0.72rem; color: #b6a3c9; font-weight: 600; }
+  .phone-sub { margin-left: auto; font-size: 0.72rem; color: #cdb8a6; font-weight: 600; }
 
   .call-bar {
     display: flex; align-items: center; gap: 8px; margin: 10px 2px 0;
     background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px; padding: 8px 10px; font-size: 0.72rem; color: #cbb9dc;
+    border-radius: 12px; padding: 8px 10px; font-size: 0.72rem; color: #cdb8a6;
     animation: pop 0.3s ease both;
   }
   .live { display: inline-flex; align-items: center; gap: 6px; font-weight: 800; color: #86efac; }
@@ -94,20 +94,20 @@ const T =
   @media (min-width: 480px) { .thread { min-height: 360px; max-height: 430px; } }
 
   .msg { animation: pop 0.34s cubic-bezier(0.22, 1, 0.36, 1) both; max-width: 88%; }
-  .msg .who { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #9c8bb0; margin-bottom: 4px; }
+  .msg .who { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #a89080; margin-bottom: 4px; }
   .bubble { padding: 10px 13px; border-radius: 16px; font-size: 0.9rem; line-height: 1.45; }
 
   .msg.you { align-self: flex-end; text-align: right; }
   .msg.you .bubble {
-    background: linear-gradient(120deg, #f43f8e, #ff8fc0); color: #fff; border-bottom-right-radius: 5px;
+    background: linear-gradient(120deg, #ff6a2b, #ffb020); color: #fff; border-bottom-right-radius: 5px;
     text-align: left;
   }
   .msg.them .bubble {
     background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 255, 255, 0.1);
-    border-bottom-left-radius: 5px; color: #f2e8f8;
+    border-bottom-left-radius: 5px; color: #fdf3ea;
   }
   .msg.them .trans {
-    margin-top: 6px; font-size: 0.86rem; color: #e9d5ff; padding-left: 10px;
+    margin-top: 6px; font-size: 0.86rem; color: #ffd9b8; padding-left: 10px;
     border-left: 2px solid var(--accent); animation: fade 0.4s ease both;
   }
   .msg.melanie .bubble {
@@ -120,7 +120,7 @@ const T =
   .msg.melanie .wave i:nth-child(4) { animation-delay: 0.36s; }
 
   .sys {
-    align-self: center; font-size: 0.74rem; color: #b6a3c9; background: rgba(255, 255, 255, 0.05);
+    align-self: center; font-size: 0.74rem; color: #cdb8a6; background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1); padding: 6px 12px; border-radius: 999px;
     animation: pop 0.3s ease both; text-align: center;
   }
@@ -131,7 +131,7 @@ const T =
   }
   .summary h4 { margin: 0 0 8px; font-size: 0.92rem; display: flex; align-items: center; gap: 7px; }
   .summary ul { display: grid; gap: 5px; }
-  .summary li { font-size: 0.84rem; color: #e6dcef; padding-left: 14px; position: relative; }
+  .summary li { font-size: 0.84rem; color: #f0e4d8; padding-left: 14px; position: relative; }
   .summary li::before { content: '\2022'; position: absolute; left: 2px; color: #86efac; }
 
   .typing { display: inline-flex; gap: 3px; }
@@ -144,22 +144,22 @@ const T =
     background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 999px; padding: 10px 8px 10px 14px;
   }
-  .composer-text { font-size: 0.86rem; color: #d6c8e4; min-height: 1.2em; flex: 1; text-align: left; }
-  .composer-text.ph { color: #8a789d; }
-  .composer-text .caret { display: inline-block; width: 1px; background: #f43f8e; height: 1em; vertical-align: -2px; animation: blink 0.8s steps(1) infinite; }
+  .composer-text { font-size: 0.86rem; color: #cdb8a6; min-height: 1.2em; flex: 1; text-align: left; }
+  .composer-text.ph { color: #8a7263; }
+  .composer-text .caret { display: inline-block; width: 1px; background: #ff6a2b; height: 1em; vertical-align: -2px; animation: blink 0.8s steps(1) infinite; }
   .send {
     width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; color: #fff;
-    background: linear-gradient(120deg, #f43f8e, #ff8fc0); flex: 0 0 auto;
+    background: linear-gradient(120deg, #ff6a2b, #ffb020); flex: 0 0 auto;
   }
 
   .demo-ctl { display: flex; align-items: center; gap: 12px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
   .ctl {
     display: inline-flex; align-items: center; gap: 7px; background: transparent; cursor: pointer;
-    border: 1px solid rgba(255, 255, 255, 0.16); color: #f7eefc; border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.16); color: #fdf3ea; border-radius: 999px;
     padding: 7px 14px; font: inherit; font-size: 0.82rem; font-weight: 700;
   }
   .ctl:hover { border-color: #ff8c3c; }
-  .ctl-note { font-size: 0.78rem; color: #6b5b7d; }
+  .ctl-note { font-size: 0.78rem; color: #6f5a4a; }
 
   @keyframes pop { from { opacity: 0; transform: translateY(10px) scale(0.98); } to { opacity: 1; transform: none; } }
   @keyframes fade { from { opacity: 0; } to { opacity: 1; } }

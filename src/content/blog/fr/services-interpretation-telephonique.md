@@ -12,7 +12,7 @@ secondaryKeywords:
 publishDate: 2026-08-07
 updatedDate: 2026-08-07
 readingMinutes: 8
-accent: '#ff8fc0'
+accent: '#ffb020'
 lang: fr
 keyNumbers:
   - value: "3,95 $ US/min"

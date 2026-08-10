@@ -7,10 +7,10 @@
   --dark-muted: #8a7263;
   /* brand: tangerine -> amber. --pink/--purple kept as aliases so every
      existing rule inherits the new palette without a rewrite. */
-  --pink: #f43f8e;
-  --pink-2: #ff8fc0;
-  --pink: #f43f8e;
-  --purple: #ff8fc0;
+  --pink: #ff6a2b;
+  --pink-2: #ffb020;
+  --pink: #ff6a2b;
+  --purple: #ffb020;
   --pink-soft: #ffe0ef;
   --line: rgba(255, 236, 220, 0.14);
   --radius: 18px;
@@ -59,7 +59,7 @@ p { margin: 0 0 1em; }
   background: linear-gradient(96deg, var(--pink), var(--pink-2));
   color: #fff; text-decoration: none; font-weight: 700; font-size: 1rem;
   padding: 14px 24px; border-radius: 999px; border: 0;
-  box-shadow: 0 10px 30px -12px rgba(168, 85, 247, 0.9);
+  box-shadow: 0 10px 30px -12px rgba(255, 106, 43, 0.55);
   transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 .btn:hover { transform: translateY(-2px); box-shadow: 0 16px 36px -12px rgba(255, 106, 43, 0.85); }
@@ -122,8 +122,8 @@ section { position: relative; }
 .glow {
   position: absolute; inset: -20% 0 auto 0; height: 620px; pointer-events: none; z-index: 0;
   background:
-    radial-gradient(45% 55% at 18% 30%, rgba(244, 114, 182, 0.3), transparent 70%),
-    radial-gradient(45% 55% at 82% 12%, rgba(168, 85, 247, 0.3), transparent 70%);
+    radial-gradient(45% 55% at 18% 30%, rgba(255, 106, 43, 0.26), transparent 70%),
+    radial-gradient(45% 55% at 82% 12%, rgba(255, 176, 32, 0.22), transparent 70%);
   filter: blur(6px);
 }
 
