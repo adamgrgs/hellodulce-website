@@ -13,7 +13,7 @@ export const USE_CASES_FR_B: UseCase[] = [
     h1: 'Gagnez la discussion sur votre facture dans une langue que vous n’avez jamais apprise',
     kicker: 'Lignes de soutien',
     emoji: '💳',
-    accent: '#ffb020',
+    accent: '#ff8fc0',
     intro:
       'Menus téléphoniques, musique d’attente, un agent qui parle vite. Melanie navigue dans le menu, patiente en attente et défend votre dossier avec politesse et précision — vous n’avez qu’à lire et à donner la suite.',
     metaTitle: 'Appeler le service à la clientèle dans votre langue | Montreal Reception',
@@ -85,7 +85,7 @@ export const USE_CASES_FR_B: UseCase[] = [
     h1: 'Immigration, prestations, permis — la bonne question, du premier coup',
     kicker: 'Services publics',
     emoji: '🏛️',
-    accent: '#d97706',
+    accent: '#c2185b',
     intro:
       'Les lignes gouvernementales n’aiment pas les questions floues. Melanie pose la vôtre dans une langue claire et formelle, note le numéro de dossier, la date limite et le document exact qu’on vous demande, puis vous remet le tout traduit.',
     metaTitle: 'Appeler un bureau du gouvernement dans votre langue | Montreal Reception',
@@ -161,7 +161,7 @@ export const USE_CASES_FR_B: UseCase[] = [
     h1: 'Redonnez le téléphone à vos parents',
     kicker: 'Proches aidants',
     emoji: '💛',
-    accent: '#ff7a45',
+    accent: '#ff6fa8',
     intro:
       'Ces appels que les enfants adultes finissent par faire à la place de leurs parents — la pharmacie, l’assurance, le soutien à domicile, le bureau du spécialiste. Avec Melanie, votre mère les fait elle-même, dans sa langue, et vous pouvez lire la transcription après.',
     metaTitle: 'Aider vos parents âgés à téléphoner dans leur langue | Montreal Reception',

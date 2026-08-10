@@ -12,7 +12,7 @@ secondaryKeywords:
 publishDate: 2026-08-07
 updatedDate: 2026-08-07
 readingMinutes: 8
-accent: '#ff6a2b'
+accent: '#f43f8e'
 lang: fr
 keyNumbers:
   - value: '82 075'

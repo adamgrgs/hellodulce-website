@@ -6,7 +6,7 @@ interface Props {
   id?: string;
   locale?: 'en' | 'fr';
 }
-const { scenario, accent = '#ff6a2b', id = 'demo', locale = 'en' } = Astro.props as Props;
+const { scenario, accent = '#f43f8e', id = 'demo', locale = 'en' } = Astro.props as Props;
 
 /* All runtime strings live in one dict handed to the client script via a data
    attribute — the animation code stays locale-agnostic. */
@@ -99,7 +99,7 @@ const T =
 
   .msg.you { align-self: flex-end; text-align: right; }
   .msg.you .bubble {
-    background: linear-gradient(120deg, #ff6a2b, #ffb020); color: #fff; border-bottom-right-radius: 5px;
+    background: linear-gradient(120deg, #f43f8e, #ff8fc0); color: #fff; border-bottom-right-radius: 5px;
     text-align: left;
   }
   .msg.them .bubble {
@@ -107,11 +107,11 @@ const T =
     border-bottom-left-radius: 5px; color: #fdf3ea;
   }
   .msg.them .trans {
-    margin-top: 6px; font-size: 0.86rem; color: #ffd9b8; padding-left: 10px;
+    margin-top: 6px; font-size: 0.86rem; color: #ffd6e8; padding-left: 10px;
     border-left: 2px solid var(--accent); animation: fade 0.4s ease both;
   }
   .msg.melanie .bubble {
-    background: rgba(255, 176, 32, 0.14); border: 1px dashed rgba(255, 106, 43, 0.5); color: #ffe9d6;
+    background: rgba(255, 143, 192, 0.14); border: 1px dashed rgba(244, 63, 142, 0.5); color: #ffe0ef;
   }
   .msg.melanie .wave { display: inline-flex; align-items: flex-end; gap: 2px; height: 12px; margin-right: 7px; vertical-align: -1px; }
   .msg.melanie .wave i { width: 2px; background: var(--accent); border-radius: 2px; animation: eq 0.9s ease-in-out infinite; }
@@ -126,7 +126,7 @@ const T =
   }
   .summary {
     align-self: stretch; border-radius: 16px; padding: 14px;
-    background: linear-gradient(140deg, rgba(34, 197, 94, 0.16), rgba(255, 176, 32, 0.14));
+    background: linear-gradient(140deg, rgba(34, 197, 94, 0.16), rgba(255, 143, 192, 0.14));
     border: 1px solid rgba(34, 197, 94, 0.35); animation: pop 0.4s ease both;
   }
   .summary h4 { margin: 0 0 8px; font-size: 0.92rem; display: flex; align-items: center; gap: 7px; }
@@ -146,10 +146,10 @@ const T =
   }
   .composer-text { font-size: 0.86rem; color: #cdb8a6; min-height: 1.2em; flex: 1; text-align: left; }
   .composer-text.ph { color: #8a7263; }
-  .composer-text .caret { display: inline-block; width: 1px; background: #ff6a2b; height: 1em; vertical-align: -2px; animation: blink 0.8s steps(1) infinite; }
+  .composer-text .caret { display: inline-block; width: 1px; background: #f43f8e; height: 1em; vertical-align: -2px; animation: blink 0.8s steps(1) infinite; }
   .send {
     width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; color: #fff;
-    background: linear-gradient(120deg, #ff6a2b, #ffb020); flex: 0 0 auto;
+    background: linear-gradient(120deg, #f43f8e, #ff8fc0); flex: 0 0 auto;
   }
 
   .demo-ctl { display: flex; align-items: center; gap: 12px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
@@ -158,7 +158,7 @@ const T =
     border: 1px solid rgba(255, 255, 255, 0.16); color: #fdf3ea; border-radius: 999px;
     padding: 7px 14px; font: inherit; font-size: 0.82rem; font-weight: 700;
   }
-  .ctl:hover { border-color: #ff8c3c; }
+  .ctl:hover { border-color: #ff8fc0; }
   .ctl-note { font-size: 0.78rem; color: #6f5a4a; }
 
   @keyframes pop { from { opacity: 0; transform: translateY(10px) scale(0.98); } to { opacity: 1; transform: none; } }

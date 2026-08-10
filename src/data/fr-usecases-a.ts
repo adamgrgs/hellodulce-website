@@ -12,7 +12,7 @@ export const USE_CASES_FR_A: UseCase[] = [
     h1: 'Prenez le rendez-vous. Décrivez le symptôme. Dans vos mots.',
     kicker: 'Santé',
     emoji: '🩺',
-    accent: '#ff4d3d',
+    accent: '#ff2d7a',
     intro:
       'Les appels de santé, c’est ceux qu’on ne peut pas remettre à plus tard et qu’on ne peut pas se permettre de faire à moitié. Écrivez ce qui fait mal dans la langue où vous pensez — Melanie le dit avec précision à la clinique et vous rapporte la réponse de la même façon.',
     metaTitle: 'Appeler une clinique dans votre langue | Montreal Reception',
@@ -88,7 +88,7 @@ export const USE_CASES_FR_A: UseCase[] = [
     h1: 'Faites réparer le chauffage sans avoir besoin d’un interprète',
     kicker: 'Logement',
     emoji: '🏠',
-    accent: '#e8952a',
+    accent: '#e8558f',
     intro:
       'Réparations, questions de loyer, date d’emménagement, panne de courant. Ces appels récompensent celui qui a l’air sûr de lui et précis — laissez Melanie être précise pour vous, et gardez la trace écrite qu’elle produit.',
     metaTitle: 'Appeler votre propriétaire dans votre langue | Montreal Reception',

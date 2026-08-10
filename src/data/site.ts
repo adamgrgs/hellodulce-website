@@ -39,7 +39,7 @@ const flagship: UseCase = {
   h1: "Talk to your child's school, even if you don't speak the language",
   kicker: 'Education',
   emoji: '🎒',
-  accent: '#ff6a2b',
+  accent: '#f43f8e',
   intro:
     "Parent-teacher meetings, absences, bus changes, extra help in reading — the calls that decide how your child's year goes. Write to Melanie in your language; the school hears fluent, polite French, English or whatever the office speaks.",
   metaTitle: "Call your child's school in any language | Montreal Reception",
@@ -118,7 +118,7 @@ export const USE_CASES: UseCase[] = [
     h1: 'Book the appointment. Describe the symptom. In your own words.',
     kicker: 'Healthcare',
     emoji: '🩺',
-    accent: '#ff4d3d',
+    accent: '#ff2d7a',
     intro:
       'Health calls are the ones you cannot postpone and cannot afford to get half-right. Type what hurts in the language you think in — Melanie says it precisely to the clinic and brings the answer back the same way.',
     metaTitle: 'Call a doctor or clinic in any language | Montreal Reception',
@@ -194,7 +194,7 @@ export const USE_CASES: UseCase[] = [
     h1: 'Get the heat fixed without needing a translator',
     kicker: 'Housing',
     emoji: '🏠',
-    accent: '#e8952a',
+    accent: '#e8558f',
     intro:
       'Repairs, rent questions, a move-in date, a power outage. These calls reward whoever sounds confident and precise — so let Melanie be precise for you, and keep the written record it produces.',
     metaTitle: 'Call your landlord or utility company in any language | Montreal Reception',
@@ -266,7 +266,7 @@ export const USE_CASES: UseCase[] = [
     h1: 'Win the billing argument in a language you never studied',
     kicker: 'Support lines',
     emoji: '💳',
-    accent: '#ffb020',
+    accent: '#ff8fc0',
     intro:
       'Phone menus, hold music, an agent who talks fast. Melanie navigates the menu, waits on hold, and argues your case politely and exactly — you just read along and steer.',
     metaTitle: 'Call customer service in any language | Montreal Reception',
@@ -338,7 +338,7 @@ export const USE_CASES: UseCase[] = [
     h1: 'Immigration, benefits, licences — asked correctly the first time',
     kicker: 'Public services',
     emoji: '🏛️',
-    accent: '#d97706',
+    accent: '#c2185b',
     intro:
       'Government lines punish vague questions. Melanie asks yours in clean, formal language, notes the file number, the deadline and the exact document they asked for, and gives it all back to you translated.',
     metaTitle: 'Call government offices in any language | Montreal Reception',
@@ -410,7 +410,7 @@ export const USE_CASES: UseCase[] = [
     h1: 'Give your parents back the phone',
     kicker: 'Family care',
     emoji: '💛',
-    accent: '#ff7a45',
+    accent: '#ff6fa8',
     intro:
       'The calls adult children end up making for their parents — pharmacy, insurance, home care, the specialist’s office. With Melanie, your mother makes them herself, in her own language, and you can see the transcript afterwards.',
     metaTitle: 'Help elderly parents make phone calls in any language | Montreal Reception',
