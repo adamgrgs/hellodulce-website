@@ -36,6 +36,11 @@ const norm = (url) => {
 export default defineConfig({
   site: SITE,
   trailingSlash: 'ignore',
+  /* Old Dulce URLs keep their links and rankings [viktor, 2026-08-10]. */
+  redirects: {
+    '/meet-dulce': { status: 301, destination: '/meet-melanie' },
+    '/fr/rencontrer-dulce': { status: 301, destination: '/fr/rencontrer-melanie' },
+  },
   integrations: [
     sitemap({
       filter: (p) => !p.includes('/404'),
