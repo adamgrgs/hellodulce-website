@@ -98,7 +98,7 @@ const flagship: UseCase = {
   faqs: [
     {
       q: 'Does the school know they are talking to an AI?',
-      a: 'Dulce introduces itself as calling on your behalf. It never pretends to be you, and it never invents facts — if the office asks something you have not told Dulce, it politely holds the line and asks you.',
+      a: 'Dulce introduces herself as calling on your behalf. She never pretends to be you, and she never invents facts — if the office asks something you have not told her, she politely holds the line and asks you.',
     },
     {
       q: 'Can I stay on the line and listen?',
@@ -484,7 +484,7 @@ export const STEPS = [
   {
     n: '02',
     title: 'Dulce dials and speaks',
-    body: 'A natural voice in their language — not a robot reading a translation. Dulce introduces itself as calling on your behalf.',
+    body: 'A natural voice in their language — not a robot reading a translation. Dulce introduces herself as calling on your behalf.',
   },
   {
     n: '03',
@@ -513,7 +513,7 @@ export const CORE_QA: QA[] = [
   {
     slug: 'how-does-it-work',
     q: 'How does Hello Dulce work, step by step?',
-    a: 'Four steps. 1) You open the app and write your message in your language. 2) You enter the number and Hello Dulce dials it. 3) When someone answers, Hello Dulce introduces itself as calling on your behalf and speaks your message in their language; each sentence they say comes back to you as text in your language about a second later. 4) When the call ends you keep a written summary and the full bilingual transcript.',
+    a: 'Four steps. 1) You open the app and write your message in your language. 2) You enter the number and Hello Dulce dials it. 3) When someone answers, Dulce introduces herself as calling on your behalf and speaks your message in their language; each sentence they say comes back to you as text in your language about a second later. 4) When the call ends you keep a written summary and the full bilingual transcript.',
   },
   {
     slug: 'do-i-have-to-speak',
@@ -548,7 +548,7 @@ export const CORE_QA: QA[] = [
   {
     slug: 'is-it-honest-about-being-ai',
     q: 'Does Hello Dulce tell people it is AI?',
-    a: 'Yes. Hello Dulce announces at the start of the call that it is an interpretation service calling on behalf of a named person. It never impersonates you, and it never invents an answer \u2014 if it is asked something you have not told it, it holds the line and asks you.',
+    a: 'Yes. Dulce announces at the start of the call that she is a virtual interpreter calling on behalf of a named person. She never impersonates you, and she never invents an answer \u2014 if she is asked something you have not told her, she holds the line and asks you.',
   },
   {
     slug: 'what-does-it-cost',

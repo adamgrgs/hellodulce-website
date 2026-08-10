@@ -29,7 +29,7 @@ ${STEPS.map((s, i) => `${i + 1}. ${s.title}. ${s.body}`).join('\n')}
 - The user types in their own language and never has to speak the other language.
 - Each sentence spoken on the call is returned to the user as text in their language while the call is live.
 - Measured latency from typed message to spoken speech in the other language: 0.9-1.3 seconds (internal testing, 2026-08-07).
-- Hello Dulce announces itself at the start of a call as an interpretation service calling on behalf of a named person. It does not impersonate the user.
+- Dulce announces herself at the start of a call as a virtual interpreter calling on behalf of a named person. She does not impersonate the user.
 - Status: early access at ${APP_URL}. Pricing is not published yet.
 - Not a substitute for a certified human interpreter in legal proceedings, medical consent or other settings where a qualified interpreter is required.
 
