@@ -1,9 +1,9 @@
 /* Host cutover pending: montrealreception.com has no DNS yet [viktor, 2026-08-10].
-   Brand name is Montreal Reception; hosts stay on hellodulce.com until the domain resolves. */
-export const APP_URL = 'https://bonjour.hellodulce.com';
+   Brand name is Montreal Reception; hosts are montrealreception.com [cutover 2026-08-10, DNS live]. */
+export const APP_URL = 'https://bonjour.montrealreception.com';
 export const SITE = {
   name: 'Montreal Reception',
-  domain: 'https://hellodulce.com',
+  domain: 'https://montrealreception.com',
   tagline: 'Your voice, in any language',
   blurb:
     'Montreal Reception makes the phone call for you. You text what you want to say in your language — Melanie dials, speaks it naturally in theirs, and shows you on screen only what you need to know or answer, while the call is live.',
@@ -555,7 +555,7 @@ export const CORE_QA: QA[] = [
   {
     slug: 'what-does-it-cost',
     q: 'What does Montreal Reception cost?',
-    a: 'Pricing is not published yet \u2014 Montreal Reception is in early access at bonjour.hellodulce.com. The design target is a cost per call far below per-minute human interpreting, because no third person has to join the line.',
+    a: 'Pricing is not published yet \u2014 Montreal Reception is in early access at bonjour.montrealreception.com. The design target is a cost per call far below per-minute human interpreting, because no third person has to join the line.',
   },
 ];
 
