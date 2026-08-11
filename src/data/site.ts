@@ -535,7 +535,7 @@ export const CORE_QA: QA[] = [
   {
     slug: 'which-languages',
     q: 'Which languages does Montreal Reception support?',
-    a: 'Montreal Reception is built for high-resource language pairs in both directions \u2014 Spanish, French, English, Arabic, Mandarin, Portuguese, Haitian Creole, Vietnamese, Russian, Hindi, Tagalog and more. The first market is Spanish and Arabic speakers calling French-speaking institutions in Quebec.',
+    a: 'Two different lists, and the difference matters. You can write to Melanie in Spanish, English, French, Portuguese, Arabic, Haitian Creole, Vietnamese or Mandarin \u2014 that is text, and the app is fully translated into all eight. The languages Melanie can currently SPEAK on the line are French (including Qu\u00e9b\u00e9cois), English, Spanish, German, Italian, Dutch and Japanese; Portuguese, Arabic, Mandarin, Haitian Creole and Vietnamese are shown in the app but marked as not yet speakable, because we would rather tell you than have you find out on a call. Quebec\u2019s first market is Spanish and Arabic speakers calling French-speaking institutions.',
   },
   {
     slug: 'is-it-an-interpreter-service',

@@ -110,7 +110,7 @@ export const CORE_QA_FR: QA[] = [
   {
     slug: 'quelles-langues',
     q: 'Quelles langues sont prises en charge?',
-    a: 'Montreal Reception est conçue pour les paires de langues très répandues, dans les deux sens — espagnol, français, anglais, arabe, mandarin, portugais, créole haïtien, vietnamien, russe, hindi, tagalog et plus. Le premier marché : les personnes hispanophones et arabophones qui appellent des institutions francophones au Québec.',
+    a: 'Deux listes différentes, et la distinction compte. Vous pouvez écrire à Mélanie en espagnol, anglais, français, portugais, arabe, créole haïtien, vietnamien ou mandarin — ça, c’est du texte, et l’application est traduite dans ces huit langues. Les langues que Mélanie peut PARLER au téléphone aujourd’hui : français (dont le québécois), anglais, espagnol, allemand, italien, néerlandais et japonais; le portugais, l’arabe, le mandarin, le créole haïtien et le vietnamien apparaissent dans l’application, mais marqués « pas encore », parce qu’on préfère vous le dire que vous le faire découvrir en pleine conversation. Premier marché : les personnes hispanophones et arabophones qui appellent des institutions francophones au Québec.',
   },
   {
     slug: 'est-ce-un-service-dinterpretation',
