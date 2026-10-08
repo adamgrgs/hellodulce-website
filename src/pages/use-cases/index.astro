@@ -6,19 +6,19 @@ import { altForRoute } from '../../data/i18n';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'Montreal Reception use cases',
+  name: 'Hello Dulce use cases',
   itemListElement: USE_CASES.map((u, i) => ({
     '@type': 'ListItem',
     position: i + 1,
     name: u.title,
-    url: `https://montrealreception.com/use-cases/${u.slug}`,
+    url: `https://hellodulce.com/use-cases/${u.slug}`,
   })),
 };
 ---
 
 <Base
-  title="Use cases — every call Montreal Reception can make for you"
-  description="Doctors, schools, landlords, utilities, customer service, government offices and elderly care. See a live simulation of each call in Montreal Reception."
+  title="Use cases — every call Hello Dulce can make for you"
+  description="Doctors, schools, landlords, utilities, customer service, government offices and elderly care. See a live simulation of each call in Hello Dulce."
   path="/use-cases"
   alternates={altForRoute('useCases')}
   jsonLd={jsonLd}
@@ -30,7 +30,7 @@ const jsonLd = {
       <h1>Every call you have been <span class="em grad">putting off</span></h1>
       <p class="lede">
         Six situations, six pages. Each one shows the real conversation as it plays out — what you
-        type, what Melanie says, what comes back.
+        type, what Dulce says, what comes back.
       </p>
       <div class="hero-cta"><a class="btn" href={APP_URL}>Start a call &rarr;</a></div>
     </div>
@@ -57,7 +57,7 @@ const jsonLd = {
       <div class="band">
         <h2>Not on the list?</h2>
         <p>
-          If it is a phone call in a language you do not speak, Melanie can make it. Open the app and
+          If it is a phone call in a language you do not speak, Dulce can make it. Open the app and
           write your first line.
         </p>
         <a class="btn" href={APP_URL}>Start a call &rarr;</a>

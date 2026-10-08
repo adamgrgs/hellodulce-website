@@ -10,7 +10,7 @@ const posts = (await getCollection('blog'))
   (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
 );
 
-const title = 'Guides to phone calls across a language barrier | Montreal Reception';
+const title = 'Guides to phone calls across a language barrier | Hello Dulce';
 const description =
   'Practical, sourced guides on phone interpreting, language barriers in healthcare, and talking to schools and institutions in a language you do not speak.';
 
@@ -18,7 +18,7 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'Blog',
-    name: 'Montreal Reception guides',
+    name: 'Hello Dulce guides',
     url: new URL('/blog', SITE.domain).href,
     description,
     publisher: { '@type': 'Organization', name: SITE.name, url: SITE.domain },
@@ -73,7 +73,7 @@ const fmt = (d: Date) => d.toLocaleDateString('en-CA', { year: 'numeric', month:
 
       <div class="band" style="margin-top:48px">
         <h2>Stop rehearsing the call</h2>
-        <p>Write what you want to say in your language. Montreal Reception says it in theirs.</p>
+        <p>Write what you want to say in your language. Hello Dulce says it in theirs.</p>
         <a class="btn" href={APP_URL}>Start a call &rarr;</a>
       </div>
     </div>

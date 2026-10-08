@@ -4,9 +4,9 @@ import { APP_URL, SITE } from '../../data/site';
 import { CORE_QA_FR, FACTS_FR, STEPS_FR, USE_CASES_FR, UI_FR } from '../../data/fr';
 import { altForRoute, routePath, useCasePath } from '../../data/i18n';
 
-const title = 'FAQ Montreal Reception : comment fonctionne l’interprète téléphonique IA';
+const title = 'FAQ Hello Dulce : comment fonctionne l’interprète téléphonique IA';
 const description =
-  'Des réponses claires : ce qu’est Montreal Reception, la vitesse de la traduction, si ça sonne robotique, les langues couvertes, le prix, et la comparaison avec un service d’interprétation.';
+  'Des réponses claires : ce qu’est Hello Dulce, la vitesse de la traduction, si ça sonne robotique, les langues couvertes, le prix, et la comparaison avec un service d’interprétation.';
 
 const useCaseFaqs = USE_CASES_FR.flatMap((u) => u.faqs.map((f) => ({ ...f, from: u.title, slug: u.slug })));
 
@@ -34,7 +34,7 @@ const jsonLd = [
 ];
 ---
 
-<Base title={`${title} | Montreal Reception`} description={description} path="/fr/faq" jsonLd={jsonLd} locale="fr" alternates={altForRoute('faq')}>
+<Base title={`${title} | Hello Dulce`} description={description} path="/fr/faq" jsonLd={jsonLd} locale="fr" alternates={altForRoute('faq')}>
   <section class="sec">
     <div class="wrap">
       <p class="crumbs"><a href="/fr">Accueil</a> / FAQ</p>

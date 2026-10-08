@@ -16,7 +16,7 @@ export const GET: APIRoute = async () => {
 
   const parts: string[] = [];
 
-  parts.push(`# Montreal Reception - full site text
+  parts.push(`# Hello Dulce - full site text
 Source: ${SITE.domain}
 App: ${APP_URL}
 Generated: ${new Date().toISOString().slice(0, 10)}
@@ -58,8 +58,8 @@ ${u.jobs.map((j) => `### ${j.title}\n${j.body}\nExample of what the user writes:
 ${u.scenario.turns
   .map((t) => {
     if (t.kind === 'type') return `User types (${t.lang}): ${t.text}`;
-    if (t.kind === 'dial') return `Melanie dials ${t.number} (${t.label})`;
-    if (t.kind === 'speak') return `Melanie speaks (${t.lang}): ${t.text}`;
+    if (t.kind === 'dial') return `Dulce dials ${t.number} (${t.label})`;
+    if (t.kind === 'speak') return `Dulce speaks (${t.lang}): ${t.text}`;
     if (t.kind === 'hear') return `Other person (${t.lang}): ${t.text}\n  -> translated for the user: ${t.translation}`;
     return `Outcome - ${t.title}: ${t.lines.join('; ')}`;
   })

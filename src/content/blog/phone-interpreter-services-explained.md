@@ -12,7 +12,7 @@ secondaryKeywords:
 publishDate: 2026-08-07
 updatedDate: 2026-08-07
 readingMinutes: 8
-accent: '#ff8fc0'
+accent: '#ffb020'
 keyNumbers:
   - value: '$3.95/min'
     label: 'LanguageLine published pay-as-you-go rate for audio interpreting'
@@ -75,7 +75,7 @@ Two very different price worlds exist, and confusing them is the single most com
 | Volume contract OPI | $0.64–$0.69 per minute by language tier on one public-sector schedule | Hospitals, agencies, call centres |
 | A bilingual relative | Free, plus a favour you have to ask for | Short, non-private calls |
 | A translation app on speakerphone | Free | One or two sentences, low stakes |
-| An AI call interpreter (Montreal Reception) | Early access, no published price yet | Everyday calls you keep postponing |
+| An AI call interpreter (Hello Dulce) | Early access, no published price yet | Everyday calls you keep postponing |
 
 The consumer rate is the one you can actually buy today with a credit card. At $3.95 a minute, a fifteen-minute call to a clinic to reschedule an appointment costs about $59. That is not a scandal — a trained human interpreter's time is genuinely worth that — but it explains why almost nobody uses professional interpreting for the ordinary calls that make up daily life.
 

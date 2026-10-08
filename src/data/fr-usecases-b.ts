@@ -13,12 +13,12 @@ export const USE_CASES_FR_B: UseCase[] = [
     h1: 'Gagnez la discussion sur votre facture dans une langue que vous n’avez jamais apprise',
     kicker: 'Lignes de soutien',
     emoji: '💳',
-    accent: '#ff8fc0',
+    accent: '#ffb020',
     intro:
-      'Menus téléphoniques, musique d’attente, un agent qui parle vite. Melanie navigue dans le menu, patiente en attente et défend votre dossier avec politesse et précision — vous n’avez qu’à lire et à donner la suite.',
-    metaTitle: 'Appeler le service à la clientèle dans votre langue | Montreal Reception',
+      'Menus téléphoniques, musique d’attente, un agent qui parle vite. Dulce navigue dans le menu, patiente en attente et défend votre dossier avec politesse et précision — vous n’avez qu’à lire et à donner la suite.',
+    metaTitle: 'Appeler le service à la clientèle dans votre langue | Hello Dulce',
     metaDescription:
-      'Montreal Reception appelle les lignes de soutien pour vous : facturation, soutien technique, retours, garanties — dans leur langue, traduit dans la vôtre en direct.',
+      'Hello Dulce appelle les lignes de soutien pour vous : facturation, soutien technique, retours, garanties — dans leur langue, traduit dans la vôtre en direct.',
     jobs: [
       {
         title: 'Facturation et comptes',
@@ -52,8 +52,8 @@ export const USE_CASES_FR_B: UseCase[] = [
         },
         {
           kind: 'speak',
-          text: "Hello, my name is Melanie. I'm a virtual interpreter calling on behalf of the account holder. She was billed $89 twice in August and is requesting a refund of the duplicate charge.",
-          lang: 'Melanie · anglais',
+          text: "Hello, my name is Dulce. I'm a virtual interpreter calling on behalf of the account holder. She was billed $89 twice in August and is requesting a refund of the duplicate charge.",
+          lang: 'Dulce · anglais',
         },
         {
           kind: 'hear',
@@ -63,7 +63,7 @@ export const USE_CASES_FR_B: UseCase[] = [
           transLang: 'espagnol',
         },
         { kind: 'type', text: 'Acepto. Pide el número de confirmación.', lang: 'Vous · espagnol' },
-        { kind: 'speak', text: 'She accepts. Could you give us a confirmation number, please?', lang: 'Melanie · anglais' },
+        { kind: 'speak', text: 'She accepts. Could you give us a confirmation number, please?', lang: 'Dulce · anglais' },
         {
           kind: 'done',
           title: 'Remboursement accepté',
@@ -73,7 +73,7 @@ export const USE_CASES_FR_B: UseCase[] = [
     },
     faqs: [
       {
-        q: 'Est-ce que Melanie va passer à travers le menu et la file d’attente?',
+        q: 'Est-ce que Dulce va passer à travers le menu et la file d’attente?',
         a: 'Oui — elle appuie sur les bonnes options et elle attend. Vous recevez une alerte dès qu’une personne prend l’appel.',
       },
     ],
@@ -85,12 +85,12 @@ export const USE_CASES_FR_B: UseCase[] = [
     h1: 'Immigration, prestations, permis — la bonne question, du premier coup',
     kicker: 'Services publics',
     emoji: '🏛️',
-    accent: '#c2185b',
+    accent: '#d97706',
     intro:
-      'Les lignes gouvernementales n’aiment pas les questions floues. Melanie pose la vôtre dans une langue claire et formelle, note le numéro de dossier, la date limite et le document exact qu’on vous demande, puis vous remet le tout traduit.',
-    metaTitle: 'Appeler un bureau du gouvernement dans votre langue | Montreal Reception',
+      'Les lignes gouvernementales n’aiment pas les questions floues. Dulce pose la vôtre dans une langue claire et formelle, note le numéro de dossier, la date limite et le document exact qu’on vous demande, puis vous remet le tout traduit.',
+    metaTitle: 'Appeler un bureau du gouvernement dans votre langue | Hello Dulce',
     metaDescription:
-      'Montreal Reception appelle l’immigration, les services sociaux et les bureaux de permis pour vous, et vous rend dossier, délais et documents dans votre langue.',
+      'Hello Dulce appelle l’immigration, les services sociaux et les bureaux de permis pour vous, et vous rend dossier, délais et documents dans votre langue.',
     jobs: [
       {
         title: 'Dossiers d’immigration',
@@ -124,8 +124,8 @@ export const USE_CASES_FR_B: UseCase[] = [
         },
         {
           kind: 'speak',
-          text: 'Bonjour! Je m’appelle Melanie, je suis une interprète virtuelle et j’appelle au nom d’un titulaire de permis qui souhaite connaître les documents requis pour un renouvellement.',
-          lang: 'Melanie · français',
+          text: 'Bonjour! Je m’appelle Dulce, je suis une interprète virtuelle et j’appelle au nom d’un titulaire de permis qui souhaite connaître les documents requis pour un renouvellement.',
+          lang: 'Dulce · français',
         },
         {
           kind: 'hear',
@@ -135,7 +135,7 @@ export const USE_CASES_FR_B: UseCase[] = [
           transLang: 'arabe',
         },
         { kind: 'type', text: 'هل يمكن الدفع ببطاقة الخصم؟', lang: 'Vous · arabe' },
-        { kind: 'speak', text: 'Est-ce que le paiement par carte de débit est accepté?', lang: 'Melanie · français' },
+        { kind: 'speak', text: 'Est-ce que le paiement par carte de débit est accepté?', lang: 'Dulce · français' },
         {
           kind: 'done',
           title: 'Liste de documents enregistrée',
@@ -149,7 +149,7 @@ export const USE_CASES_FR_B: UseCase[] = [
     },
     faqs: [
       {
-        q: 'Est-ce que Melanie peut donner mes renseignements personnels à l’agent?',
+        q: 'Est-ce que Dulce peut donner mes renseignements personnels à l’agent?',
         a: 'Seulement ceux que vous lui avez confiés pour cet appel. Pour tout le reste, elle garde la ligne et vous pose la question avant.',
       },
     ],
@@ -161,12 +161,12 @@ export const USE_CASES_FR_B: UseCase[] = [
     h1: 'Redonnez le téléphone à vos parents',
     kicker: 'Proches aidants',
     emoji: '💛',
-    accent: '#ff6fa8',
+    accent: '#ff7a45',
     intro:
-      'Ces appels que les enfants adultes finissent par faire à la place de leurs parents — la pharmacie, l’assurance, le soutien à domicile, le bureau du spécialiste. Avec Melanie, votre mère les fait elle-même, dans sa langue, et vous pouvez lire la transcription après.',
-    metaTitle: 'Aider vos parents âgés à téléphoner dans leur langue | Montreal Reception',
+      'Ces appels que les enfants adultes finissent par faire à la place de leurs parents — la pharmacie, l’assurance, le soutien à domicile, le bureau du spécialiste. Avec Dulce, votre mère les fait elle-même, dans sa langue, et vous pouvez lire la transcription après.',
+    metaTitle: 'Aider vos parents âgés à téléphoner dans leur langue | Hello Dulce',
     metaDescription:
-      'Avec Montreal Reception, vos parents âgés font leurs appels eux-mêmes — médecin, pharmacie, assureur, soutien à domicile — dans leur langue, transcription incluse.',
+      'Avec Hello Dulce, vos parents âgés font leurs appels eux-mêmes — médecin, pharmacie, assureur, soutien à domicile — dans leur langue, transcription incluse.',
     jobs: [
       {
         title: 'Coordination médicale',
@@ -204,8 +204,8 @@ export const USE_CASES_FR_B: UseCase[] = [
         },
         {
           kind: 'speak',
-          text: 'Bonjour! Je m’appelle Melanie, je suis une interprète virtuelle et j’appelle au nom d’une dame de 78 ans qui aurait besoin d’une rampe d’accès pour fauteuil roulant à son entrée.',
-          lang: 'Melanie · français',
+          text: 'Bonjour! Je m’appelle Dulce, je suis une interprète virtuelle et j’appelle au nom d’une dame de 78 ans qui aurait besoin d’une rampe d’accès pour fauteuil roulant à son entrée.',
+          lang: 'Dulce · français',
         },
         {
           kind: 'hear',
@@ -215,7 +215,7 @@ export const USE_CASES_FR_B: UseCase[] = [
           transLang: 'espagnol',
         },
         { kind: 'type', text: 'Sí, el martes a las 10 está bien.', lang: 'Vous · espagnol' },
-        { kind: 'speak', text: 'Oui, mardi 10 h convient parfaitement. Merci!', lang: 'Melanie · français' },
+        { kind: 'speak', text: 'Oui, mardi 10 h convient parfaitement. Merci!', lang: 'Dulce · français' },
         {
           kind: 'done',
           title: 'Visite à domicile fixée',
@@ -226,7 +226,7 @@ export const USE_CASES_FR_B: UseCase[] = [
     faqs: [
       {
         q: 'Est-ce que je peux configurer ça pour un parent qui n’est pas à l’aise avec les applications?',
-        a: 'Oui. Melanie fonctionne avec de simples messages écrits, et un membre de la famille peut aider à rédiger la première demande ou relire la transcription ensuite.',
+        a: 'Oui. Dulce fonctionne avec de simples messages écrits, et un membre de la famille peut aider à rédiger la première demande ou relire la transcription ensuite.',
       },
     ],
   },

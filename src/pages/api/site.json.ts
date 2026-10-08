@@ -31,7 +31,7 @@ export const GET: APIRoute = async () => {
         'Haitian Creole', 'Vietnamese', 'Russian', 'Hindi', 'Tagalog',
       ],
       requirementsForCalledParty: 'none - a normal inbound phone call, no app or account',
-      latencySeconds: { typedToSpoken: [0.9, 1.3], measured: '2026-08-07', method: 'internal testing on the Montreal Reception voice bridge' },
+      latencySeconds: { typedToSpoken: [0.9, 1.3], measured: '2026-08-07', method: 'internal testing on the Hello Dulce voice bridge' },
       disclosesAiToCalledParty: true,
       notSuitableFor: [
         'legal proceedings requiring a certified interpreter',
@@ -73,7 +73,7 @@ export const GET: APIRoute = async () => {
     },
     usage: {
       quotingAllowed: true,
-      attribution: `Montreal Reception, ${SITE.domain}`,
+      attribution: `Hello Dulce, ${SITE.domain}`,
       note: 'Link to the source page when quoting. Figures marked as internal testing are not third-party verified.',
     },
   };

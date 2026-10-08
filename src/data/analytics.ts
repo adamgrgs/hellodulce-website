@@ -1,5 +1,5 @@
 /**
- * Analytics configuration and the event vocabulary for montrealreception.com.
+ * Analytics configuration and the event vocabulary for hellodulce.com.
  *
  * One list, one place. Every event name the site can send is declared here so
  * the GA4 property never accumulates near-duplicate names ("cta-click",
@@ -23,11 +23,11 @@ export const GA_ID = import.meta.env.PUBLIC_GA_ID || 'G-LQVSHTVP6Z';
  * preview deploys and my own screenshot/QA runs would otherwise pollute the
  * property with traffic that looks real but isn't.
  */
-/* Both domains during the rebrand overlap: hellodulce.com still 301s here. */
-export const SEND_ON_HOSTS = ['montrealreception.com', 'www.montrealreception.com', 'hellodulce.com', 'www.hellodulce.com'];
+/* montrealreception.com 301s here since the 2026-10-08 revert; keep both during the overlap. */
+export const SEND_ON_HOSTS = ['hellodulce.com', 'www.hellodulce.com', 'montrealreception.com', 'www.montrealreception.com'];
 
 export const EVENTS = {
-  /** Click on any link pointing at the app (bonjour.montrealreception.com). The one
+  /** Click on any link pointing at the app (bonjour.hellodulce.com). The one
    *  that matters commercially — mark as a key event in GA. */
   ctaClick: 'cta_click',
   /** Click on an external link that is NOT the app (citations in guides). */
@@ -64,7 +64,7 @@ export const EVENTS = {
 export const CUSTOM_DIMENSIONS = [
   'page_domain', // 'site' | 'app' — one GA property covers both
   'content_locale', // 'en' | 'fr-CA'
-  'page_type', // home | how_it_works | use_case | guide | faq | meet_melanie | ...
+  'page_type', // home | how_it_works | use_case | guide | faq | meet_dulce | ...
   'cta_location', // hero | nav | footer | section | use_case | guide_end
   'cta_label',
   'use_case', // schools | healthcare | ...
@@ -95,7 +95,7 @@ export function pageType(path: string): string {
   if (bare === '/how-it-works' || bare === '/fonctionnement') return 'how_it_works';
   if (bare === '/use-cases' || bare === '/cas-dutilisation') return 'use_cases_index';
   if (bare.startsWith('/use-cases/') || bare.startsWith('/cas-dutilisation/')) return 'use_case';
-  if (bare === '/meet-melanie' || bare === '/rencontrer-melanie') return 'meet_melanie';
+  if (bare === '/meet-dulce' || bare === '/rencontrer-dulce') return 'meet_dulce';
   if (bare === '/faq') return 'faq';
   if (bare === '/blog' || bare === '/guides') return 'blog_index';
   if (bare.startsWith('/blog/') || bare.startsWith('/guides/')) return 'guide';

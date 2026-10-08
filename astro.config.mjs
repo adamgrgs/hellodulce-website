@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 import vercel from '@astrojs/vercel';
 import sitemap from '@astrojs/sitemap';
 
-const SITE = 'https://montrealreception.com'; // cut over 2026-08-10 when Cloudflare DNS went live
+const SITE = 'https://hellodulce.com'; // back on hellodulce.com 2026-10-08 (Montreal Reception reverted)
 
 /** en path -> fr path. Mirrors src/data/i18n.ts; kept literal here because the
  *  sitemap `serialize` hook runs outside the TS module graph. */
@@ -11,7 +11,7 @@ const EN_TO_FR = {
   '/': '/fr',
   '/how-it-works': '/fr/fonctionnement',
   '/use-cases': '/fr/cas-dutilisation',
-  '/meet-melanie': '/fr/rencontrer-melanie',
+  '/meet-dulce': '/fr/rencontrer-dulce',
   '/faq': '/fr/faq',
   '/blog': '/fr/guides',
   '/use-cases/schools': '/fr/cas-dutilisation/ecoles',
@@ -36,10 +36,10 @@ const norm = (url) => {
 export default defineConfig({
   site: SITE,
   trailingSlash: 'ignore',
-  /* Old Dulce URLs keep their links and rankings [viktor, 2026-08-10]. */
+  /* Montreal Reception-era URLs (Aug–Oct 2026) keep their links [viktor, 2026-10-08]. */
   redirects: {
-    '/meet-dulce': { status: 301, destination: '/meet-melanie' },
-    '/fr/rencontrer-dulce': { status: 301, destination: '/fr/rencontrer-melanie' },
+    '/meet-melanie': { status: 301, destination: '/meet-dulce' },
+    '/fr/rencontrer-melanie': { status: 301, destination: '/fr/rencontrer-dulce' },
   },
   integrations: [
     sitemap({

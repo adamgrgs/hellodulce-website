@@ -9,7 +9,7 @@ const posts = (await getCollection('blog'))
   .filter((p) => p.id.startsWith('fr/'))
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 
-const title = 'Guides sur les appels par-dessus la barrière linguistique | Montreal Reception';
+const title = 'Guides sur les appels par-dessus la barrière linguistique | Hello Dulce';
 const description =
   'Des guides pratiques et sourcés sur l’interprétation téléphonique, les barrières linguistiques en santé, et comment parler aux écoles et aux institutions dans une langue que vous ne parlez pas.';
 
@@ -19,7 +19,7 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'Blog',
-    name: 'Guides Montreal Reception',
+    name: 'Guides Hello Dulce',
     url: new URL('/fr/guides', SITE.domain).href,
     inLanguage: 'fr-CA',
     description,
@@ -76,7 +76,7 @@ const jsonLd = [
 
       <div class="band" style="margin-top:48px">
         <h2>Arrêtez de répéter l’appel dans votre tête</h2>
-        <p>Écrivez ce que vous voulez dire dans votre langue. Montreal Reception le dit dans la leur.</p>
+        <p>Écrivez ce que vous voulez dire dans votre langue. Hello Dulce le dit dans la leur.</p>
         <a class="btn" href={APP_URL}>{UI_FR.cta.startArrow}</a>
       </div>
     </div>

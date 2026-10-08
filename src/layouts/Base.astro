@@ -30,7 +30,7 @@ const S = fr ? SITE_FR : SITE;
 const nav = fr
   ? UI_FR.nav
   : {
-      howItWorks: 'How it works', useCases: 'Use cases', meetMelanie: 'Meet Melanie', story: 'Our story',
+      howItWorks: 'How it works', useCases: 'Use cases', meetDulce: 'Meet Dulce', story: 'Our story',
       guides: 'Guides', faq: 'FAQ', start: 'Start a call', openApp: 'Open the app',
       allUseCases: 'All use cases', home: 'Home',
     };
@@ -110,7 +110,7 @@ const year = new Date().getFullYear();
     <meta property="og:image" content={og} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Montreal Reception — your voice, in any language" />
+    <meta property="og:image:alt" content="Hello Dulce — your voice, in any language" />
     <meta property="og:locale" content={OG_LOCALE[locale]} />
     {alternates && <meta property="og:locale:alternate" content={OG_LOCALE[other]} />}
     <meta name="twitter:card" content="summary_large_image" />
@@ -139,12 +139,12 @@ const year = new Date().getFullYear();
       <div class="wrap head-inner">
         <a class="logo" href={L('home')}>
           <span class="logo-mark" aria-hidden="true"></span>
-          <span>Montreal&nbsp;Reception</span>
+          <span>Hello&nbsp;Dulce</span>
         </a>
         <nav class="head-nav" aria-label="Main">
           <a href={L('howItWorks')}>{nav.howItWorks}</a>
           <a href={L('useCases')}>{nav.useCases}</a>
-          <a href={L('meetMelanie')}>{nav.meetMelanie}</a>
+          <a href={L('meetDulce')}>{nav.meetDulce}</a>
           <a href={L('story')}>{nav.story}</a>
           <a href={L('blog')}>{nav.guides}</a>
           <a href={L('faq')}>{nav.faq}</a>
@@ -158,7 +158,7 @@ const year = new Date().getFullYear();
       <nav class="mobile-nav" id="m-nav" aria-label="Mobile" hidden>
         <a href={L('howItWorks')}>{nav.howItWorks}</a>
         <a href={L('useCases')}>{nav.useCases}</a>
-        <a href={L('meetMelanie')}>{nav.meetMelanie}</a>
+        <a href={L('meetDulce')}>{nav.meetDulce}</a>
         <a href={L('story')}>{nav.story}</a>
         <a href={L('blog')}>{nav.guides}</a>
         <a href={L('faq')}>{nav.faq}</a>
@@ -175,7 +175,7 @@ const year = new Date().getFullYear();
         <div>
           <a class="logo" href={L('home')}>
             <span class="logo-mark" aria-hidden="true"></span>
-            <span>Montreal&nbsp;Reception</span>
+            <span>Hello&nbsp;Dulce</span>
           </a>
           <p class="foot-blurb">{SITE.blurb}</p>
           <a class="btn" href={APP_URL}>Start a call &rarr;</a>
@@ -189,9 +189,9 @@ const year = new Date().getFullYear();
           </ul>
         </div>
         <div>
-          <h2 class="foot-h">Montreal Reception</h2>
+          <h2 class="foot-h">Hello Dulce</h2>
           <ul>
-            <li><a href={L('meetMelanie')}>{nav.meetMelanie}</a></li>
+            <li><a href={L('meetDulce')}>{nav.meetDulce}</a></li>
             <li><a href={L('story')}>{nav.story}</a></li>
             <li><a href={L('howItWorks')}>{nav.howItWorks}</a></li>
             <li><a href={L('useCases')}>{nav.allUseCases}</a></li>
@@ -206,7 +206,7 @@ const year = new Date().getFullYear();
         <p class="foot-legal">
           <a href="#" data-consent-manage>{fr ? 'Témoins' : 'Cookies'}</a>
         </p>
-        <p>&copy; {year} Montreal Reception. {fr ? UI_FR.footer.tagline : 'Made for anyone who has ever put off a phone call.'}</p>
+        <p>&copy; {year} Hello Dulce. {fr ? UI_FR.footer.tagline : 'Made for anyone who has ever put off a phone call.'}</p>
       </div>
     </footer>
 

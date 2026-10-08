@@ -10,7 +10,7 @@ const jsonLd = {
   '@type': 'HowTo',
   name: 'How to make a phone call in a language you do not speak',
   description:
-    'Montreal Reception places the call, speaks the other language for you, and relays the whole conversation back to you as translated text.',
+    'Hello Dulce places the call, speaks the other language for you, and relays the whole conversation back to you as translated text.',
   step: STEPS.map((s, i) => ({
     '@type': 'HowToStep',
     position: i + 1,
@@ -22,23 +22,23 @@ const jsonLd = {
 const detail = [
   {
     h: 'The voice is chosen for the region, not just the language',
-    p: 'A call to a Montreal school is answered in Quebec French, so Melanie speaks Quebec French. Accent and register are part of being taken seriously on the phone.',
+    p: 'A call to a Montreal school is answered in Quebec French, so Dulce speaks Quebec French. Accent and register are part of being taken seriously on the phone.',
   },
   {
     h: 'Latency is the product',
-    p: 'Melanie begins speaking about a second after you press send, and relayed text reaches you about a second after the other person finishes a sentence. That is the difference between a conversation and an awkward silence.',
+    p: 'Dulce begins speaking about a second after you press send, and relayed text reaches you about a second after the other person finishes a sentence. That is the difference between a conversation and an awkward silence.',
   },
   {
     h: 'A hold, not a guess',
-    p: 'When the other side asks something you have not told Melanie, it says a natural holding line — “un instant, je vérifie” — and pings you. It waits for your words rather than inventing any.',
+    p: 'When the other side asks something you have not told Dulce, it says a natural holding line — “un instant, je vérifie” — and pings you. It waits for your words rather than inventing any.',
   },
   {
     h: 'You can change direction mid-call',
-    p: 'Type a new instruction at any moment: ask for a different time, push back on a price, ask them to repeat. Melanie says it on the next turn.',
+    p: 'Type a new instruction at any moment: ask for a different time, push back on a price, ask them to repeat. Dulce says it on the next turn.',
   },
   {
-    h: 'Melanie is transparent about what it is',
-    p: 'It introduces itself as calling on your behalf. It never claims to be you, and it never records anyone without the call being visible to you.',
+    h: 'Dulce is transparent about what it is',
+    p: 'She introduces herself as calling on your behalf. She never claims to be you, and she never records anyone without the call being visible to you.',
   },
   {
     h: 'The call ends in writing',
@@ -48,8 +48,8 @@ const detail = [
 ---
 
 <Base
-  title="How Montreal Reception works — you type, Melanie talks"
-  description="Montreal Reception places your phone call, speaks the other language with a natural regional voice, relays every sentence back to you translated in about a second, and never invents facts."
+  title="How Hello Dulce works — you type, Dulce talks"
+  description="Hello Dulce places your phone call, speaks the other language with a natural regional voice, relays every sentence back to you translated in about a second, and never invents facts."
   path="/how-it-works" alternates={altForRoute('howItWorks')}
   jsonLd={jsonLd}
 >
@@ -58,9 +58,9 @@ const detail = [
     <div class="wrap hero-grid">
       <div>
         <span class="kicker">How it works</span>
-        <h1>You type. Melanie <span class="em grad">talks.</span></h1>
+        <h1>You type. Dulce <span class="em grad">talks.</span></h1>
         <p class="lede">
-          Montreal Reception is not a translation app you hold up to your ear. It is a fluent speaker who
+          Hello Dulce is not a translation app you hold up to your ear. It is a fluent speaker who
           makes the call for you, tells you everything that was said, and says whatever you write
           next.
         </p>
@@ -69,7 +69,7 @@ const detail = [
           <a class="btn btn-ghost" href="/use-cases">Browse use cases</a>
         </div>
       </div>
-      <div><CallDemo scenario={demo} accent="#ff8fc0" id="hiw-demo" /></div>
+      <div><CallDemo scenario={demo} accent="#ff8c3c" id="hiw-demo" /></div>
     </div>
   </section>
 

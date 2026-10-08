@@ -1,26 +1,26 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { SITE, APP_URL } from '../../data/site';
-import { MELANIE_FR as MELANIE } from '../../data/melanie';
+import { DULCE_FR as DULCE } from '../../data/dulce';
 import { UI_FR } from '../../data/fr';
 import { altForRoute } from '../../data/i18n';
 import AudioSample from '../../components/AudioSample.astro';
 
-const title = 'Rencontrez Melanie, la voix qui fait votre appel';
+const title = 'Rencontrez Dulce, la voix qui fait votre appel';
 const description =
-  'Melanie, c’est la voix que Montreal Reception utilise au téléphone : elle se nomme, dit que l’appel est pour vous, et n’invente jamais de réponse. Voici comment elle se comporte.';
+  'Dulce, c’est la voix que Hello Dulce utilise au téléphone : elle se nomme, dit que l’appel est pour vous, et n’invente jamais de réponse. Voici comment elle se comporte.';
 
 const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    name: 'Melanie',
-    description: MELANIE.oneLiner,
-    image: new URL(MELANIE.images.hero, SITE.domain).href,
-    homeLocation: { '@type': 'Place', name: MELANIE.city },
+    name: 'Dulce',
+    description: DULCE.oneLiner,
+    image: new URL(DULCE.images.hero, SITE.domain).href,
+    homeLocation: { '@type': 'Place', name: DULCE.city },
     inLanguage: 'fr-CA',
     knowsLanguage: ['fr', 'en', 'es'],
-    disambiguatingDescription: MELANIE.fiction,
+    disambiguatingDescription: DULCE.fiction,
     worksFor: { '@type': 'Organization', name: SITE.name, url: SITE.domain },
   },
   {
@@ -28,42 +28,42 @@ const jsonLd = [
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Accueil', item: new URL('/fr', SITE.domain).href },
-      { '@type': 'ListItem', position: 2, name: 'Rencontrer Melanie', item: new URL('/fr/rencontrer-melanie', SITE.domain).href },
+      { '@type': 'ListItem', position: 2, name: 'Rencontrer Dulce', item: new URL('/fr/rencontrer-dulce', SITE.domain).href },
     ],
   },
 ];
 ---
 
 <Base
-  title={`${title} | Montreal Reception`}
+  title={`${title} | Hello Dulce`}
   description={description}
-  path="/fr/rencontrer-melanie"
+  path="/fr/rencontrer-dulce"
   jsonLd={jsonLd}
   locale="fr"
-  alternates={altForRoute('meetMelanie')}
+  alternates={altForRoute('meetDulce')}
 >
   <div class="glow" aria-hidden="true"></div>
 
   <section class="sec">
     <div class="wrap">
-      <p class="crumbs"><a href="/fr">Accueil</a> / Rencontrer Melanie</p>
-      <div class="melanie-hero">
+      <p class="crumbs"><a href="/fr">Accueil</a> / Rencontrer Dulce</p>
+      <div class="dulce-hero">
         <div>
-          <p class="kicker">Rencontrer Melanie</p>
+          <p class="kicker">Rencontrer Dulce</p>
           <h1>L’amie qui <span class="em grad">fait l’appel</span> à votre place</h1>
-          <p class="lede">{MELANIE.oneLiner}</p>
-          <p class="fine">{MELANIE.fiction}</p>
+          <p class="lede">{DULCE.oneLiner}</p>
+          <p class="fine">{DULCE.fiction}</p>
           <div class="hero-cta">
             <a class="btn" href={APP_URL}>{UI_FR.cta.startArrow}</a>
             <a class="btn btn-ghost" href="#sample-call">Écouter sa voix</a>
           </div>
         </div>
-        <div class="melanie-portrait">
+        <div class="dulce-portrait">
           <img
-            src={MELANIE.images.hero}
+            src={DULCE.images.hero}
             width="399"
             height="980"
-            alt="Melanie, le personnage de Montreal Reception, en coton ouaté orange, au téléphone, la main levée"
+            alt="Dulce, le personnage de Hello Dulce, en coton ouaté orange, au téléphone, la main levée"
             fetchpriority="high"
           />
         </div>
@@ -77,7 +77,7 @@ const jsonLd = [
       <h2>Trois choses qu’on entend tout de suite</h2>
       <div class="trait-list">
         {
-          MELANIE.traits.map((t) => (
+          DULCE.traits.map((t) => (
             <article class="trait">
               <img src={t.image} alt={t.alt} loading="lazy" width="320" height="420" />
               <div>
@@ -96,9 +96,9 @@ const jsonLd = [
       <p class="kicker">Ses règles</p>
       <h2>Quatre règles qu’elle ne brise jamais</h2>
       <ol class="rules">
-        {MELANIE.voiceRules.map((r) => <li>{r}</li>)}
+        {DULCE.voiceRules.map((r) => <li>{r}</li>)}
       </ol>
-      <p class="quote-line" style="margin-top:26px">{MELANIE.quote}</p>
+      <p class="quote-line" style="margin-top:26px">{DULCE.quote}</p>
     </div>
   </section>
 
@@ -117,7 +117,7 @@ const jsonLd = [
     <div class="wrap">
       <div class="band">
         <h2>Donnez-lui un appel à faire</h2>
-        <p>Écrivez-le dans votre langue. Melanie s’occupe du reste.</p>
+        <p>Écrivez-le dans votre langue. Dulce s’occupe du reste.</p>
         <a class="btn" href={APP_URL}>{UI_FR.cta.startArrow}</a>
       </div>
     </div>
@@ -125,16 +125,16 @@ const jsonLd = [
 </Base>
 
 <style>
-  .melanie-hero { display: grid; gap: 30px; align-items: center; }
-  @media (min-width: 940px) { .melanie-hero { grid-template-columns: 1.25fr 0.75fr; gap: 48px; } }
-  .melanie-portrait { display: flex; justify-content: center; }
-  .melanie-portrait img { width: min(300px, 74%); height: auto; filter: drop-shadow(0 24px 44px rgba(244, 63, 142, 0.28)); }
+  .dulce-hero { display: grid; gap: 30px; align-items: center; }
+  @media (min-width: 940px) { .dulce-hero { grid-template-columns: 1.25fr 0.75fr; gap: 48px; } }
+  .dulce-portrait { display: flex; justify-content: center; }
+  .dulce-portrait img { width: min(300px, 74%); height: auto; filter: drop-shadow(0 24px 44px rgba(255, 106, 43, 0.28)); }
   .trait-list { display: grid; gap: 18px; margin-top: 22px; }
   @media (min-width: 820px) { .trait-list { grid-template-columns: repeat(3, 1fr); } }
   .trait {
     display: grid; grid-template-columns: 110px 1fr; gap: 18px; align-items: start;
     border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 20px;
-    background: linear-gradient(150deg, rgba(244, 63, 142, 0.07), transparent 60%);
+    background: linear-gradient(150deg, rgba(255, 106, 43, 0.07), transparent 60%);
   }
   .trait img { width: 110px; height: auto; border-radius: 14px; }
   .trait h3 { margin: 0 0 8px; font-size: 1.06rem; }

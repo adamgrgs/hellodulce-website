@@ -1,12 +1,10 @@
-/* Host cutover pending: montrealreception.com has no DNS yet [viktor, 2026-08-10].
-   Brand name is Montreal Reception; hosts are montrealreception.com [cutover 2026-08-10, DNS live]. */
-export const APP_URL = 'https://bonjour.montrealreception.com';
+export const APP_URL = 'https://bonjour.hellodulce.com';
 export const SITE = {
-  name: 'Montreal Reception',
-  domain: 'https://montrealreception.com',
+  name: 'Hello Dulce',
+  domain: 'https://hellodulce.com',
   tagline: 'Your voice, in any language',
   blurb:
-    'Montreal Reception makes the phone call for you. You text what you want to say in your language — Melanie dials, speaks it naturally in theirs, and shows you on screen only what you need to know or answer, while the call is live.',
+    'Hello Dulce makes the phone call for you. You text what you want to say in your language — Dulce dials, speaks it naturally in theirs, and shows you on screen only what you need to know or answer, while the call is live.',
 };
 
 export type Turn =
@@ -39,12 +37,12 @@ const flagship: UseCase = {
   h1: "Talk to your child's school, even if you don't speak the language",
   kicker: 'Education',
   emoji: '🎒',
-  accent: '#f43f8e',
+  accent: '#ff6a2b',
   intro:
-    "Parent-teacher meetings, absences, bus changes, extra help in reading — the calls that decide how your child's year goes. Write to Melanie in your language; the school hears fluent, polite French, English or whatever the office speaks.",
-  metaTitle: "Call your child's school in any language | Montreal Reception",
+    "Parent-teacher meetings, absences, bus changes, extra help in reading — the calls that decide how your child's year goes. Write to Dulce in your language; the school hears fluent, polite French, English or whatever the office speaks.",
+  metaTitle: "Call your child's school in any language | Hello Dulce",
   metaDescription:
-    "Text Montreal Reception in Spanish, Arabic or any language and it calls your child's school and speaks fluent French or English for you — with every word translated back live.",
+    "Text Hello Dulce in Spanish, Arabic or any language and it calls your child's school and speaks fluent French or English for you — with every word translated back live.",
   jobs: [
     {
       title: 'Parent-teacher conferences',
@@ -79,7 +77,7 @@ const flagship: UseCase = {
       {
         kind: 'speak',
         text: "Bonjour, j'appelle au nom de la mère de Sofía Ramírez. Elle souhaite rencontrer l'enseignante de Sofía.",
-        lang: 'Melanie · French',
+        lang: 'Dulce · French',
       },
       {
         kind: 'hear',
@@ -89,7 +87,7 @@ const flagship: UseCase = {
         transLang: 'Spanish',
       },
       { kind: 'type', text: 'Sí, el jueves está perfecto. Gracias.', lang: 'You · Spanish' },
-      { kind: 'speak', text: 'Parfait, jeudi 15 h 30 lui convient. Merci beaucoup!', lang: 'Melanie · French' },
+      { kind: 'speak', text: 'Parfait, jeudi 15 h 30 lui convient. Merci beaucoup!', lang: 'Dulce · French' },
       {
         kind: 'done',
         title: 'Meeting booked',
@@ -100,7 +98,7 @@ const flagship: UseCase = {
   faqs: [
     {
       q: 'Does the school know they are talking to an AI?',
-      a: 'Melanie introduces itself as calling on your behalf. It never pretends to be you, and it never invents facts — if the office asks something you have not told Melanie, it politely holds the line and asks you.',
+      a: 'Dulce introduces herself as calling on your behalf. She never pretends to be you, and she never invents facts — if the office asks something you have not told her, she politely holds the line and asks you.',
     },
     {
       q: 'Can I stay on the line and listen?',
@@ -118,16 +116,16 @@ export const USE_CASES: UseCase[] = [
     h1: 'Book the appointment. Describe the symptom. In your own words.',
     kicker: 'Healthcare',
     emoji: '🩺',
-    accent: '#ff2d7a',
+    accent: '#ff4d3d',
     intro:
-      'Health calls are the ones you cannot postpone and cannot afford to get half-right. Type what hurts in the language you think in — Melanie says it precisely to the clinic and brings the answer back the same way.',
-    metaTitle: 'Call a doctor or clinic in any language | Montreal Reception',
+      'Health calls are the ones you cannot postpone and cannot afford to get half-right. Type what hurts in the language you think in — Dulce says it precisely to the clinic and brings the answer back the same way.',
+    metaTitle: 'Call a doctor or clinic in any language | Hello Dulce',
     metaDescription:
-      'Montreal Reception calls clinics, pharmacies and insurers for you, speaks their language fluently, and texts the whole conversation back translated — appointments, symptoms, coverage.',
+      'Hello Dulce calls clinics, pharmacies and insurers for you, speaks their language fluently, and texts the whole conversation back translated — appointments, symptoms, coverage.',
     jobs: [
       {
         title: 'Schedule and reschedule',
-        body: 'Routine checkups, specialists, walk-in slots, lab results. Melanie waits on hold so you do not have to.',
+        body: 'Routine checkups, specialists, walk-in slots, lab results. Dulce waits on hold so you do not have to.',
         quote: 'Necesito ver a un cardiólogo la próxima semana',
       },
       {
@@ -158,7 +156,7 @@ export const USE_CASES: UseCase[] = [
         {
           kind: 'speak',
           text: "Bonjour, j'appelle pour Mme Ramírez. Elle a une douleur à la poitrine en respirant et voudrait un rendez-vous cette semaine.",
-          lang: 'Melanie · French',
+          lang: 'Dulce · French',
         },
         {
           kind: 'hear',
@@ -168,7 +166,7 @@ export const USE_CASES: UseCase[] = [
           transLang: 'Spanish',
         },
         { kind: 'type', text: 'Sí, la tengo. Confirmo mañana a las 2:15.', lang: 'You · Spanish' },
-        { kind: 'speak', text: 'Oui, elle l’a. On confirme demain 14 h 15. Merci!', lang: 'Melanie · French' },
+        { kind: 'speak', text: 'Oui, elle l’a. On confirme demain 14 h 15. Merci!', lang: 'Dulce · French' },
         {
           kind: 'done',
           title: 'Appointment confirmed',
@@ -179,11 +177,11 @@ export const USE_CASES: UseCase[] = [
     faqs: [
       {
         q: 'Is my health information kept private?',
-        a: 'Calls and transcripts belong to you. Melanie only says what you have written or approved, and you can delete a call and its transcript at any time.',
+        a: 'Calls and transcripts belong to you. Dulce only says what you have written or approved, and you can delete a call and its transcript at any time.',
       },
       {
         q: 'What if the clinic puts the call on hold?',
-        a: 'Melanie holds the line silently and pings you the moment a human comes back.',
+        a: 'Dulce holds the line silently and pings you the moment a human comes back.',
       },
     ],
   },
@@ -194,12 +192,12 @@ export const USE_CASES: UseCase[] = [
     h1: 'Get the heat fixed without needing a translator',
     kicker: 'Housing',
     emoji: '🏠',
-    accent: '#e8558f',
+    accent: '#e8952a',
     intro:
-      'Repairs, rent questions, a move-in date, a power outage. These calls reward whoever sounds confident and precise — so let Melanie be precise for you, and keep the written record it produces.',
-    metaTitle: 'Call your landlord or utility company in any language | Montreal Reception',
+      'Repairs, rent questions, a move-in date, a power outage. These calls reward whoever sounds confident and precise — so let Dulce be precise for you, and keep the written record it produces.',
+    metaTitle: 'Call your landlord or utility company in any language | Hello Dulce',
     metaDescription:
-      'Report repairs, ask about rent, set up utilities or a move — Montreal Reception speaks to landlords, property managers and utility lines in their language and keeps a written record.',
+      'Report repairs, ask about rent, set up utilities or a move — Hello Dulce speaks to landlords, property managers and utility lines in their language and keeps a written record.',
     jobs: [
       {
         title: 'Landlords and repairs',
@@ -234,7 +232,7 @@ export const USE_CASES: UseCase[] = [
         {
           kind: 'speak',
           text: "Bonjour, j'appelle pour la locataire du 4B. Son chauffage ne fonctionne plus depuis lundi.",
-          lang: 'Melanie · French',
+          lang: 'Dulce · French',
         },
         {
           kind: 'hear',
@@ -244,7 +242,7 @@ export const USE_CASES: UseCase[] = [
           transLang: 'Spanish',
         },
         { kind: 'type', text: 'Perfecto. ¿Me puede dar un número de seguimiento?', lang: 'You · Spanish' },
-        { kind: 'speak', text: 'Très bien. Pouvez-vous nous donner un numéro de suivi?', lang: 'Melanie · French' },
+        { kind: 'speak', text: 'Très bien. Pouvez-vous nous donner un numéro de suivi?', lang: 'Dulce · French' },
         {
           kind: 'done',
           title: 'Repair scheduled',
@@ -266,12 +264,12 @@ export const USE_CASES: UseCase[] = [
     h1: 'Win the billing argument in a language you never studied',
     kicker: 'Support lines',
     emoji: '💳',
-    accent: '#ff8fc0',
+    accent: '#ffb020',
     intro:
-      'Phone menus, hold music, an agent who talks fast. Melanie navigates the menu, waits on hold, and argues your case politely and exactly — you just read along and steer.',
-    metaTitle: 'Call customer service in any language | Montreal Reception',
+      'Phone menus, hold music, an agent who talks fast. Dulce navigates the menu, waits on hold, and argues your case politely and exactly — you just read along and steer.',
+    metaTitle: 'Call customer service in any language | Hello Dulce',
     metaDescription:
-      'Montreal Reception calls support lines for you: billing disputes, tech support, returns and warranties — spoken fluently in their language, translated back to yours in real time.',
+      'Hello Dulce calls support lines for you: billing disputes, tech support, returns and warranties — spoken fluently in their language, translated back to yours in real time.',
     jobs: [
       {
         title: 'Billing and accounts',
@@ -306,7 +304,7 @@ export const USE_CASES: UseCase[] = [
         {
           kind: 'speak',
           text: "I'm calling on behalf of the account holder. She was billed $89 twice in August and is requesting a refund of the duplicate charge.",
-          lang: 'Melanie · English',
+          lang: 'Dulce · English',
         },
         {
           kind: 'hear',
@@ -316,7 +314,7 @@ export const USE_CASES: UseCase[] = [
           transLang: 'Spanish',
         },
         { kind: 'type', text: 'Acepto. Pide el número de confirmación.', lang: 'You · Spanish' },
-        { kind: 'speak', text: 'She accepts. Could you give us a confirmation number, please?', lang: 'Melanie · English' },
+        { kind: 'speak', text: 'She accepts. Could you give us a confirmation number, please?', lang: 'Dulce · English' },
         {
           kind: 'done',
           title: 'Refund approved',
@@ -326,7 +324,7 @@ export const USE_CASES: UseCase[] = [
     },
     faqs: [
       {
-        q: 'Will Melanie sit through the phone menu and the hold queue?',
+        q: 'Will Dulce sit through the phone menu and the hold queue?',
         a: 'Yes — it presses the right options and waits. You get pinged when a person picks up.',
       },
     ],
@@ -338,12 +336,12 @@ export const USE_CASES: UseCase[] = [
     h1: 'Immigration, benefits, licences — asked correctly the first time',
     kicker: 'Public services',
     emoji: '🏛️',
-    accent: '#c2185b',
+    accent: '#d97706',
     intro:
-      'Government lines punish vague questions. Melanie asks yours in clean, formal language, notes the file number, the deadline and the exact document they asked for, and gives it all back to you translated.',
-    metaTitle: 'Call government offices in any language | Montreal Reception',
+      'Government lines punish vague questions. Dulce asks yours in clean, formal language, notes the file number, the deadline and the exact document they asked for, and gives it all back to you translated.',
+    metaTitle: 'Call government offices in any language | Hello Dulce',
     metaDescription:
-      'Montreal Reception calls immigration, social services and licensing offices on your behalf, speaks their official language, and returns file numbers, deadlines and documents in yours.',
+      'Hello Dulce calls immigration, social services and licensing offices on your behalf, speaks their official language, and returns file numbers, deadlines and documents in yours.',
     jobs: [
       {
         title: 'Immigration files',
@@ -378,7 +376,7 @@ export const USE_CASES: UseCase[] = [
         {
           kind: 'speak',
           text: "Bonjour, j'appelle pour un titulaire de permis qui souhaite connaître les documents requis pour un renouvellement.",
-          lang: 'Melanie · French',
+          lang: 'Dulce · French',
         },
         {
           kind: 'hear',
@@ -388,7 +386,7 @@ export const USE_CASES: UseCase[] = [
           transLang: 'Arabic',
         },
         { kind: 'type', text: 'هل يمكن الدفع ببطاقة الخصم؟', lang: 'You · Arabic' },
-        { kind: 'speak', text: 'Est-ce que le paiement par carte de débit est accepté?', lang: 'Melanie · French' },
+        { kind: 'speak', text: 'Est-ce que le paiement par carte de débit est accepté?', lang: 'Dulce · French' },
         {
           kind: 'done',
           title: 'Checklist saved',
@@ -398,7 +396,7 @@ export const USE_CASES: UseCase[] = [
     },
     faqs: [
       {
-        q: 'Can Melanie give my personal details to the agent?',
+        q: 'Can Dulce give my personal details to the agent?',
         a: 'Only the details you have given it for that call. Anything else, it holds the line and asks you first.',
       },
     ],
@@ -410,12 +408,12 @@ export const USE_CASES: UseCase[] = [
     h1: 'Give your parents back the phone',
     kicker: 'Family care',
     emoji: '💛',
-    accent: '#ff6fa8',
+    accent: '#ff7a45',
     intro:
-      'The calls adult children end up making for their parents — pharmacy, insurance, home care, the specialist’s office. With Melanie, your mother makes them herself, in her own language, and you can see the transcript afterwards.',
-    metaTitle: 'Help elderly parents make phone calls in any language | Montreal Reception',
+      'The calls adult children end up making for their parents — pharmacy, insurance, home care, the specialist’s office. With Dulce, your mother makes them herself, in her own language, and you can see the transcript afterwards.',
+    metaTitle: 'Help elderly parents make phone calls in any language | Hello Dulce',
     metaDescription:
-      'Montreal Reception lets elderly family members handle their own calls — doctors, pharmacies, insurers, home care — in their own language, with a transcript the family can review.',
+      'Hello Dulce lets elderly family members handle their own calls — doctors, pharmacies, insurers, home care — in their own language, with a transcript the family can review.',
     jobs: [
       {
         title: 'Medical coordination',
@@ -450,7 +448,7 @@ export const USE_CASES: UseCase[] = [
         {
           kind: 'speak',
           text: "Bonjour, j'appelle pour une dame de 78 ans qui aurait besoin d'une rampe d'accès pour fauteuil roulant à son entrée.",
-          lang: 'Melanie · French',
+          lang: 'Dulce · French',
         },
         {
           kind: 'hear',
@@ -460,7 +458,7 @@ export const USE_CASES: UseCase[] = [
           transLang: 'Spanish',
         },
         { kind: 'type', text: 'Sí, el martes a las 10 está bien.', lang: 'You · Spanish' },
-        { kind: 'speak', text: 'Oui, mardi 10 h convient parfaitement. Merci!', lang: 'Melanie · French' },
+        { kind: 'speak', text: 'Oui, mardi 10 h convient parfaitement. Merci!', lang: 'Dulce · French' },
         {
           kind: 'done',
           title: 'Home visit booked',
@@ -471,7 +469,7 @@ export const USE_CASES: UseCase[] = [
     faqs: [
       {
         q: 'Can I set this up for a parent who is not comfortable with apps?',
-        a: 'Yes. Melanie works from plain text messages, and a family member can help write the first request or read the transcript afterwards.',
+        a: 'Yes. Dulce works from plain text messages, and a family member can help write the first request or read the transcript afterwards.',
       },
     ],
   },
@@ -485,13 +483,13 @@ export const STEPS = [
   },
   {
     n: '02',
-    title: 'Melanie dials and speaks',
-    body: 'A natural voice in their language — not a robot reading a translation. Melanie introduces itself as calling on your behalf.',
+    title: 'Dulce dials and speaks',
+    body: 'A natural voice in their language — not a robot reading a translation. Dulce introduces herself as calling on your behalf.',
   },
   {
     n: '03',
     title: 'You follow the call live',
-    body: 'Every sentence comes back to you as text in your language, roughly a second after it is spoken. Send a new line any time and Melanie says it.',
+    body: 'Every sentence comes back to you as text in your language, roughly a second after it is spoken. Send a new line any time and Dulce says it.',
   },
   {
     n: '04',
@@ -508,39 +506,39 @@ export type QA = { q: string; a: string; slug: string };
 
 export const CORE_QA: QA[] = [
   {
-    slug: 'what-is-hello-melanie',
-    q: 'What is Montreal Reception?',
-    a: 'Montreal Reception is an AI phone-call interpreter. You text what you want to say in your own language, Montreal Reception places the call and speaks it out loud in the other person\u2019s language with a natural human-sounding voice, then texts every sentence of their reply back to you translated, while the call is still live. It works with any phone number and the other person needs no app, no account and no setup.',
+    slug: 'what-is-hello-dulce',
+    q: 'What is Hello Dulce?',
+    a: 'Hello Dulce is an AI phone-call interpreter. You text what you want to say in your own language, Hello Dulce places the call and speaks it out loud in the other person\u2019s language with a natural human-sounding voice, then texts every sentence of their reply back to you translated, while the call is still live. It works with any phone number and the other person needs no app, no account and no setup.',
   },
   {
     slug: 'how-does-it-work',
-    q: 'How does Montreal Reception work, step by step?',
-    a: 'Four steps. 1) You open the app and write your message in your language. 2) You enter the number and Montreal Reception dials it. 3) When someone answers, Montreal Reception introduces itself as calling on your behalf and speaks your message in their language; each sentence they say comes back to you as text in your language about a second later. 4) When the call ends you keep a written summary and the full bilingual transcript.',
+    q: 'How does Hello Dulce work, step by step?',
+    a: 'Four steps. 1) You open the app and write your message in your language. 2) You enter the number and Hello Dulce dials it. 3) When someone answers, Dulce introduces herself as calling on your behalf and speaks your message in their language; each sentence they say comes back to you as text in your language about a second later. 4) When the call ends you keep a written summary and the full bilingual transcript.',
   },
   {
     slug: 'do-i-have-to-speak',
     q: 'Do I have to speak during the call?',
-    a: 'No. You type, Montreal Reception speaks. You can listen to the live call if you want to, but you never have to say a word in a language you are not comfortable with. Typing is also why the call stays accurate: what you wrote is exactly what gets said.',
+    a: 'No. You type, Hello Dulce speaks. You can listen to the live call if you want to, but you never have to say a word in a language you are not comfortable with. Typing is also why the call stays accurate: what you wrote is exactly what gets said.',
   },
   {
     slug: 'is-it-a-robot-voice',
     q: 'Does it sound like a robot?',
-    a: 'No. Montreal Reception uses a natural, human-sounding voice with the local accent \u2014 Quebec French in Montreal, not textbook French \u2014 and it starts speaking about a second after you send your line, so the conversation keeps its normal rhythm instead of stalling. Most people on the other end simply answer as they would any other call.',
+    a: 'No. Hello Dulce uses a natural, human-sounding voice with the local accent \u2014 Quebec French in Montreal, not textbook French \u2014 and it starts speaking about a second after you send your line, so the conversation keeps its normal rhythm instead of stalling. Most people on the other end simply answer as they would any other call.',
   },
   {
     slug: 'how-fast-is-it',
     q: 'How fast is the translation?',
-    a: 'About one second. In internal testing on the Montreal Reception voice bridge, a typed message became spoken speech in the other language in roughly 0.9 to 1.3 seconds end to end. That is fast enough that the person on the phone does not feel a pause worth commenting on.',
+    a: 'About one second. In internal testing on the Hello Dulce voice bridge, a typed message became spoken speech in the other language in roughly 0.9 to 1.3 seconds end to end. That is fast enough that the person on the phone does not feel a pause worth commenting on.',
   },
   {
     slug: 'which-languages',
-    q: 'Which languages does Montreal Reception support?',
-    a: 'Two different lists, and the difference matters. You can write to Melanie in Spanish, English, French, Portuguese, Arabic, Haitian Creole, Vietnamese or Mandarin \u2014 that is text, and the app is fully translated into all eight. The languages Melanie can currently SPEAK on the line are French (including Qu\u00e9b\u00e9cois), English, Spanish, German, Italian, Dutch and Japanese; Portuguese, Arabic, Mandarin, Haitian Creole and Vietnamese are shown in the app but marked as not yet speakable, because we would rather tell you than have you find out on a call. Quebec\u2019s first market is Spanish and Arabic speakers calling French-speaking institutions.',
+    q: 'Which languages does Hello Dulce support?',
+    a: 'Two different lists, and the difference matters. You can write to Dulce in Spanish, English, French, Portuguese, Arabic, Haitian Creole, Vietnamese or Mandarin \u2014 that is text, and the app is fully translated into all eight. The languages Dulce can currently SPEAK on the line are French (including Qu\u00e9b\u00e9cois), English, Spanish, German, Italian, Dutch and Japanese; Portuguese, Arabic, Mandarin, Haitian Creole and Vietnamese are shown in the app but marked as not yet speakable, because we would rather tell you than have you find out on a call. The first market is Spanish and Arabic speakers calling French-speaking institutions in Quebec.',
   },
   {
     slug: 'is-it-an-interpreter-service',
-    q: 'Is Montreal Reception the same as a phone interpreter service?',
-    a: 'The job is the same, the shape is different. A traditional over-the-phone interpreting service is a three-way call with a human interpreter, billed per minute \u2014 LanguageLine\u2019s published pay-as-you-go rate is $3.95 per minute for audio. Montreal Reception has no third human on the line and no scheduling: you text, it speaks, and you get a written record. Human interpreters remain the right choice for legal proceedings, complex medical consent and anything where a certified interpreter is required.',
+    q: 'Is Hello Dulce the same as a phone interpreter service?',
+    a: 'The job is the same, the shape is different. A traditional over-the-phone interpreting service is a three-way call with a human interpreter, billed per minute \u2014 LanguageLine\u2019s published pay-as-you-go rate is $3.95 per minute for audio. Hello Dulce has no third human on the line and no scheduling: you text, it speaks, and you get a written record. Human interpreters remain the right choice for legal proceedings, complex medical consent and anything where a certified interpreter is required.',
   },
   {
     slug: 'does-the-other-person-need-the-app',
@@ -549,19 +547,19 @@ export const CORE_QA: QA[] = [
   },
   {
     slug: 'is-it-honest-about-being-ai',
-    q: 'Does Montreal Reception tell people it is AI?',
-    a: 'Yes. Montreal Reception announces at the start of the call that it is an interpretation service calling on behalf of a named person. It never impersonates you, and it never invents an answer \u2014 if it is asked something you have not told it, it holds the line and asks you.',
+    q: 'Does Hello Dulce tell people it is AI?',
+    a: 'Yes. Dulce announces at the start of the call that she is a virtual interpreter calling on behalf of a named person. She never impersonates you, and she never invents an answer \u2014 if she is asked something you have not told her, she holds the line and asks you.',
   },
   {
     slug: 'what-does-it-cost',
-    q: 'What does Montreal Reception cost?',
-    a: 'Pricing is not published yet \u2014 Montreal Reception is in early access at bonjour.montrealreception.com. The design target is a cost per call far below per-minute human interpreting, because no third person has to join the line.',
+    q: 'What does Hello Dulce cost?',
+    a: 'Pricing is not published yet \u2014 Hello Dulce is in early access at bonjour.hellodulce.com. The design target is a cost per call far below per-minute human interpreting, because no third person has to join the line.',
   },
 ];
 
 export const FACTS = [
   { label: 'Time from your text to spoken speech', value: '~1 second', note: 'measured at 0.9\u20131.3s in internal testing' },
   { label: 'What the other person needs', value: 'Nothing', note: 'a normal phone call on a normal line' },
-  { label: 'What you have to say out loud', value: 'Nothing', note: 'you type, Melanie speaks' },
+  { label: 'What you have to say out loud', value: 'Nothing', note: 'you type, Dulce speaks' },
   { label: 'What you keep afterwards', value: 'A written record', note: 'summary plus the full bilingual transcript' },
 ];

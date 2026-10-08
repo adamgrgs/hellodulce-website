@@ -7,7 +7,7 @@
  *  (no employer names, no specific offices, no dialogue that did not happen). Where a
  *  detail is illustrative rather than reported, keep it universal to newcomers rather
  *  than specific to Adam. If Adam supplies more detail, add it here — not inline in the
- *  page. Same rule as MELANIE: if you are tempted to add lore, don't. */
+ *  page. Same rule as DULCE: if you are tempted to add lore, don't. */
 
 export const STORY = {
   year: 2012,
@@ -16,7 +16,7 @@ export const STORY = {
   h1Lead: 'I moved to Montreal in 2012.',
   h1Accent: 'The phone was the hardest part.',
   lede:
-    'Montreal Reception exists because of a problem I could not solve for myself for years: I could live in French, slowly, in person — but I could not hold my own on the phone.',
+    'Hello Dulce exists because of a problem I could not solve for myself for years: I could live in French, slowly, in person — but I could not hold my own on the phone.',
 
   /** Body sections. Short paragraphs; this reads as a person talking, not a brand. */
   sections: [
@@ -44,8 +44,8 @@ export const STORY = {
     {
       h: 'That is what we built.',
       p: [
-        'Montreal Reception is the person I used to have to ask for. You write what you want to say in your language. Melanie dials, introduces herself as calling on your behalf, and speaks for you in theirs — a real voice, at a normal pace, that the other person does not have to be patient with.',
-        'You stay on the call the whole time. Every sentence comes back to you as text in your language while it is still happening, so you can change your mind, add a detail, or push back — and Melanie says it. Nobody speaks in your name without you hearing it.',
+        'Hello Dulce is the person I used to have to ask for. You write what you want to say in your language. Dulce dials, introduces herself as calling on your behalf, and speaks for you in theirs — a real voice, at a normal pace, that the other person does not have to be patient with.',
+        'You stay on the call the whole time. Every sentence comes back to you as text in your language while it is still happening, so you can change your mind, add a detail, or push back — and Dulce says it. Nobody speaks in your name without you hearing it.',
         'You are not asking anyone for a favour. You do not wait until someone is free. And when the call ends you keep what was agreed in writing, in your language, which is the part I never had.',
       ],
     },
@@ -67,7 +67,7 @@ export const STORY_FR = {
   h1Lead: 'Je suis arrivé à Montréal en 2012.',
   h1Accent: 'Le téléphone, c’était le plus dur.',
   lede:
-    'Montreal Reception existe à cause d’un problème que je n’ai pas réussi à régler pendant des années : j’arrivais à vivre en français, lentement, en personne — mais au téléphone, je ne tenais pas le coup.',
+    'Hello Dulce existe à cause d’un problème que je n’ai pas réussi à régler pendant des années : j’arrivais à vivre en français, lentement, en personne — mais au téléphone, je ne tenais pas le coup.',
   sections: [
     {
       h: 'En personne, on peut pointer. Au téléphone, non.',
@@ -93,8 +93,8 @@ export const STORY_FR = {
     {
       h: 'C’est ça qu’on a bâti.',
       p: [
-        'Montreal Reception, c’est la personne que je devais demander avant. Vous écrivez ce que vous voulez dire dans votre langue. Melanie compose, se présente comme appelant en votre nom, et parle pour vous dans la leur — une vraie voix, à un rythme normal, avec laquelle l’autre personne n’a pas besoin d’être patiente.',
-        'Vous restez sur l’appel du début à la fin. Chaque phrase vous revient par écrit dans votre langue pendant que ça se passe, donc vous pouvez changer d’idée, ajouter un détail ou répliquer — et Melanie le dit. Personne ne parle en votre nom sans que vous l’entendiez.',
+        'Hello Dulce, c’est la personne que je devais demander avant. Vous écrivez ce que vous voulez dire dans votre langue. Dulce compose, se présente comme appelant en votre nom, et parle pour vous dans la leur — une vraie voix, à un rythme normal, avec laquelle l’autre personne n’a pas besoin d’être patiente.',
+        'Vous restez sur l’appel du début à la fin. Chaque phrase vous revient par écrit dans votre langue pendant que ça se passe, donc vous pouvez changer d’idée, ajouter un détail ou répliquer — et Dulce le dit. Personne ne parle en votre nom sans que vous l’entendiez.',
         'Vous ne demandez de service à personne. Vous n’attendez pas que quelqu’un soit libre. Et à la fin de l’appel, vous gardez par écrit ce qui a été convenu, dans votre langue — la partie que je n’ai jamais eue.',
       ],
     },
